@@ -1,0 +1,6 @@
+<OAuthV2 name="HPX_AccesstokenValidation">
+    <DisplayName>AccesstokenValidation</DisplayName>
+    <Operation>VerifyAccessToken</Operation>
+    <AccessToken>request.header.Authorization</AccessToken>
+    <AccessTokenPrefix>Bearer</AccessTokenPrefix>
+</OAuthV2>

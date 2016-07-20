@@ -1,0 +1,92 @@
+{  
+   "swagger":"2.0",
+   "info":{  
+      "version":"1.0.0",
+      "title":"Authorization API",
+      "description":"OAuth API documentation"
+   },
+   "host":"fhirsandbox-prod.apigee.net",
+   "basePath":"/oauth/v2",
+   "schemes":[  
+      "https"
+   ],
+   "produces":[  
+      "application/json",
+      "application/xml"
+   ],
+   "consumes":[  
+      "application/x-www-form-urlencoded"
+   ],
+   "paths":{  
+      "/accesstoken?grant_type=client_credentials":{  
+         "post":{  
+            "description":"Generates access token using client credentials grant type.",
+            "operationId":"Client Credentials Grant Type",
+            "produces":[  
+               "application/json",
+               "application/xml"
+            ],
+            "consumes":[  
+               "application/x-www-form-urlencoded"
+            ],
+            "parameters":[  
+               {  
+                  "name":"Authorization",
+                  "in":"header",
+                  "description":"Base64 URL encoded clientid:clientsecret. For example: Basic Base64-encoding of Client ID and Client Secret",
+                  "required":true,
+                  "type":"string"
+               },
+               {  
+                  "name":"Content-Type",
+                  "in":"header",
+                  "required":true,
+                  "description":"Content-Type is used to declare the general type of POST data.",
+                  "default":"application/x-www-form-urlencoded",
+                  "type":"string"
+               },
+               {  
+                  "name":"state",
+                  "in":"header",
+				  "required":false,
+				  "default": "state",
+                  "description":"A string that will be sent back with the response. Typically used to prevent cross-site request forgery attacks.",
+                  "type":"string"
+               },
+               {  
+                  "name":"scope",
+                  "in":"query",
+                  "description":"Allows to filter the list of API products with which the minted token can be used.",
+                  "type":"string",
+                  "enum":[  
+                     "patient/patient.read",
+                     "patient/medicationdispense.read",
+                     "patient/practitioner.read",
+                     "patient/procedure.read",
+                     "patient/documentreference.read",
+                     "patient/condition.read",
+                     "patient/medicationstatement.read",
+                     "patient/immunization.read",
+                     "patient/allergyintolerance.read",
+                     "patient/observation.read",
+                     "patient/encounter.read",
+                     "patient/medicationorder.read",
+                     "patient/diagnosticreport.read",
+                     "patient/diagnosticorder.read",
+                     "patient/medicationadministration.read",
+                     "patient/careplan.read"
+                  ]
+               }
+            ],
+            "responses":{  
+               "200":{  
+                  "description":"Contains token(s)"
+               },
+               "default":{  
+                  "description":"unexpected error"
+               }
+            }
+         }
+      }
+   }
+}

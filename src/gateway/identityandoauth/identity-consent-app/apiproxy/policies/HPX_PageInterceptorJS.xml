@@ -1,0 +1,6 @@
+<Javascript timeLimit="0" enabled="true" continueOnError="false" async="false" name="HPX_PageInterceptorJS">
+	<DisplayName>PageInterceptorJS</DisplayName>
+	<FaultRules/>
+	<Properties/>
+	<ResourceURL>jsc://HPX_PageInterceptor.js</ResourceURL>
+</Javascript>

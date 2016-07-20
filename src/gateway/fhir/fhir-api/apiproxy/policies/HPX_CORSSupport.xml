@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="HPX_CORSSupport">
+    <DisplayName>CORSSupport</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <Add>
+        <Headers>
+            <Header name="Access-Control-Allow-Origin">*</Header>
+			<!-- Only Access-Control-Allow-Origin header is required for enabling CORS, hence Access-Control-Allow-Headers is removed  -->
+        </Headers>
+    </Add>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="response"/>
+</AssignMessage>

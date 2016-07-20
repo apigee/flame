@@ -1,0 +1,16 @@
+<RaiseFault name="HPX_ReturnGenericFaultMessage">
+    <DisplayName>ReturnGenericFaultMessage</DisplayName>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <FaultResponse>
+        <Set>
+            <Payload contentType="applcation/json">
+			{
+				"Message": {
+					"Error": "BadRequest"
+				}
+			}
+            </Payload>
+            <StatusCode>400</StatusCode>
+        </Set>
+    </FaultResponse>
+</RaiseFault>

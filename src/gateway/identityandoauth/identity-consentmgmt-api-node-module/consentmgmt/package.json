@@ -1,0 +1,16 @@
+{
+   "name": "identity-consent-mgmt",
+   "version": "0.0.1",
+   "private": true,
+   "client_id": "__APPKEY__",
+   "client_secret": "__APPSECRET__",
+   "orgName": "__APPORG__",
+   "appName": "__APPAPP__",
+
+   "dependencies": {
+     "express": "2.5.8",
+     "stylus": ">= 0.0.1",
+     "jade": ">= 0.0.1"
+  }
+  }
+

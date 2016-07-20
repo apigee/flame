@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<LookupCache async="false" continueOnError="false" enabled="true" name="HPX_GetDeveloperFromCache">
+    <DisplayName>GetDeveloperFromCache</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <CacheKey>
+        <KeyFragment ref="apigee.developer.email"/>
+    </CacheKey>
+    <Scope>Application</Scope>
+    <AssignTo>developerCache</AssignTo>
+</LookupCache>
+

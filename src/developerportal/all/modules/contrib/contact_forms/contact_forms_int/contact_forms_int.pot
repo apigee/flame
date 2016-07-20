@@ -1,0 +1,77 @@
+# $Id$
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  contact_forms_int.module: n/a
+#  contact_forms_int.info: n/a
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2013-01-18 18:19+1100\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: contact_forms_int.module:39 contact_forms_int.info:0
+msgid "Contact Forms"
+msgstr ""
+
+#: contact_forms_int.module:40
+msgid "Contact Forms variables."
+msgstr ""
+
+#: contact_forms_int.module:53
+msgid "Default Title for individual contact pages "
+msgstr ""
+
+#: contact_forms_int.module:54
+msgid "If a category doesn't have a page title specified this will be shown. To place the category name in the title use the wildcard \"@category\"."
+msgstr ""
+
+#: contact_forms_int.module:56
+msgid "Contact @category"
+msgstr ""
+
+#: contact_forms_int.module:63
+msgid "Default Additional Information for individual contact pages "
+msgstr ""
+
+#: contact_forms_int.module:64
+msgid "If a category doesn't have additional information specified this will be shown. To place the category name in your message use the wildcard \"@category\" e.g. You can send @category a message using the contact form below."
+msgstr ""
+
+#: contact_forms_int.module:66
+msgid "You can send @category a message using the contact form below."
+msgstr ""
+
+#: contact_forms_int.module:80
+msgid "Category"
+msgstr ""
+
+#: contact_forms_int.module:81
+msgid "Page Title"
+msgstr ""
+
+#: contact_forms_int.module:82
+msgid "Additional Information"
+msgstr ""
+
+#: contact_forms_int.module:83
+msgid "Auto-reply"
+msgstr ""
+
+#: contact_forms_int.info:0
+msgid "Contact Forms Translation"
+msgstr ""
+
+#: contact_forms_int.info:0
+msgid "Makes contact forms additions available for translation."
+msgstr ""
+

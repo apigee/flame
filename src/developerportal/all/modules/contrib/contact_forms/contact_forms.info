@@ -1,0 +1,16 @@
+; $Id:
+name = Contact Forms
+description = Creates individual contact pages from contact form categories.
+dependencies[] = contact
+core = 7.x
+package = Contact Forms
+files[] = contact_forms.module
+files[] = contact_forms.install
+configure = admin/structure/contact/settings
+
+; Information added by drupal.org packaging script on 2013-02-07
+version = "7.x-1.8"
+core = "7.x"
+project = "contact_forms"
+datestamp = "1360197114"
+

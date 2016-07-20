@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AccessControl async="false" continueOnError="false" enabled="false" name="HPX_AccessControl">
+    <DisplayName>AccessControl</DisplayName>
+    <Properties/>
+    <IPRules noRuleMatchAction="DENY">
+        <MatchRule action="ALLOW">
+            <SourceAddress mask="32">0.0.0.0</SourceAddress>
+            <SourceAddress mask="32">0.0.0.0</SourceAddress>
+            <SourceAddress mask="32">0.0.0.0</SourceAddress>
+            <SourceAddress mask="32">0.0.0.0</SourceAddress>
+            <SourceAddress mask="32">0.0.0.0</SourceAddress>
+            <SourceAddress mask="32">0.0.0.0</SourceAddress>
+            <SourceAddress mask="32">0.0.0.0</SourceAddress>
+            <SourceAddress mask="32">0.0.0.0</SourceAddress>
+            <SourceAddress mask="32">0.0.0.0</SourceAddress>
+            <SourceAddress mask="32">0.0.0.0</SourceAddress>
+        </MatchRule>
+    </IPRules>
+</AccessControl>

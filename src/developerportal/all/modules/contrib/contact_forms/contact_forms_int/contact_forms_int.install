@@ -1,0 +1,95 @@
+<?php
+
+
+/**
+* Implementation of hook_enable(). If the contact_fields module is installed
+* then need to make it heavier in the system table to encourage Drupal
+* to run its hooks after the Contact Forms module's hooks.
+*
+* @return None.
+*/
+function contact_forms_int_enable() {
+
+  // make this module hevier than contact_forms so hook_form_alter runs later
+  if (module_exists('contact_forms')) {
+
+    $result = db_query("SELECT weight FROM {system} WHERE `name` = 'contact_forms'")->fetchObject();
+
+    $contact_forms_int_weight = $result->weight + 1;
+
+    db_update('system')
+      ->condition('name', 'contact_forms_int')
+      ->fields(array('weight' => $contact_forms_int_weight))
+      ->execute();
+
+
+  }
+
+  if (module_exists('i18n_contact')) {
+    // make this module heavier than i18n_contact so hook_form_alter runs later
+
+    $result = db_query("SELECT weight FROM {system} WHERE `name` = 'i18n_contact'")->fetchObject();
+
+    $i18n_contact_weight = $result->weight ;
+
+    if ($contact_forms_int_weight <= $i18n_contact_weight){
+
+      $contact_forms_int_weight = $i18n_contact_weight + 1;
+
+      db_update('system')
+        ->condition('name', 'contact_forms_int')
+        ->fields(array('weight' => $contact_forms_int_weight))
+        ->execute();
+    }
+  }
+
+  // enable our variables in the language realm by adding them to the
+  // variable_realm_list_language array but only if they are not already there
+  $change_flag = FALSE;
+  $realm_variables = variable_get('variable_realm_list_language');
+
+  if(!array_key_exists('contact_forms_title', $realm_variables)){
+    $realm_variables = array_merge($realm_variables, array('contact_forms_title'));
+    $change_flag = TRUE;
+  }
+  if(!array_key_exists('contact_forms_information', $realm_variables)){
+    $realm_variables = array_merge($realm_variables, array('contact_forms_information'));
+    $change_flag = TRUE;
+  }
+
+  if ($change_flag) {
+    variable_set('variable_realm_list_language', $realm_variables);
+  }
+
+}
+
+/**
+ * Implementation of hook_disable()
+ */
+function contact_forms_int_disable() {
+
+  // Remove 'contact_forms_title' and 'contact_forms_information' from
+  // the variable variable_realm_list_language 
+  $change_flag = FALSE;
+  $realm_variables = variable_get('variable_realm_list_language');
+
+  $keys = array_keys($realm_variables, 'contact_forms_title');
+  if(isset($keys)){
+    foreach ($keys as $value) {
+      unset($realm_variables[$value]);
+    }
+    $change_flag = TRUE;
+  }
+
+  $keys = array_keys($realm_variables, 'contact_forms_information');
+  if(isset($keys)){
+    foreach ($keys as $value) {
+      unset($realm_variables[$value]);
+    }
+    $change_flag = TRUE;
+  }
+
+  if ($change_flag) {
+    variable_set('variable_realm_list_language', $realm_variables);
+  }
+}

@@ -1,0 +1,15 @@
+<RaiseFault name="HPX_RedirectToIndex">
+	<DisplayName>RedirectToIndex</DisplayName>
+	<IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+	<FaultResponse>
+		<Set>
+			<StatusCode>302</StatusCode>
+			<Headers>
+				<Header name="Location">{request.queryparam.logoutRedircetUri}</Header>
+				<Header name="Access-Control-Allow-Origin">{request.header.origin}</Header>
+				<Header name="Set-cookie">id=;Max-Age=-11; path=/</Header>
+			</Headers>
+		</Set>
+	</FaultResponse>
+</RaiseFault>
+

@@ -1,0 +1,1522 @@
+{  
+   "swagger":"2.0",
+   "info":{  
+      "version":"1.0.0",
+      "title":"DiagnosticOrder API",
+      "description":"FHIR DiagnosticOrder resource API documentation"
+   },
+   "host":"fhirsandbox-prod.apigee.net",
+   "basePath":"/fhir/v1/DiagnosticOrder",
+   "schemes":[  
+      "https"
+   ],
+   "produces":[  
+      "application/json+fhir;charset=UTF-8",
+      "application/xml+fhir;charset=UTF-8"
+   ],
+   "security":[  
+      {  
+         "outhB2C":[  
+            "patient/Diagnosticorder.read"
+         ]
+      }
+   ],
+   "paths":{  
+      "":{  
+         "get":{  
+            "description":"Returns DiagnosticOrders based on filter criteria OR Provides provision for pagination (stateid, page, page_size, _pretty & _bundletype are query parameters used for Paging).<p><a href = 'https://www.hl7.org/fhir/diagnosticorder.html'>FHIR documentation for DiagnosticOrder.</a></p>",
+            "operationId":"DiagnosticOrders Search",
+            "security":[  
+               {  
+                  "outhB2C":[  
+                     "patient/Diagnosticorder.read"
+                  ]
+               }
+            ],
+            "produces":[  
+               "application/json+fhir;charset=UTF-8",
+               "application/xml+fhir;charset=UTF-8"
+            ],
+            "parameters":[  
+               {  
+                  "name":"Authorization",
+                  "in":"header",
+				  "required":false,
+				  "default": "Bearer [access_token]",
+                  "description":"Specify access token for API in the given format: Bearer [access_token].",
+                  "type":"string"
+               },
+               {  
+                  "name":"Accept",
+                  "description":"The Accept request-header field can be used to specify certain media types which are acceptable for the response.",
+                  "in":"header",
+				  "required":false,
+				  "default": "application/json+fhir;charset=UTF-8",
+                  "type":"string"
+               },
+               {  
+                  "name":"_format",
+                  "in":"query",
+                  "description":"Format of data to be returned.",
+                  "type":"string"
+               },
+               {  
+                  "name":"_id",
+                  "in":"query",
+                  "description":"The logical resource id associated with the DiagnosticOrder.",
+                  "type":"string",
+                  "pattern":"[a-z0-9\\-\\.]{1,64}"
+               },
+               {  
+                  "name":"_elements",
+                  "in":"query",
+                  "description":"Used to specify set of elements be returned as part of a resource. The _elements parameter consists of a comma separated list of base element names.",
+                  "type":"string"
+               },
+               {  
+                  "name":"_lastUpdated",
+                  "in":"query",
+                  "description":"The search parameter _lastUpdated can be used to select resources based on the last time they were changed. The parameter format is yyyy-mm-ddThh:nn:ss(TZ). The prefixes >, >=, <= and < may be used on the parameter value.",
+                  "type":"string",
+                  "pattern":"([1-9][0-9]{3}|0[0-9]{3})(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01])(T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?)?)?)?"
+               },
+               {  
+                  "name":"_lastUpdated",
+                  "in":"query",
+                  "description":"The search parameter _lastUpdated can be used to select resources based on the last time they were changed. The parameter format is yyyy-mm-ddThh:nn:ss(TZ). The prefixes >, >=, <= and < may be used on the parameter value.",
+                  "type":"string",
+                  "pattern":"([1-9][0-9]{3}|0[0-9]{3})(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01])(T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?)?)?)?"
+               },
+               {  
+                  "name":"_profile",
+                  "in":"query",
+                  "description":"This parameter searches on the profile element in the meta element of the resource. Value can have following formats: [code] or [namespace]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"_tag",
+                  "in":"query",
+                  "description":"This parameter searches on the tags element in the meta element of the resource. Value can have following formats: [code] or [namespace]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"_security",
+                  "in":"query",
+                  "description":"This parameter searches on the security element in the meta element of the resource. Value can have following formats: [code] or [namespace]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"_count",
+                  "in":"query",
+                  "description":"The number of resources that should be returned in a single page.",
+                  "type":"integer"
+               },
+               {
+					"name": "_summary",
+					"in": "query",
+					"description": "Used to request the server to return a subset of the resource. It can contain one of the following values: true, false, text, data or count.",
+					"type": "string"
+				}, {
+					"name": "_content",
+					"in": "query",
+					"description": "Used to search the entire content of the DiagnosticOrder resource.",
+					"type": "string"
+				}, {
+					"name": "_text",
+					"in": "query",
+					"description": "Used to search on the narrative of the DiagnosticOrder resource.",
+					"type": "string"
+				},
+               {  
+                  "name":"_include",
+                  "in":"query",
+                  "description":"This parameter can be used to fetch a particular resource, and any resources that it references. Parameter values for _include have 3 parts, separated by a : separator. 1. The name of the source resource from which the join comes. 2. The name of the search parameter which must be of type reference. 3.(Optional) A specific of type of target resource (for when the search parameter refers to multiple possible target types)",
+                  "type":"string"
+               },
+               {  
+                  "name":"_revinclude",
+                  "in":"query",
+                  "description":"This parameter can be used to fetch a particular resource, and any resources that refer to it. It can have a value of one of the possible search parameters. Parameter values for _revinclude have 3 parts, separated by a : separator. 1. The name of the source resource from which the join comes. 2. The name of the search parameter which must be of type reference. 3.(Optional) A specific of type of target resource (for when the search parameter refers to multiple possible target types)",
+                  "type":"string"
+               },
+               {  
+                  "name":"_sort",
+                  "in":"query",
+                  "description":"Used to order the results in default(ascending) order. The value can be one of the possible search parameters. The _sort parameter can repeat to indicate sort order, with the repeats indicating a lower sort priority sequentially.",
+                  "type":"string"
+               },
+               {  
+                  "name":"_sort:asc",
+                  "in":"query",
+                  "description":"Used to order the results in ascending order. The value can be one of the possible search parameters. The _sort parameter can repeat to indicate sort order, with the repeats indicating a lower sort priority sequentially.",
+                  "type":"string"
+               },
+               {  
+                  "name":"_sort:desc",
+                  "in":"query",
+                  "description":"Used to order the results in descending order. The value can be one of the possible search parameters. The _sort parameter can repeat to indicate sort order, with the repeats indicating a lower sort priority sequentially.",
+                  "type":"string"
+               },
+               {  
+                  "name":"actor",
+                  "in":"query",
+                  "description":"Who recorded or did this (Device, Practitioner).",
+                  "type":"string"
+               },
+               {  
+                  "name":"bodysite",
+                  "in":"query",
+                  "description":"Location of requested test (if applicable). Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"code",
+                  "in":"query",
+                  "description":"Code to indicate the item (test or panel) being ordered. Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"encounter",
+                  "in":"query",
+                  "description":"The encounter that this diagnostic order is associated with (Encounter).",
+                  "type":"string"
+               },
+               {  
+                  "name":"event-date",
+                  "in":"query",
+                  "description":"The date at which the event happened. The date parameter format is yyyy-mm-ddThh:nn:ss(TZ). The prefixes >, >=, <= and < may be used on the parameter value.",
+                  "type":"string",
+                  "pattern":"([1-9][0-9]{3}|0[0-9]{3})(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01])(T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?)?)?)?"
+               },
+               {  
+                  "name":"event-date",
+                  "in":"query",
+                  "description":" The date parameter format is yyyy-mm-ddThh:nn:ss(TZ). Two dates can be used to specify an interval. The prefixes >, >=, <= and < may be used on the parameter value.",
+                  "type":"string",
+                  "pattern":"([1-9][0-9]{3}|0[0-9]{3})(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01])(T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?)?)?)?"
+               },
+               {  
+                  "name":"event-status",
+                  "in":"query",
+                  "description":"proposed | draft | planned | requested | received | accepted | in-progress | review | completed | cancelled | suspended | rejected | failed. Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"event-status-date",
+                  "in":"query",
+                  "description":"A combination of past-status and date. Value should be in the form: [status]$[date]",
+                  "type":"string"
+               },
+               {  
+                  "name":"identifier",
+                  "in":"query",
+                  "description":"Identifiers assigned to this order. Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"item-date",
+                  "in":"query",
+                  "description":"The date at which the event happened. The date parameter format is yyyy-mm-ddThh:nn:ss(TZ). The prefixes >, >=, <= and < may be used on the parameter value.",
+                  "type":"string",
+                  "pattern":"([1-9][0-9]{3}|0[0-9]{3})(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01])(T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?)?)?)?"
+               },
+               {  
+                  "name":"item-date",
+                  "in":"query",
+                  "description":"The date at which the event happened. The date parameter format is yyyy-mm-ddThh:nn:ss(TZ). Two dates can be used to specify an interval. The prefixes >, >=, <= and < may be used on the parameter value.",
+                  "type":"string",
+                  "pattern":"([1-9][0-9]{3}|0[0-9]{3})(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01])(T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?)?)?)?"
+               },
+               {  
+                  "name":"item-past-status",
+                  "in":"query",
+                  "description":"proposed | draft | planned | requested | received | accepted | in-progress | review | completed | cancelled | suspended | rejected | failed. Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"item-status",
+                  "in":"query",
+                  "description":"proposed | draft | planned | requested | received | accepted | in-progress | review | completed | cancelled | suspended | rejected | failed. Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"item-status-date",
+                  "in":"query",
+                  "description":"A combination of item-past-status and item-date. Value should be in the form: [status]$[date]",
+                  "type":"string"
+               },
+               {  
+                  "name":"orderer",
+                  "in":"query",
+                  "description":"Who ordered the test (Practitioner).",
+                  "type":"string"
+               },
+               {  
+                  "name":"patient",
+                  "in":"query",
+                  "description":"Who and/or what test is about (Patient).",
+                  "type":"string"
+               },
+               {  
+                  "name":"specimen",
+                  "in":"query",
+                  "description":"If the whole order relates to specific specimens (Specimen).",
+                  "type":"string"
+               },
+               {  
+                  "name":"status",
+                  "in":"query",
+                  "description":"proposed | draft | planned | requested | received | accepted | in-progress | review | completed | cancelled | suspended | rejected | failed. Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"subject",
+                  "in":"query",
+                  "description":"Who and/or what test is about (Device, Location, Patient, Group).",
+                  "type":"string"
+               },
+               {  
+                  "name":"stateid",
+                  "in":"query",
+                  "description":"Unique id associated with a page.",
+                  "type":"string"
+               },
+               {  
+                  "name":"page",
+                  "in":"query",
+                  "description":"DiagnosticOrder resource offset.",
+                  "type":"number"
+               },
+               {  
+                  "name":"page_size",
+                  "in":"query",
+                  "description":"The number of DiagnosticOrder resources requested in a page.",
+                  "type":"number"
+               },
+               {  
+                  "name":"_pretty",
+                  "in":"query",
+                  "description":"Set true to get prettified data.",
+                  "type":"boolean"
+               }, {
+					"name": "_bundletype",
+					"in": "query",
+					"description": "Indicates the purpose of a bundle. Values can be one of: document | message | transaction | transaction-response | batch | batch-response | history | searchset | collection.",
+					"type": "string"
+				}
+            ],
+            "responses":{  
+               "200":{  
+                  "description":"DiagnosticOrder bundle"
+               },
+               "default":{  
+                  "description":"unexpected error"
+               }
+            }
+         }
+      },
+      "/_search":{
+         "post":{  
+            "description":"This interaction searches a set of DiagnosticOrders based on some filter criteria. Search interactions take a series of parameters of name'='value pairs encoded as an application/x-www-form-urlencoded submission for a POST.<p><a href = 'https://www.hl7.org/fhir/diagnosticorder.html'>FHIR documentation for DiagnosticOrder.</a></p>",
+            "operationId":"DiagnosticOrders Search using POST",
+            "security":[  
+               {  
+                  "outhB2C":[  
+                     "patient/Diagnosticorder.read"
+                  ]
+               }
+            ],
+            "produces":[  
+               "application/json+fhir;charset=UTF-8",
+               "application/xml+fhir;charset=UTF-8"
+            ],
+            "parameters":[  
+               {  
+                  "name":"Authorization",
+                  "in":"header",
+				  "required":false,
+				  "default": "Bearer [access_token]",
+                  "description":"Specify access token for API in the given format: Bearer [access_token].",
+                  "type":"string"
+               },
+               {  
+                  "name":"Accept",
+                  "description":"The Accept request-header field can be used to specify certain media types which are acceptable for the response.",
+                  "in":"header",
+				  "required":false,
+				  "default": "application/json+fhir;charset=UTF-8",
+                  "type":"string"
+               },
+               {  
+                  "name":"_format",
+                  "in":"query",
+                  "description":"Format of data to be returned.",
+                  "type":"string"
+               },
+               {  
+                  "name":"Content-Type",
+                  "in":"header",
+                  "required":true,
+                  "description":"Specifies the format of data in body",
+                  "type":"string",
+                  "default":"application/x-www-form-urlencoded"
+               },
+               {  
+                  "name":"_id",
+                  "in":"query",
+                  "description":"The logical resource id associated with the DiagnosticOrder.",
+                  "type":"string",
+                  "pattern":"[a-z0-9\\-\\.]{1,64}"
+               },
+               {  
+                  "name":"_elements",
+                  "in":"query",
+                  "description":"Used to specify set of elements be returned as part of a resource. The _elements parameter consists of a comma separated list of base element names.",
+                  "type":"string"
+               },
+               {  
+                  "name":"_lastUpdated",
+                  "in":"query",
+                  "description":"The search parameter _lastUpdated can be used to select resources based on the last time they were changed. The parameter format is yyyy-mm-ddThh:nn:ss(TZ). The prefixes >, >=, <= and < may be used on the parameter value.",
+                  "type":"string",
+                  "pattern":"([1-9][0-9]{3}|0[0-9]{3})(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01])(T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?)?)?)?"
+               },
+               {  
+                  "name":"_lastUpdated",
+                  "in":"query",
+                  "description":"The search parameter _lastUpdated can be used to select resources based on the last time they were changed. The parameter format is yyyy-mm-ddThh:nn:ss(TZ). The prefixes >, >=, <= and < may be used on the parameter value.",
+                  "type":"string",
+                  "pattern":"([1-9][0-9]{3}|0[0-9]{3})(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01])(T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?)?)?)?"
+               },
+               {  
+                  "name":"_profile",
+                  "in":"query",
+                  "description":"This parameter searches on the profile element in the meta element of the resource. Value can have following formats: [code] or [namespace]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"_tag",
+                  "in":"query",
+                  "description":"This parameter searches on the tags element in the meta element of the resource. Value can have following formats: [code] or [namespace]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"_security",
+                  "in":"query",
+                  "description":"This parameter searches on the security element in the meta element of the resource. Value can have following formats: [code] or [namespace]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"_count",
+                  "in":"query",
+                  "description":"The number of resources that should be returned in a single page.",
+                  "type":"integer"
+               },
+               {
+					"name": "_summary",
+					"in": "query",
+					"description": "Used to request the server to return a subset of the resource. It can contain one of the following values: true, false, text, data or count.",
+					"type": "string"
+				}, {
+					"name": "_content",
+					"in": "query",
+					"description": "Used to search the entire content of the DiagnosticOrder resource.",
+					"type": "string"
+				}, {
+					"name": "_text",
+					"in": "query",
+					"description": "Used to search on the narrative of the DiagnosticOrder resource.",
+					"type": "string"
+				},
+               {  
+                  "name":"_include",
+                  "in":"query",
+                  "description":"This parameter can be used to fetch a particular resource, and any resources that it references. Parameter values for _include have 3 parts, separated by a : separator. 1. The name of the source resource from which the join comes. 2. The name of the search parameter which must be of type reference. 3.(Optional) A specific of type of target resource (for when the search parameter refers to multiple possible target types)",
+                  "type":"string"
+               },
+               {  
+                  "name":"_revinclude",
+                  "in":"query",
+                  "description":"This parameter can be used to fetch a particular resource, and any resources that refer to it. It can have a value of one of the possible search parameters. Parameter values for _revinclude have 3 parts, separated by a : separator. 1. The name of the source resource from which the join comes. 2. The name of the search parameter which must be of type reference. 3.(Optional) A specific of type of target resource (for when the search parameter refers to multiple possible target types)",
+                  "type":"string"
+               },
+               {  
+                  "name":"_sort",
+                  "in":"query",
+                  "description":"Used to order the results in default(ascending) order. The value can be one of the possible search parameters. The _sort parameter can repeat to indicate sort order, with the repeats indicating a lower sort priority sequentially.",
+                  "type":"string"
+               },
+               {  
+                  "name":"_sort:asc",
+                  "in":"query",
+                  "description":"Used to order the results in ascending order. The value can be one of the possible search parameters. The _sort parameter can repeat to indicate sort order, with the repeats indicating a lower sort priority sequentially.",
+                  "type":"string"
+               },
+               {  
+                  "name":"_sort:desc",
+                  "in":"query",
+                  "description":"Used to order the results in descending order. The value can be one of the possible search parameters. The _sort parameter can repeat to indicate sort order, with the repeats indicating a lower sort priority sequentially.",
+                  "type":"string"
+               },
+               {  
+                  "name":"actor",
+                  "in":"query",
+                  "description":"Who recorded or did this (Device, Practitioner).",
+                  "type":"string"
+               },
+               {  
+                  "name":"bodysite",
+                  "in":"query",
+                  "description":"Location of requested test (if applicable). Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"code",
+                  "in":"query",
+                  "description":"Code to indicate the item (test or panel) being ordered. Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"encounter",
+                  "in":"query",
+                  "description":"The encounter that this diagnostic order is associated with (Encounter).",
+                  "type":"string"
+               },
+               {  
+                  "name":"event-date",
+                  "in":"query",
+                  "description":"The date at which the event happened. The date parameter format is yyyy-mm-ddThh:nn:ss(TZ). The prefixes >, >=, <= and < may be used on the parameter value.",
+                  "type":"string",
+                  "pattern":"([1-9][0-9]{3}|0[0-9]{3})(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01])(T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?)?)?)?"
+               },
+               {  
+                  "name":"event-date",
+                  "in":"query",
+                  "description":" The date parameter format is yyyy-mm-ddThh:nn:ss(TZ). Two dates can be used to specify an interval. The prefixes >, >=, <= and < may be used on the parameter value.",
+                  "type":"string",
+                  "pattern":"([1-9][0-9]{3}|0[0-9]{3})(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01])(T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?)?)?)?"
+               },
+               {  
+                  "name":"event-status",
+                  "in":"query",
+                  "description":"proposed | draft | planned | requested | received | accepted | in-progress | review | completed | cancelled | suspended | rejected | failed. Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"event-status-date",
+                  "in":"query",
+                  "description":"A combination of past-status and date. Value should be in the form: [status]$[date]",
+                  "type":"string"
+               },
+               {  
+                  "name":"identifier",
+                  "in":"query",
+                  "description":"Identifiers assigned to this order. Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"item-date",
+                  "in":"query",
+                  "description":"The date at which the event happened. The date parameter format is yyyy-mm-ddThh:nn:ss(TZ). The prefixes >, >=, <= and < may be used on the parameter value.",
+                  "type":"string",
+                  "pattern":"([1-9][0-9]{3}|0[0-9]{3})(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01])(T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?)?)?)?"
+               },
+               {  
+                  "name":"item-date",
+                  "in":"query",
+                  "description":"The date at which the event happened. The date parameter format is yyyy-mm-ddThh:nn:ss(TZ). Two dates can be used to specify an interval. The prefixes >, >=, <= and < may be used on the parameter value.",
+                  "type":"string",
+                  "pattern":"([1-9][0-9]{3}|0[0-9]{3})(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01])(T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?)?)?)?"
+               },
+               {  
+                  "name":"item-past-status",
+                  "in":"query",
+                  "description":"proposed | draft | planned | requested | received | accepted | in-progress | review | completed | cancelled | suspended | rejected | failed. Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"item-status",
+                  "in":"query",
+                  "description":"proposed | draft | planned | requested | received | accepted | in-progress | review | completed | cancelled | suspended | rejected | failed. Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"item-status-date",
+                  "in":"query",
+                  "description":"A combination of item-past-status and item-date. Value should be in the form: [status]$[date]",
+                  "type":"string"
+               },
+               {  
+                  "name":"orderer",
+                  "in":"query",
+                  "description":"Who ordered the test (Practitioner).",
+                  "type":"string"
+               },
+               {  
+                  "name":"patient",
+                  "in":"query",
+                  "description":"Who and/or what test is about (Patient).",
+                  "type":"string"
+               },
+               {  
+                  "name":"specimen",
+                  "in":"query",
+                  "description":"If the whole order relates to specific specimens (Specimen).",
+                  "type":"string"
+               },
+               {  
+                  "name":"status",
+                  "in":"query",
+                  "description":"proposed | draft | planned | requested | received | accepted | in-progress | review | completed | cancelled | suspended | rejected | failed. Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"subject",
+                  "in":"query",
+                  "description":"Who and/or what test is about (Device, Location, Patient, Group).",
+                  "type":"string"
+               },
+               {  
+                  "name":"_id",
+                  "in":"formData",
+                  "description":"The logical resource id associated with the DiagnosticOrder.",
+                  "type":"string",
+                  "pattern":"[a-z0-9\\-\\.]{1,64}"
+               },
+               {  
+                  "name":"_elements",
+                  "in":"formData",
+                  "description":"Used to specify set of elements be returned as part of a resource. The _elements parameter consists of a comma separated list of base element names.",
+                  "type":"string"
+               },
+               {  
+                  "name":"_lastUpdated",
+                  "in":"formData",
+                  "description":"The search parameter _lastUpdated can be used to select resources based on the last time they were changed. The parameter format is yyyy-mm-ddThh:nn:ss(TZ). The prefixes >, >=, <= and < may be used on the parameter value.",
+                  "type":"string",
+                  "pattern":"([1-9][0-9]{3}|0[0-9]{3})(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01])(T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?)?)?)?"
+               },
+               {  
+                  "name":"_lastUpdated",
+                  "in":"formData",
+                  "description":"The search parameter _lastUpdated can be used to select resources based on the last time they were changed. The parameter format is yyyy-mm-ddThh:nn:ss(TZ). The prefixes >, >=, <= and < may be used on the parameter value.",
+                  "type":"string",
+                  "pattern":"([1-9][0-9]{3}|0[0-9]{3})(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01])(T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?)?)?)?"
+               },
+               {  
+                  "name":"_profile",
+                  "in":"formData",
+                  "description":"This parameter searches on the profile element in the meta element of the resource. Value can have following formats: [code] or [namespace]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"_tag",
+                  "in":"formData",
+                  "description":"This parameter searches on the tags element in the meta element of the resource. Value can have following formats: [code] or [namespace]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"_security",
+                  "in":"formData",
+                  "description":"This parameter searches on the security element in the meta element of the resource. Value can have following formats: [code] or [namespace]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"_count",
+                  "in":"formData",
+                  "description":"The number of resources that should be returned in a single page.",
+                  "type":"integer"
+               },
+               {
+					"name": "_summary",
+					"in": "formData",
+					"description": "Used to request the server to return a subset of the resource. It can contain one of the following values: true, false, text, data or count.",
+					"type": "string"
+				}, {
+					"name": "_content",
+					"in": "formData",
+					"description": "Used to search the entire content of the DiagnosticOrder resource.",
+					"type": "string"
+				}, {
+					"name": "_text",
+					"in": "formData",
+					"description": "Used to search on the narrative of the DiagnosticOrder resource.",
+					"type": "string"
+				},
+               {  
+                  "name":"_include",
+                  "in":"formData",
+                  "description":"This parameter can be used to fetch a particular resource, and any resources that it references. Parameter values for _include have 3 parts, separated by a : separator. 1. The name of the source resource from which the join comes. 2. The name of the search parameter which must be of type reference. 3.(Optional) A specific of type of target resource (for when the search parameter refers to multiple possible target types)",
+                  "type":"string"
+               },
+               {  
+                  "name":"_revinclude",
+                  "in":"formData",
+                  "description":"This parameter can be used to fetch a particular resource, and any resources that refer to it. It can have a value of one of the possible search parameters. Parameter values for _revinclude have 3 parts, separated by a : separator. 1. The name of the source resource from which the join comes. 2. The name of the search parameter which must be of type reference. 3.(Optional) A specific of type of target resource (for when the search parameter refers to multiple possible target types)",
+                  "type":"string"
+               },
+               {  
+                  "name":"_sort",
+                  "in":"formData",
+                  "description":"Used to order the results in default(ascending) order. The value can be one of the possible search parameters. The _sort parameter can repeat to indicate sort order, with the repeats indicating a lower sort priority sequentially.",
+                  "type":"string"
+               },
+               {  
+                  "name":"_sort:asc",
+                  "in":"formData",
+                  "description":"Used to order the results in ascending order. The value can be one of the possible search parameters. The _sort parameter can repeat to indicate sort order, with the repeats indicating a lower sort priority sequentially.",
+                  "type":"string"
+               },
+               {  
+                  "name":"_sort:desc",
+                  "in":"formData",
+                  "description":"Used to order the results in descending order. The value can be one of the possible search parameters. The _sort parameter can repeat to indicate sort order, with the repeats indicating a lower sort priority sequentially.",
+                  "type":"string"
+               },
+               {  
+                  "name":"actor",
+                  "in":"formData",
+                  "description":"Who recorded or did this (Device, Practitioner).",
+                  "type":"string"
+               },
+               {  
+                  "name":"bodysite",
+                  "in":"formData",
+                  "description":"Location of requested test (if applicable). Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"code",
+                  "in":"formData",
+                  "description":"Code to indicate the item (test or panel) being ordered. Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"encounter",
+                  "in":"formData",
+                  "description":"The encounter that this diagnostic order is associated with (Encounter).",
+                  "type":"string"
+               },
+               {  
+                  "name":"event-date",
+                  "in":"formData",
+                  "description":"The date at which the event happened. The date parameter format is yyyy-mm-ddThh:nn:ss(TZ). The prefixes >, >=, <= and < may be used on the parameter value.",
+                  "type":"string",
+                  "pattern":"([1-9][0-9]{3}|0[0-9]{3})(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01])(T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?)?)?)?"
+               },
+               {  
+                  "name":"event-date",
+                  "in":"formData",
+                  "description":" The date parameter format is yyyy-mm-ddThh:nn:ss(TZ). Two dates can be used to specify an interval. The prefixes >, >=, <= and < may be used on the parameter value.",
+                  "type":"string",
+                  "pattern":"([1-9][0-9]{3}|0[0-9]{3})(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01])(T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?)?)?)?"
+               },
+               {  
+                  "name":"event-status",
+                  "in":"formData",
+                  "description":"proposed | draft | planned | requested | received | accepted | in-progress | review | completed | cancelled | suspended | rejected | failed. Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"event-status-date",
+                  "in":"formData",
+                  "description":"A combination of past-status and date. Value should be in the form: [status]$[date]",
+                  "type":"string"
+               },
+               {  
+                  "name":"identifier",
+                  "in":"formData",
+                  "description":"Identifiers assigned to this order. Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"item-date",
+                  "in":"formData",
+                  "description":"The date at which the event happened. The date parameter format is yyyy-mm-ddThh:nn:ss(TZ). The prefixes >, >=, <= and < may be used on the parameter value.",
+                  "type":"string",
+                  "pattern":"([1-9][0-9]{3}|0[0-9]{3})(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01])(T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?)?)?)?"
+               },
+               {  
+                  "name":"item-date",
+                  "in":"formData",
+                  "description":"The date at which the event happened. The date parameter format is yyyy-mm-ddThh:nn:ss(TZ). Two dates can be used to specify an interval. The prefixes >, >=, <= and < may be used on the parameter value.",
+                  "type":"string",
+                  "pattern":"([1-9][0-9]{3}|0[0-9]{3})(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01])(T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?)?)?)?"
+               },
+               {  
+                  "name":"item-past-status",
+                  "in":"formData",
+                  "description":"proposed | draft | planned | requested | received | accepted | in-progress | review | completed | cancelled | suspended | rejected | failed. Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"item-status",
+                  "in":"formData",
+                  "description":"proposed | draft | planned | requested | received | accepted | in-progress | review | completed | cancelled | suspended | rejected | failed. Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"item-status-date",
+                  "in":"formData",
+                  "description":"A combination of item-past-status and item-date. Value should be in the form: [status]$[date]",
+                  "type":"string"
+               },
+               {  
+                  "name":"orderer",
+                  "in":"formData",
+                  "description":"Who ordered the test (Practitioner).",
+                  "type":"string"
+               },
+               {  
+                  "name":"patient",
+                  "in":"formData",
+                  "description":"Who and/or what test is about (Patient).",
+                  "type":"string"
+               },
+               {  
+                  "name":"specimen",
+                  "in":"formData",
+                  "description":"If the whole order relates to specific specimens (Specimen).",
+                  "type":"string"
+               },
+               {  
+                  "name":"status",
+                  "in":"formData",
+                  "description":"proposed | draft | planned | requested | received | accepted | in-progress | review | completed | cancelled | suspended | rejected | failed. Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"subject",
+                  "in":"formData",
+                  "description":"Who and/or what test is about (Device, Location, Patient, Group).",
+                  "type":"string"
+               }
+            ],
+            "responses":{  
+               "200":{  
+                  "description":"DiagnosticOrder Bundle"
+               },
+               "default":{  
+                  "description":"unexpected error"
+               }
+            }
+         }
+      },
+      "/{id}":{  
+         "get":{  
+            "description":"Returns details of DiagnosticOrder having id given in path.<p><a href = 'https://www.hl7.org/fhir/diagnosticorder.html'>FHIR documentation for DiagnosticOrder.</a></p>",
+            "operationId":"Read DiagnosticOrder",
+            "security":[  
+               {  
+                  "outhB2C":[  
+                     "patient/Diagnosticorder.read"
+                  ]
+               }
+            ],
+            "produces":[  
+               "application/json+fhir;charset=UTF-8",
+               "application/xml+fhir;charset=UTF-8"
+            ],
+            "parameters":[  
+               {  
+                  "name":"_format",
+                  "in":"query",
+                  "description":"Format of data to be returned.",
+                  "type":"string"
+               },
+               {  
+                  "name":"id",
+                  "description":"The logical resource id associated with the DiagnosticOrder.",
+                  "type":"string",
+                  "pattern":"[a-z0-9\\-\\.]{1,64}",
+                  "required":true,
+                  "in":"path"
+               },
+               {  
+                  "name":"Authorization",
+                  "in":"header",
+				  "required":false,
+				  "default": "Bearer [access_token]",
+                  "description":"Specify access token for API in the given format: Bearer [access_token].",
+                  "type":"string"
+               },
+               {  
+                  "name":"Accept",
+                  "description":"The Accept request-header field can be used to specify certain media types which are acceptable for the response.",
+                  "in":"header",
+				  "required":false,
+				  "default": "application/json+fhir;charset=UTF-8",
+                  "type":"string"
+               }
+            ],
+            "responses":{  
+               "200":{  
+                  "description":"DiagnosticOrder instance"
+               },
+               "default":{  
+                  "description":"unexpected error"
+               }
+            }
+         }
+      },
+      "/$meta":{  
+         "get":{  
+            "description":"Retrieves a summary of the profiles, tags, and security labels for DiagnosticOrder.<p><a href = 'https://www.hl7.org/fhir/diagnosticorder.html'>FHIR documentation for DiagnosticOrder.</a></p>",
+            "operationId":"DiagnosticOrders Metadata",
+            "security":[  
+               {  
+                  "outhB2C":[  
+                     "patient/Diagnosticorder.read"
+                  ]
+               }
+            ],
+            "produces":[  
+               "application/json+fhir;charset=UTF-8",
+               "application/xml+fhir;charset=UTF-8"
+            ],
+            "parameters":[  
+               {  
+                  "name":"_format",
+                  "in":"query",
+                  "description":"Format of data to be returned.",
+                  "type":"string"
+               },
+               {  
+                  "name":"Authorization",
+                  "in":"header",
+				  "required":false,
+				  "default": "Bearer [access_token]",
+                  "description":"Specify access token for API in the given format: Bearer [access_token].",
+                  "type":"string"
+               },
+               {  
+                  "name":"Accept",
+                  "description":"The Accept request-header field can be used to specify certain media types which are acceptable for the response.",
+                  "in":"header",
+				  "required":false,
+				  "default": "application/json+fhir;charset=UTF-8",
+                  "type":"string"
+               }
+            ],
+            "responses":{  
+               "200":{  
+                  "description":"List of all tags, profiles and security labels used for DiagnosticOrder."
+               },
+               "default":{  
+                  "description":"unexpected error"
+               }
+            }
+         }
+      },
+      "/{id}/$meta":{  
+         "get":{  
+            "description":"Retrieves a summary of the profiles, tags, and security labels for given DiagnosticOrder resource.<p><a href = 'https://www.hl7.org/fhir/diagnosticorder.html'>FHIR documentation for DiagnosticOrder.</a></p>",
+            "operationId":"DiagnosticOrder Metadata",
+            "security":[  
+               {  
+                  "outhB2C":[  
+                     "patient/Diagnosticorder.read"
+                  ]
+               }
+            ],
+            "produces":[  
+               "application/json+fhir;charset=UTF-8",
+               "application/xml+fhir;charset=UTF-8"
+            ],
+            "parameters":[  
+               {  
+                  "name":"_format",
+                  "in":"query",
+                  "description":"Format of data to be returned.",
+                  "type":"string"
+               },
+               {  
+                  "name":"id",
+                  "description":"The logical resource id associated with the DiagnosticOrder.",
+                  "type":"string",
+                  "pattern":"[a-z0-9\\-\\.]{1,64}",
+                  "required":true,
+                  "in":"path"
+               },
+               {  
+                  "name":"Authorization",
+                  "in":"header",
+				  "required":false,
+				  "default": "Bearer [access_token]",
+                  "description":"Specify access token for API in the given format: Bearer [access_token].",
+                  "type":"string"
+               },
+               {  
+                  "name":"Accept",
+                  "description":"The Accept request-header field can be used to specify certain media types which are acceptable for the response.",
+                  "in":"header",
+				  "required":false,
+				  "default": "application/json+fhir;charset=UTF-8",
+                  "type":"string"
+               }
+            ],
+            "responses":{  
+               "200":{  
+                  "description":"List of all tags, profiles and security labels affixed to the nominated resource."
+               },
+               "default":{  
+                  "description":"unexpected error"
+               }
+            }
+         }
+      },
+      "/{id}/_history/{vid}/$meta":{  
+         "get":{  
+            "description":"Retrieves a summary of the profiles, tags, and security labels for given version of the DiagnosticOrder.<p><a href = 'https://www.hl7.org/fhir/diagnosticorder.html'>FHIR documentation for DiagnosticOrder.</a></p>",
+            "operationId":"DiagnosticOrder Version based Metadata",
+            "security":[  
+               {  
+                  "outhB2C":[  
+                     "patient/Diagnosticorder.read"
+                  ]
+               }
+            ],
+            "produces":[  
+               "application/json+fhir;charset=UTF-8",
+               "application/xml+fhir;charset=UTF-8"
+            ],
+            "parameters":[  
+               {  
+                  "name":"_format",
+                  "in":"query",
+                  "description":"Format of data to be returned.",
+                  "type":"string"
+               },
+               {  
+                  "name":"id",
+                  "description":"The logical resource id associated with the DiagnosticOrder.",
+                  "type":"string",
+                  "pattern":"[a-z0-9\\-\\.]{1,64}",
+                  "required":true,
+                  "in":"path"
+               },
+               {  
+                  "name":"vid",
+                  "description":"Version Id of DiagnosticOrder",
+                  "type":"string",
+                  "pattern":"[a-z0-9\\-\\.]{1,64}",
+                  "required":true,
+                  "in":"path"
+               },
+               {  
+                  "name":"Authorization",
+                  "in":"header",
+				  "required":false,
+				  "default": "Bearer [access_token]",
+                  "description":"Specify access token for API in the given format: Bearer [access_token].",
+                  "type":"string"
+               },
+               {  
+                  "name":"Accept",
+                  "description":"The Accept request-header field can be used to specify certain media types which are acceptable for the response.",
+                  "in":"header",
+				  "required":false,
+				  "default": "application/json+fhir;charset=UTF-8",
+                  "type":"string"
+               }
+            ],
+            "responses":{  
+               "200":{  
+                  "description":"List of all tags, profiles and security labels affixed to the nominated version of the resource."
+               },
+               "default":{  
+                  "description":"unexpected error"
+               }
+            }
+         }
+      },
+      "/_history":{  
+         "get":{  
+            "description":"It retrieves the history of all resources of DiagnosticOrder.<p><a href = 'https://www.hl7.org/fhir/diagnosticorder.html'>FHIR documentation for DiagnosticOrder.</a></p>",
+            "operationId":"DiagnosticOrders History",
+            "security":[  
+               {  
+                  "outhB2C":[  
+                     "patient/Diagnosticorder.read"
+                  ]
+               }
+            ],
+            "produces":[  
+               "application/json+fhir;charset=UTF-8",
+               "application/xml+fhir;charset=UTF-8"
+            ],
+            "parameters":[  
+               {  
+                  "name":"_format",
+                  "in":"query",
+                  "description":"Format of data to be returned.",
+                  "type":"string"
+               },
+               {  
+                  "name":"_count",
+                  "in":"query",
+                  "description":"Number of records needed in response.",
+                  "type":"integer"
+               },
+               {  
+                  "name":"_since",
+                  "in":"query",
+                  "description":"Specify an instant to only include resource versions that were created at or after the given instant in time. An instant in time is known at least to the second and always includes a time zone.",
+                  "type":"string",
+                  "pattern":"([1-9][0-9]{3}|0[0-9]{3})(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01])(T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?)?)?)?"
+               },
+               {  
+                  "name":"Authorization",
+                  "in":"header",
+				  "required":false,
+				  "default": "Bearer [access_token]",
+                  "description":"Specify access token for API in the given format: Bearer [access_token].",
+                  "type":"string"
+               },
+               {  
+                  "name":"Accept",
+                  "description":"The Accept request-header field can be used to specify certain media types which are acceptable for the response.",
+                  "in":"header",
+				  "required":false,
+				  "default": "application/json+fhir;charset=UTF-8",
+                  "type":"string"
+               }
+            ],
+            "responses":{  
+               "200":{  
+                  "description":"DiagnosticOrder instance"
+               },
+               "default":{  
+                  "description":"unexpected error"
+               }
+            }
+         }
+      },
+      "/{id}/_history":{  
+         "get":{  
+            "description":"It retrieves the history of a particular DiagnosticOrder identified by the given id in path.<p><a href = 'https://www.hl7.org/fhir/diagnosticorder.html'>FHIR documentation for DiagnosticOrder.</a></p>",
+            "operationId":"DiagnosticOrder History",
+            "security":[  
+               {  
+                  "outhB2C":[  
+                     "patient/Diagnosticorder.read"
+                  ]
+               }
+            ],
+            "produces":[  
+               "application/json+fhir;charset=UTF-8",
+               "application/xml+fhir;charset=UTF-8"
+            ],
+            "parameters":[  
+               {  
+                  "name":"_format",
+                  "in":"query",
+                  "description":"Format of data to be returned.",
+                  "type":"string"
+               },
+               {  
+                  "name":"_count",
+                  "in":"query",
+                  "description":"Number of records needed in response.",
+                  "type":"integer"
+               },
+               {  
+                  "name":"_since",
+                  "in":"query",
+                  "description":"Specify an instant to only include resource versions that were created at or after the given instant in time. An instant in time is known at least to the second and always includes a time zone.",
+                  "type":"string",
+                  "pattern":"([1-9][0-9]{3}|0[0-9]{3})(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01])(T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?)?)?)?"
+               },
+               {  
+                  "name":"id",
+                  "description":"The logical resource id associated with the DiagnosticOrder.",
+                  "type":"string",
+                  "pattern":"[a-z0-9\\-\\.]{1,64}",
+                  "required":true,
+                  "in":"path"
+               },
+               {  
+                  "name":"Authorization",
+                  "in":"header",
+				  "required":false,
+				  "default": "Bearer [access_token]",
+                  "description":"Specify access token for API in the given format: Bearer [access_token].",
+                  "type":"string"
+               },
+               {  
+                  "name":"Accept",
+                  "description":"The Accept request-header field can be used to specify certain media types which are acceptable for the response.",
+                  "in":"header",
+				  "required":false,
+				  "default": "application/json+fhir;charset=UTF-8",
+                  "type":"string"
+               }
+            ],
+            "responses":{  
+               "200":{  
+                  "description":"DiagnosticOrder instance"
+               },
+               "default":{  
+                  "description":"unexpected error"
+               }
+            }
+         }
+      },
+      "/{id}/_history/{vid}":{  
+         "get":{  
+            "description":"This interaction preforms a version specific read of DiagnosticOrder resource.<p><a href = 'https://www.hl7.org/fhir/diagnosticorder.html'>FHIR documentation for DiagnosticOrder.</a></p>",
+            "operationId":"DiagnosticOrder Version Read",
+            "security":[  
+               {  
+                  "outhB2C":[  
+                     "patient/Diagnosticorder.read"
+                  ]
+               }
+            ],
+            "produces":[  
+               "application/json+fhir;charset=UTF-8",
+               "application/xml+fhir;charset=UTF-8"
+            ],
+            "parameters":[  
+               {  
+                  "name":"_format",
+                  "in":"query",
+                  "description":"Format of data to be returned.",
+                  "type":"string"
+               },
+               {  
+                  "name":"id",
+                  "description":"The logical resource id associated with the DiagnosticOrder.",
+                  "type":"string",
+                  "pattern":"[a-z0-9\\-\\.]{1,64}",
+                  "required":true,
+                  "in":"path"
+               },
+               {  
+                  "name":"vid",
+                  "description":"Version Id of DiagnosticOrder",
+                  "type":"string",
+                  "pattern":"[a-z0-9\\-\\.]{1,64}",
+                  "required":true,
+                  "in":"path"
+               },
+               {  
+                  "name":"Authorization",
+                  "in":"header",
+				  "required":false,
+				  "default": "Bearer [access_token]",
+                  "description":"Specify access token for API in the given format: Bearer [access_token].",
+                  "type":"string"
+               },
+               {  
+                  "name":"Accept",
+                  "description":"The Accept request-header field can be used to specify certain media types which are acceptable for the response.",
+                  "in":"header",
+				  "required":false,
+				  "default": "application/json+fhir;charset=UTF-8",
+                  "type":"string"
+               }
+            ],
+            "responses":{  
+               "200":{  
+                  "description":"DiagnosticOrder instance"
+               },
+               "default":{  
+                  "description":"unexpected error"
+               }
+            }
+         }
+      },
+      "/{id}/{type}":{  
+         "get":{  
+            "description":"Search the specified resource type in DiagnosticOrder compartment.<p><a href = 'https://www.hl7.org/fhir/diagnosticorder.html'>FHIR documentation for DiagnosticOrder.</a></p>",
+            "operationId":"Compartment Search",
+            "security":[  
+               {  
+                  "outhB2C":[  
+                     "patient/Diagnosticorder.read"
+                  ]
+               }
+            ],
+            "produces":[  
+               "application/json+fhir;charset=UTF-8",
+               "application/xml+fhir;charset=UTF-8"
+            ],
+            "parameters":[  
+               {  
+                  "name":"_format",
+                  "in":"query",
+                  "description":"Format of data to be returned.",
+                  "type":"string"
+               },
+               {  
+                  "name":"id",
+                  "description":"The logical resource id associated with the DiagnosticOrder.",
+                  "type":"string",
+                  "pattern":"[a-z0-9\\-\\.]{1,64}",
+                  "required":true,
+                  "in":"path"
+               },
+               {  
+                  "name":"type",
+                  "description":"Type of Resource",
+                  "type":"string",
+                  "required":true,
+                  "in":"path"
+               },
+               {  
+                  "name":"Authorization",
+                  "in":"header",
+				  "required":false,
+				  "default": "Bearer [access_token]",
+                  "description":"Specify access token for API in the given format: Bearer [access_token].",
+                  "type":"string"
+               },
+               {  
+                  "name":"Accept",
+                  "description":"The Accept request-header field can be used to specify certain media types which are acceptable for the response.",
+                  "in":"header",
+				  "required":false,
+				  "default": "application/json+fhir;charset=UTF-8",
+                  "type":"string"
+               },
+               {  
+                  "name":"_id",
+                  "in":"query",
+                  "description":"The logical resource id associated with the DiagnosticOrder.",
+                  "type":"string",
+                  "pattern":"[a-z0-9\\-\\.]{1,64}"
+               },
+               {  
+                  "name":"_elements",
+                  "in":"query",
+                  "description":"Used to specify set of elements be returned as part of a resource. The _elements parameter consists of a comma separated list of base element names.",
+                  "type":"string"
+               },
+               {  
+                  "name":"_lastUpdated",
+                  "in":"query",
+                  "description":"The search parameter _lastUpdated can be used to select resources based on the last time they were changed. The parameter format is yyyy-mm-ddThh:nn:ss(TZ). The prefixes >, >=, <= and < may be used on the parameter value.",
+                  "type":"string",
+                  "pattern":"([1-9][0-9]{3}|0[0-9]{3})(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01])(T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?)?)?)?"
+               },
+               {  
+                  "name":"_lastUpdated",
+                  "in":"query",
+                  "description":"The search parameter _lastUpdated can be used to select resources based on the last time they were changed. The parameter format is yyyy-mm-ddThh:nn:ss(TZ). The prefixes >, >=, <= and < may be used on the parameter value.",
+                  "type":"string",
+                  "pattern":"([1-9][0-9]{3}|0[0-9]{3})(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01])(T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?)?)?)?"
+               },
+               {  
+                  "name":"_profile",
+                  "in":"query",
+                  "description":"This parameter searches on the profile element in the meta element of the resource. Value can have following formats: [code] or [namespace]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"_tag",
+                  "in":"query",
+                  "description":"This parameter searches on the tags element in the meta element of the resource. Value can have following formats: [code] or [namespace]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"_security",
+                  "in":"query",
+                  "description":"This parameter searches on the security element in the meta element of the resource. Value can have following formats: [code] or [namespace]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"_count",
+                  "in":"query",
+                  "description":"The number of resources that should be returned in a single page.",
+                  "type":"integer"
+               },
+               {
+					"name": "_summary",
+					"in": "query",
+					"description": "Used to request the server to return a subset of the resource. It can contain one of the following values: true, false, text, data or count.",
+					"type": "string"
+				}, {
+					"name": "_content",
+					"in": "query",
+					"description": "Used to search the entire content of the DiagnosticOrder resource.",
+					"type": "string"
+				}, {
+					"name": "_text",
+					"in": "query",
+					"description": "Used to search on the narrative of the DiagnosticOrder resource.",
+					"type": "string"
+				},
+               {  
+                  "name":"_include",
+                  "in":"query",
+                  "description":"This parameter can be used to fetch a particular resource, and any resources that it references. Parameter values for _include have 3 parts, separated by a : separator. 1. The name of the source resource from which the join comes. 2. The name of the search parameter which must be of type reference. 3.(Optional) A specific of type of target resource (for when the search parameter refers to multiple possible target types)",
+                  "type":"string"
+               },
+               {  
+                  "name":"_revinclude",
+                  "in":"query",
+                  "description":"This parameter can be used to fetch a particular resource, and any resources that refer to it. It can have a value of one of the possible search parameters. Parameter values for _revinclude have 3 parts, separated by a : separator. 1. The name of the source resource from which the join comes. 2. The name of the search parameter which must be of type reference. 3.(Optional) A specific of type of target resource (for when the search parameter refers to multiple possible target types)",
+                  "type":"string"
+               },
+               {  
+                  "name":"_sort",
+                  "in":"query",
+                  "description":"Used to order the results in default(ascending) order. The value can be one of the possible search parameters. The _sort parameter can repeat to indicate sort order, with the repeats indicating a lower sort priority sequentially.",
+                  "type":"string"
+               },
+               {  
+                  "name":"_sort:asc",
+                  "in":"query",
+                  "description":"Used to order the results in ascending order. The value can be one of the possible search parameters. The _sort parameter can repeat to indicate sort order, with the repeats indicating a lower sort priority sequentially.",
+                  "type":"string"
+               },
+               {  
+                  "name":"_sort:desc",
+                  "in":"query",
+                  "description":"Used to order the results in descending order. The value can be one of the possible search parameters. The _sort parameter can repeat to indicate sort order, with the repeats indicating a lower sort priority sequentially.",
+                  "type":"string"
+               },
+               {  
+                  "name":"actor",
+                  "in":"query",
+                  "description":"Who recorded or did this (Device, Practitioner).",
+                  "type":"string"
+               },
+               {  
+                  "name":"bodysite",
+                  "in":"query",
+                  "description":"Location of requested test (if applicable). Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"code",
+                  "in":"query",
+                  "description":"Code to indicate the item (test or panel) being ordered. Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"encounter",
+                  "in":"query",
+                  "description":"The encounter that this diagnostic order is associated with (Encounter).",
+                  "type":"string"
+               },
+               {  
+                  "name":"event-date",
+                  "in":"query",
+                  "description":"The date at which the event happened. The date parameter format is yyyy-mm-ddThh:nn:ss(TZ). The prefixes >, >=, <= and < may be used on the parameter value.",
+                  "type":"string",
+                  "pattern":"([1-9][0-9]{3}|0[0-9]{3})(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01])(T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?)?)?)?"
+               },
+               {  
+                  "name":"event-date",
+                  "in":"query",
+                  "description":" The date parameter format is yyyy-mm-ddThh:nn:ss(TZ). Two dates can be used to specify an interval. The prefixes >, >=, <= and < may be used on the parameter value.",
+                  "type":"string",
+                  "pattern":"([1-9][0-9]{3}|0[0-9]{3})(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01])(T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?)?)?)?"
+               },
+               {  
+                  "name":"event-status",
+                  "in":"query",
+                  "description":"proposed | draft | planned | requested | received | accepted | in-progress | review | completed | cancelled | suspended | rejected | failed. Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"event-status-date",
+                  "in":"query",
+                  "description":"A combination of past-status and date. Value should be in the form: [status]$[date]",
+                  "type":"string"
+               },
+               {  
+                  "name":"identifier",
+                  "in":"query",
+                  "description":"Identifiers assigned to this order. Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"item-date",
+                  "in":"query",
+                  "description":"The date at which the event happened. The date parameter format is yyyy-mm-ddThh:nn:ss(TZ). The prefixes >, >=, <= and < may be used on the parameter value.",
+                  "type":"string",
+                  "pattern":"([1-9][0-9]{3}|0[0-9]{3})(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01])(T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?)?)?)?"
+               },
+               {  
+                  "name":"item-date",
+                  "in":"query",
+                  "description":"The date at which the event happened. The date parameter format is yyyy-mm-ddThh:nn:ss(TZ). Two dates can be used to specify an interval. The prefixes >, >=, <= and < may be used on the parameter value.",
+                  "type":"string",
+                  "pattern":"([1-9][0-9]{3}|0[0-9]{3})(-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01])(T(([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9](\\.[0-9]+)?|(24:00:00(\\.0+)?))(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?)?)?)?"
+               },
+               {  
+                  "name":"item-past-status",
+                  "in":"query",
+                  "description":"proposed | draft | planned | requested | received | accepted | in-progress | review | completed | cancelled | suspended | rejected | failed. Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"item-status",
+                  "in":"query",
+                  "description":"proposed | draft | planned | requested | received | accepted | in-progress | review | completed | cancelled | suspended | rejected | failed. Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"item-status-date",
+                  "in":"query",
+                  "description":"A combination of item-past-status and item-date. Value should be in the form: [status]$[date]",
+                  "type":"string"
+               },
+               {  
+                  "name":"orderer",
+                  "in":"query",
+                  "description":"Who ordered the test (Practitioner).",
+                  "type":"string"
+               },
+               {  
+                  "name":"patient",
+                  "in":"query",
+                  "description":"Who and/or what test is about (Patient).",
+                  "type":"string"
+               },
+               {  
+                  "name":"specimen",
+                  "in":"query",
+                  "description":"If the whole order relates to specific specimens (Specimen).",
+                  "type":"string"
+               },
+               {  
+                  "name":"status",
+                  "in":"query",
+                  "description":"proposed | draft | planned | requested | received | accepted | in-progress | review | completed | cancelled | suspended | rejected | failed. Value can have following formats: [code] or [system]|[code] or |[code].",
+                  "type":"string"
+               },
+               {  
+                  "name":"subject",
+                  "in":"query",
+                  "description":"Who and/or what test is about (Device, Location, Patient, Group).",
+                  "type":"string"
+               }
+            ],
+            "responses":{  
+               "200":{  
+                  "description":"The set of resources associated with a particular DiagnosticOrder."
+               },
+               "default":{  
+                  "description":"unexpected error"
+               }
+            }
+         }
+      }
+   },
+   "securityDefinitions":{  
+      "outhB2C":{  
+         "type":"oauth2",
+         "description":"Security scheme for B2C flow using authorization code flow.",
+         "scopes":{  
+            "patient/Diagnosticorder.read":"Read permissions for DiagnosticOrder demographics."
+         },
+         "flow":"Authorization_code",
+         "authorizationUrl":"https://fhirsandbox-prod.apigee.net/oauth/v2/authorize?scope=patient/Diagnosticorder.read&state=uyrjiqa23nv8650ndj",
+         "tokenUrl":"https://fhirsandbox-prod.apigee.net/oauth/v2/accesstoken"
+      }
+   }
+}

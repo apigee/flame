@@ -1,0 +1,7 @@
+name = FHIR Swagger
+description = Import swagger files, render and publish them.
+package = FHIR
+version = 7.x-1.0
+core = 7.x
+files[] = fhir_swagger.module
+files[] = fhir_swagger.install_callbacks.inc

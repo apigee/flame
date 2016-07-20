@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="HPX_Fault_GenericFault">
+    <DisplayName>Fault_GenericFault</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <Set>
+        <Payload contentType="application/json" variablePrefix="%" variableSuffix="#">
+        {
+			"resourceType": "OperationOutcome",
+			"text": {
+				"status": "generated",
+				  "div": "<div><h1>Operation Outcome</h1><table border='0'><tr><td style='font-weight: bold;'>error</td><td>[]</td><td><pre>%error.message#</pre></td>\n\t\t\t</tr>\n\t\t</table>\n\t</div>"
+			},
+			"issue": [
+				{
+					"severity": "error",
+         		  	"code":"unknown",
+					"details": "%error.message#"
+				}
+			]
+		}
+      	</Payload>
+        <StatusCode>500</StatusCode>
+        <ReasonPhrase>Internal Server Error</ReasonPhrase>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="request"/>
+</AssignMessage>

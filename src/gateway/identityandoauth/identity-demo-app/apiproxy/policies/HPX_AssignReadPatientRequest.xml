@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="HPX_AssignReadPatientRequest">
+    <DisplayName>AssignReadPatientRequest</DisplayName>
+    <Properties/>
+    <Set>
+        <Headers>
+            <Header name="Accept">application/json</Header>
+            <Header name="Authorization">Bearer {access_token}</Header>
+        </Headers>
+        <QueryParams/>
+        <FormParams/>
+        <Verb>GET</Verb>
+        <Path/>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="true" transport="http" type="request">read_patient_request</AssignTo>
+</AssignMessage>

@@ -1,0 +1,19 @@
+name = Contact Forms Translation
+description = Makes contact forms additions available for translation.
+dependencies[] = contact
+dependencies[] = contact_forms
+dependencies[] = locale
+dependencies[] = i18n
+dependencies[] = i18n_contact
+dependencies[] = i18n_string
+dependencies[] = variable
+package = Contact Forms
+core = 7.x
+files[] = contact_forms_int.install
+files[] = contact_forms_int.module
+; Information added by drupal.org packaging script on 2013-02-07
+version = "7.x-1.8"
+core = "7.x"
+project = "contact_forms"
+datestamp = "1360197114"
+

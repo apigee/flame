@@ -1,0 +1,1225 @@
+<div class="row">
+<div class="row">
+<style>
+        body section.page-header {
+        display:none;
+
+    }
+
+    .CodeMirror {
+        min-height:150px;
+    }
+
+    .CodeMirror-scroll {
+        padding:0;
+    }
+	.docs-block {
+		border:1px solid #bcbcbc;
+			
+	}
+	.docs-block h3{
+		background:#4a4a4a;
+		color:#ffffff !important;
+		margin:0;
+		padding:8px 18px 1px 18px !important;
+	}
+	.docs-block .block-content {
+		padding:20px;
+	}
+	.docs-block .block-big-area {
+		background:#f2f2f2;
+		padding:10px;
+	}
+	.docs-block .block-big-area select {
+		padding:8px;
+	}
+	.set-height-fr-scroll
+	{
+		height:300px;
+		overflow-y:auto;
+		overflow-x-hidden;
+	}
+	#method_content, #index_content {
+		border-right:none;
+		padding:0 14px 50px 35px;
+	}
+	#method_content #request_response_container, #method_content .tab-content {
+		background:#ffffff;
+		padding:0;
+		border-radius:0;
+		border:1px solid #bcbcbc;
+	}
+	#method_content .operation_container {
+		margin:0;
+	}
+	#method_content button#send_request {
+		background:#fe4203;
+		border:none;
+		padding:10px 20px;	
+	}
+	.request_response_tabs, #method_content .nav-tabs {
+		background:#eeeced;
+	}
+	#method_content .request_response_tabs a, #method_content .nav-tabs>li>a {
+		background:#dbdbdb;
+		margin-right:1px;
+		color: #4a494a;
+		font-size: 16px;
+		padding:10px 15px;
+		line-height:1.42857143;
+	}
+	#method_content .request_response_tabs a.selected {
+		/*background:#FFFFFF;
+		border-width:0;
+		border-style:solid;
+		border-color:#bcbcbc;
+		margin-bottom:-1px;*/
+		border-radius:0;
+	}
+	.resource-summary {
+	margin-top:20px;
+	background:#f2f2f2;
+}
+#method_content .nav-tabs>li>a {
+	font-size:16px;
+	border:none;
+}
+#method_content .nav-tabs>li.active>a, #method_content .nav-tabs>li.active>a:hover, #method_content .nav-tabs>li.active>a:focus, #method_content .request_response_tabs a.selected {
+	background:#4a494a;
+	color:#FFFFFF;
+}
+	pre {
+		border-radius:0;
+		background:#FFFFFF;
+	}
+	.nav-tabs>li>a {
+		border-radius:0;
+	}
+	.req-tabs {
+		background:#f2f2f2;
+		margin-left:-1px;
+	}
+	.title_container {
+		margin-bottom:25px;
+	}
+	#method_content h4 {
+		background:#4a494a;
+		font-size:14px;
+		font-weight:normal;
+		color:#FFFFFF;
+		line-height:40px;
+		padding:0 20px;
+	}
+	#method_content h2 {
+		color:#fc4a00;
+	}
+	#method_content .table-bordered {
+		border:1px solid #bcbcbc;
+	}
+	#method_content .table thead {
+		border-bottom:1px solid #bcbcbc;
+	}
+	#method_content .table > tbody > tr > td {
+    text-align: left;
+    color: #898989;
+    border: 0;
+}
+	.panel-group .panel+.panel {
+		margin-top:15px;
+	}
+	.panel-group .panel {
+		border-radius:0;
+		border-color:#bcbcbc;
+	}
+	#accordion .panel-heading {
+		background:#4a494a;
+		border-radius:0;
+		padding:0;
+	}
+	#accordion .panel-heading a {
+		color:#FFFFFF;
+		display:block;
+	}
+	#accordion .panel-heading a:after {
+		content:"+";
+		float:right;
+		color:#FFFFFF;
+		font-size:14px;
+	}
+		
+	#accordion .panel-body {
+		background:#f2f2f2;
+	}
+	#accordion .panel-body table {
+		background:#FFFFFF;
+		border-color:#bcbcbc;
+		border-collapse:collapse;
+		margin-bottom:0;
+	}
+	
+	#accordion .panel-body table thead.well {
+		background:none;
+	}
+	#method_content .table td, #method_content .table th {
+		background:none;
+		height: auto;
+    padding: 10px;
+    max-width: 330px;
+	border:none;
+	}
+	#method_content .table > tbody > tr > td, #method_content .table > thead > tr > th {
+    height: auto;
+    padding: 10px;
+    max-width: 330px;
+	background:none;
+}
+#method_content .header-param {
+	background:#FFFFFF;
+	padding:5px 10px;
+	border:1px solid #bcbcbc;
+}
+#method_content ul.method_table, #index_content ul.method_table {
+    color: #686969;
+    line-height: 18px;
+    padding: 0;
+}
+#method_content ul.method_table, #index_content ul.method_table {
+    list-style: none;
+    margin: 0;
+}
+#method_content .method_table > li, #index_content .method_table .method_title, #index_content .method_table .method_details {
+    border-bottom: 1px solid #cacaca;
+
+}
+#method_content .method_table > li, #index_content .method_table .method_details {
+    padding: 10px 0;
+}
+#method_content .method_table > li:last-child, #index_content .method_table .method_details:last-child {
+	border-bottom:none;
+}
+#method_content ul.method_table > li:after, #method_content ul.method_table > li:before, #index_content ul.method_table > li:after, #index_content ul.method_table > li:before {
+    content: "";
+    display: table;
+    line-height: 0;
+}
+#method_content .method_table .title, #index_content .method_table .title {
+    float: left;
+    margin-right: 10px;
+    word-wrap: break-word;
+}
+#method_content .method_table .title {
+    width: 21.5%;
+}
+#method_content .method_table .value, #index_content .method_table .value {
+    width: 40% !important;
+}
+#method_content .method_table .value, #index_content .method_table .value {
+    width: 27%;
+    float: left;
+}
+#method_content .method_table .method_details .description, #method_content .method_table .method_title .description {
+    width: 30%;
+}
+#method_content .method_table .method_details .description, #method_content .method_table .method_title .description, #index_content .method_table .method_details .description, #index_content .method_table .method_title .description {
+    padding: 0 15px 0 0;
+    float: right;
+}
+#method_content .method_table .method_details .title span.required, #index_content .method_table .method_details .title span.required {
+    font-family: "ars_maquette_proitalic","ars-maquette-web","Myriad Pro","Gill Sans","Lucida Sans",Verdana,Geneva,sans-serif;
+    font-size: 12px;
+    color: #aaa;
+}
+#method_content .method_table .method_details .value input, #index_content .method_table .method_details .value input {
+    height: auto;
+    width: 100%;
+    font-size: 13px;
+    margin-bottom: 0;
+    padding: 15px;
+	border-radius:0;
+	border:1px solid #e3e3e3;
+}
+.associate_class{
+padding:10px;
+}
+.associate_class .view-copy-of-all-patients-method-listing
+{
+    padding:0px;
+    background: white;
+}
+.associate_class h2
+{
+    background: #4a4a4a;
+    border-radius: 0;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: normal;
+    color: white;
+}
+
+.associate_class .view-content{
+     
+}
+#hmac_content {
+    position: relative;
+	margin-top:20px;
+}
+#hmac_content .btn {
+    padding: 6px 10px;
+    font-size: 12px;
+	    background: none;
+    color: #ff7700;
+    border: 1px solid #ff7700;
+	border-radius:3px;
+}
+#hmac_content .glyphicon {
+    position: absolute;
+    /*right: -20px;*/
+    top: 40%;
+}
+.tab-content {
+    /*overflow-x: scroll;*/
+	background:#FFFFFF;
+}
+.textGreen{
+	text-decoration: None;
+	color: #007000;
+    font-weight: bold;
+}
+.textGray {
+	color: #aaa;
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 12px;
+}
+
+
+a:hover.textGreen{
+    color: #428bca;
+}
+
+pre.preetyprint{
+	overflow: auto; 
+	max-height: 250px;
+}
+#method_content .operation_container {
+    margin: 20px 0;
+    height: 60px;
+    position: relative;
+}
+#method_content .sendButton{
+	/*position:absolute;
+	width:45%;
+	margin-top:15px;*/
+	float:right;
+}
+/*#method_content .sendButton #send_request {
+	width:100%;
+}*/
+#method_content .operation_container .authentication .well {
+    width: 120px;
+    margin: 4px 10px 0;
+    padding: 4px;
+    float: left;
+    display: none;
+}
+#method_content a.link_reset_default {    
+    background: none !important;
+    color: #ff7700 !important;
+	border:1px solid #ff7700;
+	margin:0;	
+	/*float:right;
+	margin-top:15px;*/
+	margin-left:15px;
+	padding:10px 20px;
+	line-height:15px;
+	border-radius:7px / 5px 5px 5px 5px;
+}
+#method_content .request-appload textarea {
+	width:100%;
+	height:220px;
+}
+#method_content #request_response_container, #method_content .tab-content {
+    background-color: #FFFFFF;
+    border-radius: 1px;
+    padding: 23px;
+    clear: both;
+}
+#method_content #request_response_container .request {
+    display: none;
+}
+#method_content .sampleCodeTabs {
+	background:#FFFFFF;
+	padding:10px;
+}
+.docs-block ul.block-big-area {
+	padding:0;
+}
+.msg {
+	padding:20px 10px;
+}
+#method_content .resource_details {
+	margin-top:15px;
+}
+#method_content .resource_description {
+	padding-top:0;
+}
+#method_content .operation_container .authentication .well {
+	margin:4px 0px 0 0;
+}
+
+/* Left side Navigation Menu */
+.all-patient-left-nav {	
+	/*width:35%;	
+	padding-top:15px;
+	padding-bottom:15px;
+	background:#eeeced;
+	margin-top:-50px;*/
+}
+.all-patient-left-nav .headline {
+	font-family:Roboto;
+	font-size:24px;
+	color:#4a494a;
+	padding-left:15px;
+	font-weight:normal;
+}
+.all-patient-left-nav .ui-accordion .ui-accordion-content {
+	padding:0;
+	height:auto !important;
+}
+.all-patient-left-nav .view-content {
+	background:#fcfcfc;
+	padding:10px;
+	/*border:1px solid #d5d5d5;*/
+}
+.all-patient-left-nav .view-content .my_list {
+	margin-bottom:5px;
+}
+.all-patient-left-nav .method p, .all-patient-left-nav .method_data p, #method_content .verb_container .verb, #index_content .verb_container .verb {
+	background:none;
+	text-align:left;
+	font-size:12px;
+}
+.all-patient-left-nav .method p.POST, .all-patient-left-nav .method_data p.POST, #method_content .verb_container .verb.POST, .all-patient-left-nav .method p.post, .all-patient-left-nav .method_data p.post, #method_content .verb_container .verb.post {color:#46b70f;}
+.all-patient-left-nav .method p.GET, .all-patient-left-nav .method_data p.GET, #method_content .verb_container .verb.GET, .all-patient-left-nav .method p.get, .all-patient-left-nav .method_data p.get, #method_content .verb_container .verb.get {color:#008BFA;}
+.all-patient-left-nav .method p.DELETE, .all-patient-left-nav .method_data p.DELETE, #method_content .verb_container .verb.DELETE, .all-patient-left-nav .method p.delete, .all-patient-left-nav .method_data p.delete, #method_content .verb_container .verb.delete{color:#E50000;}
+.all-patient-left-nav .method p.PUT, .all-patient-left-nav .method_data p.PUT, #method_content .verb_container .verb.PUT, .all-patient-left-nav .method p.put, .all-patient-left-nav .method_data p.put, #method_content .verb_container .verb.put{color:#FA9400;}
+
+#sidebar {
+	/*margin-top:25px;*/
+	height: auto;	
+	/*border: 1px solid #aaa;
+	padding:5px;*/	
+	display: block;
+	/*width:75%;
+	float:right;*/
+}
+.all-patient-left-nav .panel-group .panel+.panel {
+		margin-top:5px;
+	}
+.all-patient-left-nav .heading {
+	margin-bottom:15px;
+}
+.all-patient-left-nav .panel-heading, .all-patient-left-nav .ui-accordion-header {
+	background:#4a4a4a;
+	border-radius:0;
+	padding-left:12px;
+}
+.all-patient-left-nav .ui-accordion-header-active {
+	background:#4a4a4a !important;
+}
+.all-patient-left-nav .ui-accordion-header {
+	background:#f4f4f4;
+}
+#method_content .all-patient-left-nav .panel-heading h4 {
+	line-height:normal;
+}
+.all-patient-left-nav .panel-title a, .all-patient-left-nav .ui-accordion-header-active a{
+	display:block;
+	text-decoration:none;
+	color:#FFFFFF !important;
+}
+.all-patient-left-nav .ui-accordion .ui-accordion-header {
+	margin:0 0 -1px 0;
+	letter-spacing:normal;
+}
+.all-patient-left-nav .ui-accordion-header a {
+	color:#4a494a;
+	font-size:14px;
+	font-weight:400;
+}
+/*.all-patient-left-nav .ui-accordion-header a:after {
+	content:"\f107";
+	float:right;
+	color:#a0a0a0;
+	font-size:14px;
+}*/
+.all-patient-left-nav .ui-accordion .ui-accordion-header .ui-icon {
+	right:.5em;
+	left:inherit;
+	margin:0;
+}
+.all-patient-left-nav .ui-accordion .ui-accordion-header .ui-icon-triangle-1-e {
+	background-position:-69px -6px;
+}
+.ui-state-active .ui-icon {
+	background-image:url(images/ui-icons_454545_256x240.png);
+}
+.all-patient-left-nav .ui-icon-triangle-1-s {
+	background-position:-69px -6px;
+}
+.all-patient-left-nav h2 {
+	background:#4a4a4a;
+	border-radius:0;
+	padding-left:20px;
+	line-height:normal;
+	display:block;
+	text-decoration:none;
+	color:#FFFFFF;
+	font-size:14px;
+	line-height:40px;
+}
+.all-patient-left-nav .method, .all-patient-left-nav .view .method_details .verb-auth {
+	width:30%;
+	text-align:left;
+	color:#ee5425;
+	font-size:12px;
+	float:left;
+
+}
+.all-patient-left-nav .panel-body ul li, .all-patient-left-nav .title-description {
+	font-size:14px;
+	color:#464445;
+	padding:5px 0;
+}
+.all-patient-left-nav .panel-body ul li a, .all-patient-left-nav .title-description a{
+	color:#464445;
+	text-decoration:none;
+}
+.all-patient-left-nav .panel-body ul li a:hover, .all-patient-left-nav .title-description a:hover{
+	color:#ff4401;
+	text-decoration:none;
+}
+.all-patient-left-nav .view .method_details .title {
+    width: auto;
+    float: none;
+}
+.all-patient-left-nav .node-teaser .method_details .title-description, .all-patient-left-nav .view .method_details .title-description {
+    width: 65%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.all-patient-left-nav .node-teaser .method_details .title-description a, .all-patient-left-nav .view .method_details .title-description a {	
+	font-size:14px;
+}
+.all-patient-left-nav .node-teaser .method_details, .all-patient-left-nav .view .method_details {
+	border:none;
+	padding:0 0 5px 0;
+}
+.button {
+	border: solid 1px #F56450;
+    border-radius: 2px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    outline: medium none;
+    padding: 5px 16px;
+    transition: all 0.2s ease-in-out 0s;
+    width: auto;
+	background:#F56450;
+	color:#FFF;
+	text-decoration:none;
+}
+
+.col-sm-12 {
+	padding-left:15px;
+	padding-right:15px;
+}
+body #method_content .resource_description {
+	padding-top:0;
+}
+</style>
+<div id="method_content" class="col-sm-12">
+<div data-role="error_container"></div>
+<div>
+    <!-- Resource summary - name, description and resource URL section -->
+    <div class="resource_details">
+        <span id="method_name" data-role="method-name" class="hide">{{name}}</span>
+        <div class="title_container">
+            <div class="verb_container">
+				<p class="verb {{verb}}" data-role="verb">{{verb}}</p>
+                {{#if security}}
+                <span class="icon_lock"></span>
+                {{/if}}
+            </div>
+            <h2 data-role="method-title" data-allow-edit="true">{{#if displayName}}{{displayName}}{{else}}{{name}}{{/if}}</h2>
+        </div>
+        <div class="description_and_url_container">
+            <div class="description_container">
+                <div class="resource_description" data-allow-edit="true" data-role="method-description">{{{description}}}</div>
+            </div>
+        </div>
+    </div><!--/.resource_details -->
+</div>
+<!-- Left Sidebar -->
+<!-- Left Sidebar Ends -->
+<div><!-- class="col-sm-9"-->
+    <div class=""><!--well well-sm-->
+		<div class="clearfix">
+			<div class="operation_container">
+				<!-- Basic authentication, custom token and OAuth 2 authentication container -->
+				<div class="authentication" data-role="authentication_container">
+					<div class="well basicauth" data-role="basic_auth_container">
+						<p class="title">HTTP Basic</p>
+						<div class="details">
+							<a data-toggle="modal" role="button" href="#basicauth_modal" title="Set credentials." class="link_open_basicauth">Set...</a>
+							<i title="Clear admin credentials." class="icon-remove"></i>
+						</div>
+					</div>
+					<div class="well oauth2" data-role="oauth2_container">
+						<p class="title">OAuth 2.0</p>
+						<div class="details">
+							<a data-toggle="modal" role="button" href="#oauth2_modal" title="Set credentials." class="link_open_oauth2">Set...</a>
+							<i title="Clear admin credentials." class="icon-remove"></i>
+						</div>
+					</div>
+					<div class="well customtoken" data-role="custom_token_container">
+						<p class="title">API Key</p>
+						<div class="details">
+							<a data-toggle="modal" role="button" href="#customtoken_modal" title="Set credentials." class="link_open_customtoken">Set...</a>
+							<i title="Clear admin credentials." class="icon-remove"></i>
+						</div>
+					</div>
+				</div>
+				<div class="sendButton">
+					<button id="send_request" class="button">Send</button>
+					<a href="javascript:void(0)" class="link_reset_default resetButton button" style="" title="Reset to default request parameters and body content.">Reset</a>
+				</div><!-- style="position:absolute;"-->
+			</div>
+		</div>
+		<!-- Request and response tab section -->
+		<div class="request_response_tabs clearfix" >
+			<a href="javascript:void(0)" id="link_request_tab" data-role="request-link">Request</a>
+			<a href="javascript:void(0)" id="link_response_tab" data-role="response-link" class="selected">Response</a>
+		</div>
+		<!-- Request and response container -->
+		<div id="request_response_container">
+			<div class="response" data-role="response-container">
+				<p>Make a request and see the response.</p>
+			</div>
+			<div class="request" data-role="request-container">
+				<p>Make a request and see the response.</p>
+			</div>
+		</div>
+		{{#response}}
+		{{#if doc}}
+		<!-- Response payload doc section -->
+		<div class="response_payload">
+			<h3>Response Payload Elements</h3>
+			<div data-role="response-payload-docs">
+				{{{response.doc}}}
+			</div>
+		</div>
+		<div data-role="response-content-type" class="hide">{{contentType}}</div>
+		<textarea data-role="response-payload" class="hide">{{sample}}</textarea>
+		{{/if}}
+		{{#if errors}}
+		<!-- Response errors list section -->
+		<h3>Response Error Details</h3>
+		<ul class="method_table">
+			<li class="method_title">
+				<div class="method_data title">HTTP Code</div>
+				<div class="method_data value">Error Code</div>
+				<div class="method_data description">Description</div>
+			</li>
+			{{#each errors}}
+			<li class="method_details" data-role="response_errors_list">
+				<div class="method_data title">
+					<span data-role="http_status_code">{{httpStatusCode}}</span>
+				</div>
+				<div class="method_data value">
+					<span data-role="code">{{code}}</span>
+				</div>
+				<div class="method_data description">
+					<p data-role="description" data-allow-edit="true">
+						{{{description}}}
+					</p>
+				</div>
+			</li>
+			{{/each}}
+		</ul>
+		{{/if}}
+		{{/response}}
+            
+        <div class="resource-summary">   <!--resource_summary-->    
+        
+        <!-- Tabs structure starts -->
+        <div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#resourceURL" aria-controls="resourceURL" role="tab" data-toggle="tab">Resource URL</a></li>
+    {{#if-header-param this.parameters}}
+    <li role="presentation"><a href="#headerParameters" aria-controls="headerParameters" role="tab" data-toggle="tab">Header Parameters</a></li>{{/if-header-param}}
+    
+    {{#if-query-param this.parameters}}
+    <li role="presentation"><a href="#queryParameters" aria-controls="queryParameters" role="tab" data-toggle="tab">Query Parameters</a></li>{{/if-query-param}}
+    
+    {{#if body.parameters}}
+    <li role="presentation"><a href="#bodyParameters" aria-controls="bodyParameters" role="tab" data-toggle="tab">Body Parameters</a></li>{{/if}}
+    {{#body}}
+    
+	{{#if attachments}}
+                <li role="presentation"><a href="#attachments" aria-controls="attachments" role="tab" data-toggle="tab">Attachment</a></li>{{/if}}
+				{{/body}}
+                
+    {{#body}}
+    <li role="presentation" class="request_payload"><a href="#requestBody" aria-controls="requestBody" role="tab" data-toggle="tab">Request Body</a></li>
+    {{/body}}
+    
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="resourceURL">
+      <div class="table-responsive">
+								<table class="table table-striped">
+									<thead>
+									<tr>
+										<th class="col-sm-2">Environment</th>
+										<th class="col-sm-3">URL</th>
+									</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td style="vertical-align:middle">
+												<span title="" data-original-title="" data-role="name">Live</span>
+											</td>
+											<td>
+												<p data-role="method_url_container">
+													{{#if baseUrl}}
+														<span data-role="host">{{baseUrl}}</span>
+													{{/if}}
+													{{#if path}}
+														<span data-role="path">{{path}}</span>
+													{{/if}}
+												</p>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+    </div>
+    {{#if-header-param this.parameters}}
+    <div role="tabpanel" class="tab-pane" id="headerParameters">
+      <div class="table-responsive">
+								<table class="table table-striped">
+									<thead>
+									<tr>
+										<th class="col-sm-2">Name</th>
+										<th class="col-sm-3">Values</th>
+										<th class="col-sm-7">Description</th>
+									</tr>
+									</thead>
+									<tbody>
+									{{#header-list this.parameters}}
+									<tr data-role="header-param-list" data-scope="{{scope}}">
+										<td style="vertical-align:middle">
+											<span data-role="name">{{name}}</span>
+											{{#required}}
+											<br/>
+											<span class="required" data-role="required">(required)</span>
+											{{/required}}
+										</td>
+										<td>
+											{{#if required}}
+											<input type="text" class="form-control" data-role="value" value="{{defaultValue}}"/>
+											{{else}}
+											<input type="text" class="form-control" data-role="value" placeholder="{{defaultValue}}" value=""/>
+											{{/if}}
+										</td>
+										<td style="vertical-align:middle">
+											<p data-role="description" data-allow-edit="true">
+												{{{ this.description }}}
+											</p>
+										</td>
+									</tr>
+									{{/header-list}}
+									</tbody>
+								</table>
+							</div>
+    </div>
+    {{/if-header-param}}
+                
+				{{#if-query-param this.parameters}}
+    <div role="tabpanel" class="tab-pane" id="queryParameters">
+      <div class="table-responsive">
+								<table class="table"><!--table-bordered-->
+									<thead>
+									<tr>
+										<th class="col-sm-2">Name</th>
+										<th class="col-sm-3">Values</th>
+										<th class="col-sm-7">Description</th>
+
+									</tr>
+									</thead>
+									<tbody>
+									{{#query-list this.parameters}}
+									<tr data-role="query-param-list" data-scope="{{scope}}">
+										<td>
+											<span data-role="name">{{name}}</span>
+											{{#required}}
+											<br/><span class="required" data-role="required">(required)</span>
+											{{/required}}
+										</td>
+										<td>
+											{{#if required}}
+											<input type="text" class="form-control" data-role="value" value="{{defaultValue}}"/>
+											{{else}}
+											<input type="text" class="form-control" data-role="value" placeholder="{{defaultValue}}" value=""/>
+											{{/if}}
+										</td>
+										<td>
+											<p data-role="description" data-allow-edit="true">{{{description}}}</p>
+										</td>
+									</tr>
+									{{/query-list}}
+									</tbody>
+								</table>
+							</div>
+    </div>
+    {{/if-query-param}}
+    {{#if body.parameters}}
+    <div role="tabpanel" class="tab-pane" id="bodyParameters">
+      <form enctype="multipart/form-data" method="post" name="formParams" id="formParams">
+
+								<div class="table-responsive">
+									<table class="table table-striped">
+										<thead>
+										<tr>
+											<th class="col-sm-2">Name</th>
+											<th class="col-sm-3">Values</th>
+											<th class="col-sm-7">Description</th>
+										</tr>
+										</thead>
+										<tbody>
+										{{#each body.parameters}}
+
+										<tr data-role="body-param-list" data-scope="{{scope}}" data-dataType="{{dataType}}">
+											<td style="vertical-align:middle">
+												<span data-role="name">{{this.name}}</span>
+												{{#required}}
+												<br/>
+												<span class="required" data-role="required">(required)</span>
+												{{/required}}
+											</td>
+											<td>
+												{{#if required}}
+												<input type="text" class="form-control" data-role="value" value="{{defaultValue}}"/>
+												{{else}}
+												<input type="text" class="form-control" data-role="value" placeholder="{{defaultValue}}" value=""/>
+												{{/if}}
+											</td>
+											<td style="vertical-align:middle">
+												<p data-role="description" data-allow-edit="true">
+													{{{ this.description }}}
+												</p>
+											</td>
+										</tr>
+
+										{{/each}}
+										</tbody>
+									</table>
+								</div>
+							</form>
+    </div>
+    {{/if}}
+    
+    {{#body}}
+		        {{#if attachments}}
+                <div role="tabpanel" class="tab-pane" id="attachments">
+      <form enctype="multipart/form-data" method="post" name="formAttachment" id="formAttachment">
+								<div class="table-responsive">
+									<table class="table table-striped">
+										<thead>
+										<tr>
+											<th class="col-sm-2">Name</th>
+											<th class="col-sm-3">Value</th>
+											<th class="col-sm-7">Description</th>
+										</tr>
+										</thead>
+										<tbody>
+										{{#each attachments}}
+										<tr class="method_details" data-role="attachments-list" data-scope="{{#if resourceParam}}resource{{else}}method{{/if}}">
+											<td>
+												<span data-role="name">{{name}}</span>
+												{{#required}}
+												<br/><span class="required" data-role="required">(required)</span>
+												{{/required}}
+											</td>
+											<td>
+												{{#if required}}
+												<input name="{{name}}" class="form-control" type="file" data-role="value" required/>
+												{{else}}
+												<input name="{{name}}" class="form-control" type="file" data-role="value" />
+												{{/if}}
+											</td>
+											<td>
+												<p data-role="description" data-allow-edit="true">
+													{{description}}
+												</p>
+											</td>
+										</tr>
+										{{/each}}
+										</tbody>
+									</table>
+								</div>
+							</form>
+    </div>
+    {{/if}}
+				{{/body}}
+             
+             {{#body}}   
+                <div role="tabpanel" class="tab-pane request_payload" id="requestBody">
+                <!-- Request payload section -->
+      <div class="request_payload">
+								{{#if doc}}
+								<ul class="nav nav-pills" data-role="request-payload-link">
+									<li class="active">
+										<a href="javascript:void(0)" data-role="example-link">Value</a>
+									</li>
+									<li>
+										<a href="javascript:void(0)" data-role="docs-link">Description</a>
+									</li>
+									<li>
+										<a href="javascript:void(0)" data-role="schema-link">Schema</a>
+									</li>
+								</ul>
+								{{/if}}
+								<div data-role="request-payload-docs" class="docs">
+									{{{doc}}}
+								</div>
+								<div data-role="request-payload-example">
+									<textarea class="payload_text" data-format="{{contentType}}"></textarea>
+								</div>
+								<div data-role="request-payload-schema">
+									<textarea class="payload_text_schema" data-format="{{contentType}}" style="width:100%;height:300px;"></textarea>
+								</div>
+							</div>
+                            {{/body}}
+    </div>
+  </div>
+
+</div>
+           
+        </div>
+    </div>
+	<!-- Accordion ends -->
+	{{#if-template-param this.parameters}}
+	<div class="hide" data-role="template-params">
+		{{#template-list this.parameters}}
+		<p data-scope="{{scope}}">
+			<span data-role="name">{{name}}</span>
+			<span data-role="description">{{description}}</span>
+			<span data-role="defaultValue">{{defaultValue}}</span>
+			<span data-role="required">{{required}}</span>
+		</p>
+		{{/template-list}}
+	</div>
+	{{/if-template-param}}
+</div><!--/.resource_summary -->            
+<!-- Resource summary - right side info section -->
+</div><!-- #method_content end -->
+    
+    
+    <!-- Right side integrated into main content - col-sm-9 -->
+    <!-- delete part starts -->
+<div>
+	<!-- Inline edit Organization admin credential section -->
+	<div class="admin_auth_section hide">
+		<a class="set_admin_credentials hide" href="javascript:void(0)" title="set admin credentials.">Set Admin Credentials...</a>
+		<a class="auth_admin_email" title="reset admin credentials." href="javascript:void(0)"></a>
+		<i title="Clear admin credentials." class="icon-remove"></i>
+	</div>
+</div><!--/.col-sm-12 -->
+
+<div id="working_alert">
+    <p>Working...</p>
+</div>
+
+<!-- Basic authentication modal -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="modal_container" data-role="basic_auth_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close button_close_modal" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title">Set Authentication</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="error_container"></div>
+                    <div class="form-group">
+                        <label class="control-label" for="inputEmail">Email</label>
+                        <input  class="form-control" type="text" id="inputEmail" placeholder="Email"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="inputPassword">Password</label>
+                        <input class="form-control" type="password" id="inputPassword" placeholder="Password"/>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p>Your credentials are saved for the session only.</p>
+                <a class="btn btn-primary button_save_modal" href="javascript:void(0)">Save</a>
+                <a class="button_close_modal" href="javascript:void(0)">Cancel</a>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- OAuth 2 authentication modal -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="modal_container" data-role="oauth2_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close button_close_modal" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title">Request {{apiName}} permissions</h3>
+            </div>
+            <div class="modal-body">
+                <div class="content">
+                    <p>Making {{apiName}} API requests requires you to grant access to this app.</p>
+                    <p>You will be directed to {{apiName}} to approve the use of your credentials and then returned to this page.</p>
+                    <p>You can revoke these permissions at any time.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <p>Your credentials are saved for the session only.</p>
+                <a class="btn btn-primary button_save_modal" href="javascript:void(0)">OK</a>
+                <a class="button_close_modal" href="javascript:void(0)">Cancel</a>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- Custom token authentication modal -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="modal_container" data-role="custom_token_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close button_close_modal" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title">Custom Token</h3>
+            </div>
+            <div class="modal-body">
+                <div class="content">
+                    <form class="form-horizontal">
+                        <div data-role="custom_token_rows">
+                            <div data-role="custom_token_row">
+                                <div class="form-group">
+                                    <label class="control-label">Name:</label>
+                                    <input type="text" class="form-control" placeholder="Name" data-role="name">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Value:</label>
+                                    <input type="text" class="form-control" placeholder="Value" data-role="value">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Header:</label>
+                            <input type="radio" name="custom_token_type" data-role="header">
+                        </div><!-- /input-group -->
+                        <div class="form-group">
+                            <label class="control-label">Query:</label>
+                            <input type="radio" data-role="query" name="custom_token_type">
+                        </div><!-- /input-group -->
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary button_save_modal" href="javascript:void(0)">Ok</a>
+                <a class="button_close_modal" href="javascript:void(0)">Cancel</a>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- Org admin authentication modal -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="modal_container" data-role="edit_auth_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close button_close_modal" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title">Set Organization Admin Credentials</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="error_container"></div>
+                    <div class="form-group">
+                        <label class="control-label" for="inputEmail">Email</label>
+                        <input  class="form-control" type="text" id="inputEmail" placeholder="Email"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="inputPassword">Password</label>
+                        <input class="form-control" type="password" id="inputPassword" placeholder="Password"/>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p>Your credentials are saved for the session only.</p>
+                <a class="btn btn-primary button_save_modal" href="javascript:void(0)">Save</a>
+                <a class="button_close_modal" href="javascript:void(0)">Cancel</a>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- Confirm the changes modal -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="modal_container" data-role="confirm_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close button_close_modal" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title">Warning</h3>
+            </div>
+            <div class="modal-body">
+                <div class="content">
+                    <p>Your changes have not been saved.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary button_save_modal" href="javascript:void(0)">Save</a>
+                <a class="button_close_modal" href="javascript:void(0)">Discard</a>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<div id="test_val"></div>
+<p class="data auth_type" data-role="auth-type" style="display: none;"></p>
+
+
+<script type="text/javascript">
+    var Apigee = Apigee || {}; // Look for a namespace 'Apigee', if it is not there, creates an empty one.
+    Apigee.APIModel = Apigee.APIModel || {}; // Look for a namespace 'APIModel' under 'Apigee', if it is not there, creates an empty one.
+    Apigee.APIModel.apiName = "{{apiName}}";
+    Apigee.APIModel.revisionNumber = "{{revisionNumber}}";
+    Apigee.APIModel.organizationName = "{{organizationName}}";
+    Apigee.APIModel.resourceId = "{{resourceId}}";
+    Apigee.APIModel.methodId = "{{id}}";
+    Apigee.APIModel.methodType = "details";
+    Apigee.APIModel.apiKey = "";
+    Apigee.APIModel.location = ""; // will be 'header' or 'query'
+    Apigee.APIModel.templateAuthName = "";
+    var model = {{this}};
+    Apigee.APIModel.resourceName = "";
+    if(model.body && model.body.parameters) {
+        for(var i in model.body.parameters) {
+            if(model.body.parameters[i].schema) {
+                Apigee.APIModel.resourceName = JSON.parse(model.body.parameters[0].schema).$ref;
+                Apigee.APIModel.resourceName = Apigee.APIModel.resourceName.split("/");
+                Apigee.APIModel.resourceName = Apigee.APIModel.resourceName[Apigee.APIModel.resourceName.length-1];
+            }
+        }
+    }
+    var security = [];
+    if(model.security) {
+        for (i=0;i<model.security.length;i++){
+            security.push(JSON.parse(model.security[i]));
+        }
+    }
+
+    var newAuth = "";
+    jQuery("[data-role='auth-type']").text(newAuth);
+    for (var i in security){
+        for (var keys in security[i]) {
+            if(security[i][keys].type) {
+                if (security[i][keys].type === "OAUTH2") {
+                    newAuth = "OAuth 2.0";
+                    secName = keys;
+                    jQuery("[data-role='auth-type']").append(newAuth + ", ");
+                }
+                if (security[i][keys].type === "APIKEY") {
+                    newAuth = "API Key";
+                    secName = keys;
+                    jQuery("[data-role='auth-type']").append(newAuth + ", ");
+                    if(security[i][keys].templateauths) {
+                        for(var key in security[i][keys].templateauths) {
+                            Apigee.APIModel.apiKey = security[i][keys].templateauths[key];
+                            Apigee.APIModel.location = security[i][keys].location.toLowerCase();
+
+                            Apigee.APIModel.templateAuthName = key.toLowerCase();
+                        }
+                    }
+                }
+                if (security[i][keys].type === "BASIC") {
+                    newAuth = "HTTP Basic";
+                    secName = keys;
+                    jQuery("[data-role='auth-type']").append(newAuth + ", ");
+                }
+            }
+            else if (keys === "api_key") {
+                newAuth = "API Key";
+                jQuery("[data-role='auth-type']").append(newAuth + ", ");
+            }
+        }
+    }
+    if (jQuery("[data-role='auth-type']").text() === "") {
+        jQuery("[data-role='auth-type']").append("None");
+    }
+    var methodVerb = jQuery.trim(jQuery("[data-role='verb']:first").text().toLowerCase()); // Retrieve the verb from the first HTML element.
+    var payload = jQuery(".request_payload")
+    if (methodVerb != "post" && methodVerb != "put" && methodVerb != "patch") {
+        // remove request payload
+        payload.remove();
+    }
+    else {
+         // If a sample exists, use it to populate the body payload textarea, else create an example from the api schema to populate the body payload
+         if (model.body && model.body.sample) {
+             jQuery("textarea.payload_text").val(model.body.sample);
+         }
+         else if (model.apiSchema && model.apiSchema.expandedSchema) {
+             var expandedSchema = JSON.parse(model.apiSchema.expandedSchema);
+             var swaggerModel = new Apigee.APIModel.SwaggerModel( Apigee.APIModel.resourceName, expandedSchema[Apigee.APIModel.resourceName]);
+             var sampleFromAPISchema = swaggerModel.createJSONSample( false );
+             jQuery("textarea.payload_text").val(JSON.stringify(sampleFromAPISchema, null, 4));
+
+         }
+         else {
+             payload.remove();
+         }
+    }
+	function Display_Header_Div()
+	{
+		document.getElementById('header_param_div').style.display="block";
+		document.getElementById('query_param_div').style.display="none";
+		document.getElementById('template_param_div').style.display="none";
+	}
+	
+	function Display_Template_Div()
+	{
+		document.getElementById('header_param_div').style.display="none";
+		document.getElementById('query_param_div').style.display="none";
+		document.getElementById('template_param_div').style.display="block";
+		
+	}
+	
+	function Display_Query_Div()
+	{
+		document.getElementById('query_param_div').style.display="block";
+		document.getElementById('header_param_div').style.display="none";
+		document.getElementById('template_param_div').style.display="none";
+	
+	}
+</script>
+</div>

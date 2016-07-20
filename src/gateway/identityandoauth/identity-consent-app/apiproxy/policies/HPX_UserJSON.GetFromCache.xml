@@ -1,0 +1,12 @@
+<LookupCache enabled="true" continueOnError="true" async="false" name="HPX_UserJSON.GetFromCache">
+    <DisplayName>UserJSON.GetFromCache</DisplayName>
+    <CacheResource>session-cookie-cache</CacheResource>
+    <AssignTo>userJSON</AssignTo>
+    <Scope>Global</Scope>
+    <CacheKey>
+        <KeyFragment ref="sessionIdForCookie"></KeyFragment>
+    </CacheKey>
+</LookupCache>
+
+
+

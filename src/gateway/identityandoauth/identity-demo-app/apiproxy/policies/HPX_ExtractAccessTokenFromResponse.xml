@@ -1,0 +1,10 @@
+<ExtractVariables name="HPX_ExtractAccessTokenFromResponse">
+	<DisplayName>ExtractAccessTokenFromResponse</DisplayName>
+	<Source>generate_access_token_response.content</Source>
+	<IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+	<JSONPayload>
+		<Variable name="access_token">
+			<JSONPath>$.access_token</JSONPath>
+		</Variable>
+	</JSONPayload>
+</ExtractVariables>

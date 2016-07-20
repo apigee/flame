@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<RegularExpressionProtection async="false" continueOnError="false" enabled="true" name="HPX_CheckPayloadRegex">
+    <DisplayName>CheckPayloadRegex</DisplayName>
+    <Properties/>
+    <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+   	<JSONPayload escapeSlashCharacter="true">
+        <JSONPath>
+          	<Expression>$</Expression>
+            <Pattern>[\s]*((delete)|(exec)|(drop\s*table)|(insert)|(shutdown)|(update))</Pattern>
+			<Pattern>&lt;\s*script\b[^&gt;]*&gt;[^&lt;]+&lt;\s*/\s*script\s*&gt;</Pattern>
+        </JSONPath>
+    </JSONPayload>
+  	<XMLPayload>
+      <Namespaces/>
+       <XPath>
+         <Expression>//*/@*</Expression>
+         <Type>nodeset</Type>
+         <Pattern>[\s]*((delete)|(exec)|(drop\s*table)|(insert)|(shutdown)|(update))</Pattern>
+         <Pattern>&lt;\s*script\b[^&gt;]*&gt;[^&lt;]+&lt;\s*/\s*script\s*&gt;</Pattern>
+       </XPath>
+	</XMLPayload>
+  <Source>request</Source>
+</RegularExpressionProtection>

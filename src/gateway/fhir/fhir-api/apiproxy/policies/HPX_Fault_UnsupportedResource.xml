@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="HPX_Fault_UnsupportedResource">
+    <DisplayName>Fault_UnsupportedResource</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <Set>
+        <Headers/>
+        <!-- Note: this should actually also include the "Server knows how to handle..." info -->
+        <Payload contentType="application/json" variablePrefix="%" variableSuffix="#">
+            <![CDATA[
+			{
+				"resourceType":"OperationOutcome",
+				"text":{
+					"status":"generated",
+					"div":"<div><h1>Operation Outcome</h1><table border='0'><tr><td style='font-weight: bold;'>error</td><td>[]</td><td><pre>Not Implemented</pre></td>\n\t\t\t</tr>\n\t\t</table>\n\t</div>"
+				},
+				"issue":[
+					{
+						"severity":"error",
+              		  	"code":"invalid",
+						"details":"This Resource is not yet Supported"
+					}
+				]
+			}
+			]]>
+        </Payload>
+        <StatusCode>501</StatusCode>
+        <ReasonPhrase>Not Implemented</ReasonPhrase>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</AssignMessage>

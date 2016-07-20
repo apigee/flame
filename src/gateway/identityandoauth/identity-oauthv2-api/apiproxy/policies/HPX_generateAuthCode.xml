@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OAuthV2 async="false" continueOnError="false" enabled="true" name="HPX_generateAuthCode">
+	<DisplayName>GenerateAuthCode</DisplayName>
+    <FaultRules/>
+    <Operation>GenerateAuthorizationCode</Operation>
+    <ExpiresIn>600000</ExpiresIn>
+    <Scope>request.queryparam.scope</Scope>    
+    <GenerateResponse/>
+    <Attributes>
+  		<Attribute name="userid" ref="request.queryparam.userid" display="true" />
+  		<Attribute name="sessionid" ref="request.queryparam.sessionid" display="true" />
+  		<Attribute name="nonce" ref="request.queryparam.nonce" display="true" />
+  		<Attribute name="scope" ref="request.queryparam.scope" display="true" />
+	<Attribute name="patient_id" ref="request.queryparam.patient_id" display="true"/>
+ 	</Attributes>
+</OAuthV2>

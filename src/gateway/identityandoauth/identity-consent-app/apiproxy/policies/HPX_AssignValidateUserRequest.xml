@@ -1,0 +1,14 @@
+<AssignMessage enabled="true" continueOnError="false" async="false" name="HPX_AssignValidateUserRequest">
+    <DisplayName>AssignValidateUserRequest</DisplayName>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="true" transport="http" type="request">validateUserRequest</AssignTo>
+    <Set>
+        <Payload contentType="application/json" variablePrefix="%" variableSuffix="#">
+			{
+				"grant_type": "password",
+				"username": "%request.formparam.username#",
+				"password": "%request.formparam.password#"
+			}
+		</Payload>
+    </Set>
+</AssignMessage>

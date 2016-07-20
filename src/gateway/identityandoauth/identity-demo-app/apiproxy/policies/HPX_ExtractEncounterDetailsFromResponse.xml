@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ExtractVariables name="HPX_ExtractEncounterDetailsFromResponse" enabled="true" continueOnError="false">
+	<DisplayName>ExtractEncounterDetailsFromResponse</DisplayName>
+    <Source>read_patient_encounter_response.content</Source>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <JSONPayload>
+        <Variable name="patient_display">
+            <JSONPath>$.entry[0]..patient['display']</JSONPath>
+        </Variable>
+        <Variable name="identifier">
+            <JSONPath>$.entry[0]..identifier[0].value</JSONPath>
+        </Variable>
+        <Variable name="reason">
+            <JSONPath>$.entry[0]..reason[0].text</JSONPath>
+        </Variable>
+        <Variable name="indication">
+            <JSONPath>$.entry[0]..indication[0].display</JSONPath>
+        </Variable>
+        <Variable name="length">
+            <JSONPath>$..entry[0]..length[*]</JSONPath>
+        </Variable>
+        <Variable name="status">
+            <JSONPath>$..entry[0].resource.status</JSONPath>
+        </Variable>
+        <Variable name="res_class">
+            <JSONPath>$..entry[0].resource.class</JSONPath>
+        </Variable>
+        <Variable name="diagnosis">
+            <JSONPath>$..entry[0].resource.type[0].coding[*].display</JSONPath>
+        </Variable>
+        <Variable name="priority">
+            <JSONPath>$..entry[0].resource.priority.coding[0].display</JSONPath>
+        </Variable>
+    </JSONPayload>
+</ExtractVariables>

@@ -1,0 +1,58 @@
+<ExtractVariables name="HPX_ExtractUserAttributeAndAssignToReq">
+    <DisplayName>ExtractUserAttributeAndAssignToReq</DisplayName>
+    <Source>userProfile.response</Source>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <JSONPayload>
+        <Variable name="request.queryparam.email">
+            <JSONPath>$.username</JSONPath>
+        </Variable>
+        <Variable name="request.queryparam.patientId">
+            <JSONPath>$.patient_id</JSONPath>
+        </Variable>
+        <Variable name="patient_id">
+            <JSONPath>$.patient_id</JSONPath>
+        </Variable>
+        <Variable name="request.queryparam.house">
+            <JSONPath>$.address.house</JSONPath>
+        </Variable>
+        <Variable name="request.queryparam.street">
+            <JSONPath>$.address.street</JSONPath>
+        </Variable>
+        <Variable name="request.queryparam.locality">
+            <JSONPath>$.address.locality</JSONPath>
+        </Variable>
+        <Variable name="request.queryparam.city">
+            <JSONPath>$.address.city</JSONPath>
+        </Variable>
+        <Variable name="request.queryparam.state">
+            <JSONPath>$.address.state</JSONPath>
+        </Variable>
+        <Variable name="request.queryparam.country">
+            <JSONPath>$.address.country</JSONPath>
+        </Variable>
+        <Variable name="request.queryparam.postalcode">
+            <JSONPath>$.address.postalcode</JSONPath>
+        </Variable>
+        <Variable name="request.queryparam.landmark">
+            <JSONPath>$.address.landmark</JSONPath>
+        </Variable>
+        <Variable name="request.queryparam.first_name">
+            <JSONPath>$.personal-info.name.given</JSONPath>
+        </Variable>
+        <Variable name="request.queryparam.surname">
+            <JSONPath>$.personal-info.name.surname</JSONPath>
+        </Variable>
+        <Variable name="request.queryparam.full_name">
+            <JSONPath>$.personal-info.name.complete</JSONPath>
+        </Variable>
+        <Variable name="request.queryparam.dob">
+            <JSONPath>$.personal-info.dob</JSONPath>
+        </Variable>
+        <Variable name="request.queryparam.title">
+            <JSONPath>$.personal-info.name.title</JSONPath>
+        </Variable>
+        <Variable name="request.queryparam.msisdn">
+            <JSONPath>$.msisdn</JSONPath>
+        </Variable>
+    </JSONPayload>
+</ExtractVariables>

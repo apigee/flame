@@ -1,0 +1,6 @@
+<Javascript timeLimit="0" enabled="true" continueOnError="true" async="false" name="HPX_ValidateRequest">
+<DisplayName>ValidateRequest</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <ResourceURL>jsc://HPX_ValidateRequest.js</ResourceURL>
+</Javascript>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AccessEntity async="false" continueOnError="false" enabled="true" name="HPX_GetDeveloperInfo">
+    <DisplayName>GetDeveloperInfo</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <EntityIdentifier ref="apigee.developer.email" type="developeremail"></EntityIdentifier>
+    <EntityType value="developer"></EntityType>
+</AccessEntity>
+

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>My Health Data</title>
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<style>
+
+body {   
+   font-family:sans-serif;
+   margin-top:0;
+   color: RGB(168, 168, 168);    
+}
+
+a:link,a:visited,a:hover,a:active  {
+    color: blue;
+    font-size:10pt;   
+    font-weight:normal;
+}
+
+#first{
+  width:100;background-color:RGB(0,100,100);
+  height:40px;
+  border-top-left-radius:9px;
+  border-top-right-radius:9px;
+}
+
+#second{
+  width:100;background-color:RGB(0,100,100);
+  height:50px;  
+  align-contents:cetner;
+}
+
+#client_area {
+    background-color:RGB(210,236,246);
+    height:800px;
+    width:800px;
+    margin: auto;    
+    border:3px;    
+    border-radius: 9px;
+    box-shadow: 10px 10px 5px #888888;
+}
+
+#page_heading {      
+    height:32px;
+    width:789px;
+    background-color:RGB(100,100,100);  
+    font-size:20px;
+    padding:2px; 
+    border-width:100%; 
+    color:white;
+    padding-top:4px;   
+    padding-left:9px;
+    padding-top:10px;
+}
+#info_heading {      
+    width:788px;
+    height:20px;
+    color:rgb(100,100,100);    
+    font-size:12px;
+    padding:2px; 
+    border-bottom: solid 1px RGB(200,200,200);   
+    border-width:100%;     
+    background-color:RGB(210,236,246);
+    padding-left:9px; 
+	font-weight:bold;
+}
+
+.table{
+  color: rgb(100, 100, 100);
+  width:55%;
+  font-size:10px; 
+  background-color:RGB(210,236,246);
+}
+
+.field{
+  text-align:right;
+  font-size:10pt;
+  font-family : Arial;
+}
+
+.value{
+  font-weight:bold;
+  font-size:9pt;
+  font-family : Arial;
+}
+
+.patient_name{
+  font-size:14pt;
+  color:rgb(100, 100, 100);
+  padding-left:9px;
+  font-weight:bold;	
+}
+
+#app_name{
+  width:50%
+  height:100%;
+  font-size:18pt;
+  font-weight:bold;	
+  padding-left:10px;
+  top:20px;
+  position:absolute;  
+  float:left;
+  position:relative;
+  color:white;
+}
+
+
+#account{
+  width:47%;
+  height:100%;  
+  font-weight:bold;	
+  padding-right:10px;
+  top:20px;
+  position:absolute;  
+  float:left;
+  position:relative; 
+  text-align:right;
+  font-size:10pt;
+  padding-top:5px;  
+}
+
+</style>
+</head>
+<body>
+<div id="client_area" >
+    <div id="first"></div>
+    <div id="second">
+      <div id="app_name">My Health Data</div>
+    </div>
+    <div style="width:100;background-color:RGB(0,100,100);height:20px;"></div>
+    <div id="page_heading">Clinical Data
+	<a style="float:right;color:white; padding-right:10px;" href="<%= logout_uri %>">Logout</a> 
+	</div>     
+    <br>
+    <div id="info_heading">Patient Name</div>
+    <table class="table" style="width:100%;"><tr><td class="patient_name"><%= "  " + given_name + " " + family_name + " " + name_suffix %></td></tr></table>
+     <br>    
+     <div id="info_heading">Personal Details</div>
+      <table class="table">
+        <tr><td class="field">Id : </td> <td class="value"><%= id %></td></tr>          
+        <tr><td class="field">Birth Date : </td> <td class="value"> <%= birth_date %> </td></tr>
+        <tr><td class="field">Gender : </td> <td class="value"> <%= gender %> </td></tr> 
+        <tr><td class="field">Version : </td> <td class="value"> <%= version %></td></tr>          
+        <tr><td class="field">Last Updated : </td> <td class="value"> <%= last_updated %> </td></tr>
+        <tr><td class="field">Email : </td> <td class="value"><%= email %> </td></tr> 
+        <tr><td class="field">Relation : </td> <td class="value"><%= relation %> </td></tr>
+      </table>
+      <br>
+      <div id="info_heading">Other Details</div>
+      <ul>
+        <li><a href="<%= get_all_encounters_uri %>">Encounters</a></li>
+      </ul>
+</div>    
+</body>
+</html>

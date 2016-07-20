@@ -1,0 +1,49 @@
+#######  #     #  ###  ######            #     ######   ###        ######   ######   #######  #     #  ###  #######   #####   
+#        #     #   #   #     #          # #    #     #   #         #     #  #     #  #     #   #   #    #   #        #     #  
+#        #     #   #   #     #         #   #   #     #   #         #     #  #     #  #     #    # #     #   #        #        
+#####    #######   #   ######         #     #  ######    #         ######   ######   #     #     #      #   #####     #####   
+#        #     #   #   #   #          #######  #         #         #        #   #    #     #    # #     #   #              #  
+#        #     #   #   #    #         #     #  #         #         #        #    #   #     #   #   #    #   #        #     #  
+#        #     #  ###  #     #        #     #  #        ###        #        #     #  #######  #     #  ###  #######   #####   
+
+1.fhir-api
+2.fhir-connector-hapi-dstu2
+3.oauth-b2b
+4.catch_all
+
+Following are also created:
+1. A developer (User named as testuser@apigee.com) 
+2. A Product (Product named as testFHIRproduct)  
+3. An app (App named as testFHIRApp) for the created developer. 
+
+
+###  ######   #######  #     #  #######  ###  #######  #     #         #####   #######  #        #     #  #######  ###  #######  #     #        
+ #   #     #  #        ##    #     #      #      #      #   #         #     #  #     #  #        #     #     #      #   #     #  ##    #        
+ #   #     #  #        # #   #     #      #      #       # #          #        #     #  #        #     #     #      #   #     #  # #   #        
+ #   #     #  #####    #  #  #     #      #      #        #            #####   #     #  #        #     #     #      #   #     #  #  #  #        
+ #   #     #  #        #   # #     #      #      #        #                 #  #     #  #        #     #     #      #   #     #  #   # #        
+ #   #     #  #        #    ##     #      #      #        #           #     #  #     #  #        #     #     #      #   #     #  #    ##        
+###  ######   #######  #     #     #     ###     #        #            #####   #######  #######   #####      #     ###  #######  #     #        
+
+######   ######   #######  #     #  ###  #######   #####   
+#     #  #     #  #     #   #   #    #   #        #     #  
+#     #  #     #  #     #    # #     #   #        #        
+######   ######   #     #     #      #   #####     #####   
+#        #   #    #     #    # #     #   #              #  
+#        #    #   #     #   #   #    #   #        #     #  
+#        #     #  #######  #     #  ###  #######   #####   
+
+Following proxies are deployed on your chosen enviornment:
+1. identity-authentication-spi
+2. identity-consent-app
+3. identity-consentmgmt-api
+4. identity-demo-app
+5. identity-oauth2-api
+6. identity-sms-token-api
+7. identity-usermgmt-api
+
+Following are also created:
+1. API service resources (4 cache resources named as consent-session-cache, nonce-cache, auth-req-param-cache and session-cookie-cache)
+2. A developer (Identity User named as user@identity.com) 
+3. A Product (Identity App product named as identityproduct)  
+4. An app (Identity App named as IdentityApp) for the created developer.

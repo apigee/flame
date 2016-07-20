@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="1" name="oauth-b2b">
+    <ConfigurationVersion majorVersion="4" minorVersion="0"/>
+    <CreatedAt>1448286423314</CreatedAt>
+    <CreatedBy>surbhi_nijhara@persistent.com</CreatedBy>
+    <Description></Description>
+    <DisplayName>oauth-b2b</DisplayName>
+    <LastModifiedAt>1448286423314</LastModifiedAt>
+    <LastModifiedBy>surbhi_nijhara@persistent.com</LastModifiedBy>
+    <Policies>
+        <Policy>GenerateAccessToken.Response</Policy>
+        <Policy>GenerateAccessToken</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources/>
+    <TargetServers/>
+    <TargetEndpoints/>
+</APIProxy>

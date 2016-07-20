@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout enabled="true" continueOnError="true" async="false" name="HPX_ServiceCallout.IdentifyUser">
+	<DisplayName>ServiceCallout.IdentifyUser</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <Request variable="identifyUserRequest" clearPayload="false">
+         <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+    </Request>
+    <Response>identifyUserResponse</Response>
+    <HTTPTargetConnection>
+        <Properties/>
+        <URL>[TO_BE_REPLACED]</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>

@@ -1,0 +1,8 @@
+<AssignMessage name="HPX_SetFlowErrorFromQueryParam">
+	<DisplayName>SetFlowErrorFromQueryParam</DisplayName>
+	<IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+	<AssignVariable>
+		<Name>flowError</Name>
+		<Ref>request.queryparam.error</Ref>
+	</AssignVariable>
+</AssignMessage>

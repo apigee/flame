@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<PopulateCache name="HPX_SetVariablesToSession">
+    <DisplayName>SetVariablesToSession</DisplayName>
+    <Source>access_token</Source>
+    <Scope>Exclusive</Scope>
+    <CacheKey>
+        <KeyFragment>access_token</KeyFragment>
+    </CacheKey>
+    <ExpirySettings>
+        <TimeoutInSec>1200</TimeoutInSec>
+    </ExpirySettings>
+    <DisplayName>SetVariablesToSession</DisplayName>
+</PopulateCache>

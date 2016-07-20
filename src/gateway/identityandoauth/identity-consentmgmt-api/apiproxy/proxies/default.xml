@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+	<Description />
+
+<FaultRules>
+	<FaultRule name="InvalidApiKey">
+		<Condition>fault.name = "invalid_client"</Condition>
+		<Step>
+			<FaultRules />
+			<Name>HPX_authenticationFailed</Name>
+		</Step>
+	</FaultRule>
+	<FaultRule name="InvalidProduct">
+		<Condition>fault.name = "InvalidAPICallAsNoApiProductMatchFound"</Condition>
+		<Step>
+			<FaultRules />
+			<Name>HPX_authorizationFailed</Name>
+		</Step>
+	</FaultRule>
+	<FaultRule name="InvalidClientId">
+		<Condition>(fault.name = "FailedToResolveAPIKey") or (fault.name = "InvalidApiKeyForGivenResource") or (fault.name = "InvalidApiKey") </Condition>
+		<Step>
+			<Name>HPX_RaiseFault.ApplicationKey</Name>
+		</Step>
+	</FaultRule>
+	<FaultRule name="InvalidAccessToken">
+		<Condition>(fault.name = "invalid_access_token") or (fault.name = "access_token_expired") </Condition>
+		<Step>
+			<Name>HPX_RaiseFault.InvalidAccessToken</Name>
+		</Step>
+	</FaultRule>
+	
+</FaultRules>
+
+	<PreFlow>
+		<Request>
+			<Step>
+				<Condition>(request.header.Authorization.values.count = 0)</Condition>
+				<FaultRules />
+				<Name>HPX_challengeResponse</Name>
+			</Step>
+			<Step>
+				<FaultRules />
+				<Name>HPX_setGrantType</Name>
+			</Step>
+			<Step>
+				<Condition>(request.header.Authorization =| "Basic") </Condition>
+				<FaultRules />
+				<Name>HPX_validateBasicAuth</Name>
+			</Step>
+		</Request>
+	</PreFlow>
+	
+	<Flows>
+			<Flow name="Create Consent">
+			<Request>
+				<Step>
+					<Name>HPX_ExtractPOSTRequestJSONVariables</Name>
+					<FaultRules></FaultRules>
+				</Step>
+				<Step>
+					<Name>HPX_AssignRequestPayloadToFlowVar</Name>
+					<FaultRules></FaultRules>
+				</Step>
+				<Step>
+					<Name>HPX_ValidateRequestJSONParams_JS</Name>
+					<FaultRules></FaultRules>
+				</Step>
+				<Step>
+					<Condition>errorType != null</Condition>
+					<Name>HPX_RaiseFault_BadRequest</Name>
+					<FaultRules></FaultRules>
+				</Step>
+				<Step>
+					<Condition>access_token != null</Condition>
+					<Name>HPX_AccessTokenValidation</Name>
+					<FaultRules></FaultRules>
+				</Step>
+				<Step>
+					<Condition>access_token != null</Condition>
+					<Name>HPX_AssignApplicationNameFromAccessToken</Name>
+					<FaultRules></FaultRules>
+				</Step>
+				<Step>
+					<Condition>access_token = null || application_name = null</Condition>
+					<Name>HPX_VerifyClientId</Name>
+					<FaultRules></FaultRules>
+				</Step>
+				<Step>
+					<Condition>application_name = null</Condition>
+					<Name>HPX_AssignApplicationNameFromVerifyClientId</Name>
+					<FaultRules></FaultRules>
+				</Step>
+					<Step>
+					<Name>HPX_DeleteExistingSimilarConsent</Name>
+					<FaultRules></FaultRules>
+				</Step>
+				<Step>
+					<Name>HPX_ModifyRequestToAddParams</Name>
+					<FaultRules></FaultRules>
+				</Step>
+			</Request>
+			<Response>
+			<Step>
+				<Condition>response.status.code = 200</Condition>
+				<Name>HPX_ExtractTargetResponseParameters</Name>
+				<FaultRules></FaultRules>
+			</Step>
+			<Step>
+				<Condition>response.status.code = 200</Condition>
+				<Name>HPX_CreateResposneContent_JS</Name>
+				<FaultRules></FaultRules>
+			</Step>
+			<Step>
+				<Condition>response.status.code = 200</Condition>
+				<Name>HPX_AssignCreateConsentFlowResponse</Name>
+				<FaultRules></FaultRules>
+			</Step>
+			</Response>
+
+			<Condition>(proxy.pathsuffix MatchesPath &quot;/consents&quot;) and (request.verb = &quot;POST&quot;)</Condition>
+		</Flow>
+			<Flow name="Update Consent">
+			<Request>
+				<Step>
+					<Name>HPX_ExtractPUTRequestJSONVariables</Name>
+					<FaultRules></FaultRules>
+				</Step>
+				<Step>
+					<Name>HPX_ValidatePUTRequestJSONParams_JS</Name>
+					<FaultRules></FaultRules>
+				</Step>
+				<Step>
+					<Condition>errorType != null</Condition>
+					<Name>HPX_RaiseFault_BadRequest</Name>
+					<FaultRules></FaultRules>
+				</Step>
+				<Step>
+					<Condition>access_token != null</Condition>
+					<Name>HPX_AccessTokenValidation</Name>
+					<FaultRules></FaultRules>
+				</Step>
+				<Step>
+					<Condition>access_token != null</Condition>
+					<Name>HPX_AssignApplicationNameFromAccessToken</Name>
+					<FaultRules></FaultRules>
+				</Step>
+				
+				<Step>
+					<Name>HPX_ModifyPUTRequestToAddParams</Name>
+					<FaultRules></FaultRules>
+				</Step>
+			</Request>
+			<Response>
+
+			</Response>
+
+			<Condition>(proxy.pathsuffix MatchesPath &quot;/consents/{consentId}&quot;) and (request.verb = &quot;PUT&quot;)</Condition>
+		</Flow>
+			<Flow name="Validate Consent">
+			<Request>
+				
+				<Step>
+					<Condition>request.queryparam.client_id = null or request.queryparam.client_id = "" or request.queryparam.user_id = null or request.queryparam.user_id = ""  </Condition>
+					<Name>HPX_RaiseFault_InvalidQueryParam</Name>
+					<FaultRules></FaultRules>
+				</Step>
+			</Request>
+			<Response>
+
+			</Response>
+
+			<Condition>(proxy.pathsuffix MatchesPath &quot;/consents/validate&quot;) and (request.verb = &quot;GET&quot;) and (request.queryparam.user_id != null)</Condition>
+		</Flow>
+			<Flow name="Get Consent By User">
+			<Request>
+
+			</Request>
+			<Response>
+
+			</Response>
+
+			<Condition>(proxy.pathsuffix MatchesPath &quot;/consents&quot;) and (request.verb = &quot;GET&quot;) and (request.queryparam.user_id != null)</Condition>
+		</Flow>
+			<Flow name="SSO Token Validation">
+			<Request>
+
+				<Step>
+					<Condition>request.queryparam.action != "refresh" and request.queryparam.action != "revoke"  and request.queryparam.action != "validate"  </Condition>
+					<Name>HPX_RaiseFault_Invalid_SSO_Operation</Name>
+					<FaultRules></FaultRules>
+				</Step>
+				<Step>
+					<Name>HPX_SetTokenLifeInRequest</Name>
+				</Step>
+
+			</Request>
+			<Response>
+
+			</Response>
+
+			<Condition>(proxy.pathsuffix MatchesPath &quot;/token/sso/{sso_token}&quot;) and (request.verb = &quot;GET&quot;)</Condition>
+		</Flow>		
+			<Flow name="Create SSO Token">
+			<Request>
+				<Step>
+					<Name>HPX_ExtractCreateSSOTokenReqVariables</Name>
+					<FaultRules></FaultRules>
+				</Step>
+				<Step>
+					<Name>HPX_ValidateCreateSSOTokenReqVariables_JS</Name>
+					<FaultRules></FaultRules>
+				</Step>
+				<Step>
+					<Condition>errorType != null</Condition>
+					<Name>HPX_RaiseFault_BadRequest</Name>
+					<FaultRules></FaultRules>
+				</Step>
+				<Step>
+					<Condition>access_token != null</Condition>
+					<Name>HPX_AccessTokenValidation</Name>
+					<FaultRules></FaultRules>
+				</Step>
+				<Step>
+					<Condition>access_token != null</Condition>
+					<Name>HPX_AssignApplicationNameFromAccessToken</Name>
+					<FaultRules></FaultRules>
+				</Step>
+				
+				<Step>
+					<Name>HPX_ModifyCreateSSOTokenRequestToAddParams</Name>
+					<FaultRules></FaultRules>
+				</Step>
+			</Request>
+			<Response>
+
+			</Response>
+
+			<Condition>(proxy.pathsuffix MatchesPath &quot;/token/sso/&quot;) and (request.verb = &quot;POST&quot;)</Condition>
+		</Flow>		
+			<Flow name="OPTIONS">
+			<Condition>(request.verb = &quot;OPTIONS&quot;)</Condition>
+			<Request>
+			</Request>
+			<Response>
+				<Step>
+					<Name>HPX_Option.AssignResponse</Name>
+					<FaultRules></FaultRules>
+				</Step>
+			</Response>
+		</Flow>
+	</Flows>
+
+<PostFlow>
+<Response>
+	<Step>
+		<Condition>(response.header.error_code != null)</Condition>
+		<FaultRules />
+		<Name>HPX_ConstructErrorResponse</Name>
+	</Step>
+</Response>
+
+</PostFlow>
+
+
+	<HTTPProxyConnection>
+		<BasePath>/identity</BasePath>
+		<VirtualHost>secure</VirtualHost>
+	</HTTPProxyConnection>
+	<RouteRule name="default">
+		<TargetEndpoint>default</TargetEndpoint>
+	</RouteRule>
+</ProxyEndpoint>

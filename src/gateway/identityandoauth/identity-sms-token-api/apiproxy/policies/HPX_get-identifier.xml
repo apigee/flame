@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<ExtractVariables name="HPX_get-identifier">
+    <DisplayName>Get-Identifier</DisplayName>
+    <Variable name="proxy.pathsuffix">
+        <Pattern>/sms/{identifier}</Pattern>
+    </Variable>
+</ExtractVariables>

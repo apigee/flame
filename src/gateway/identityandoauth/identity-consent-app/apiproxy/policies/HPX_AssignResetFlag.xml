@@ -1,0 +1,8 @@
+<AssignMessage name="HPX_AssignResetFlag">
+	<DisplayName>AssignResetFlag</DisplayName>
+	<IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+	<AssignVariable>
+		<Name>resetFalg</Name>
+		<Value>true</Value>
+	</AssignVariable>
+</AssignMessage>

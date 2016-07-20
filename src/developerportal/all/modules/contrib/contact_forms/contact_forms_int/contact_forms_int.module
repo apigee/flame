@@ -1,0 +1,86 @@
+<?php
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function contact_forms_int_form_contact_site_form_alter(&$form, &$form_state) {
+
+  if (isset($form['contact_information']['#markup'])) {
+
+    // Translate the Additional Info string
+    $cid = $form['cid']['#value'];
+
+    $page_info = i18n_string_translate('contact:category:' . $cid . ':page_info', $form['contact_information']['#markup'], array('sanitize' => FALSE));
+
+    // But the token, @category, isn't translated
+    // so if not the default language replace the
+    // orig category with the translated category
+    $default_lang_category = $form['orig_category']['#value'];
+    $this_lang_category = i18n_string_translate('contact:category:' . $cid . ':category', $default_lang_category);
+
+    if ($default_lang_category !== $this_lang_category) {
+      $page_info = str_replace($default_lang_category, $this_lang_category, $page_info);
+    }
+    $form['contact_information']['#markup'] = $page_info;
+  }
+
+  if(!isset($form['cid']['#options'])){
+    drupal_set_title(i18n_string_translate('contact:category:' . $form['cid']['#value'] . ':page_title', drupal_get_title()));
+  }
+}
+
+
+/**
+ * Implements hook_variable_group_info().
+ */
+function contact_forms_int_variable_group_info() {
+  $groups['contact_forms_i18n'] = array(
+    'title' => t('Contact Forms'),
+    'description' => t('Contact Forms variables.'),
+    'access' => 'administer contact forms',
+    'path' => array('admin/config/system/variable/contact-forms'),
+  );
+  return $groups;
+}
+
+/**
+ * Implements hook_variable_info().
+ */
+function contact_forms_int_variable_info($options) {
+
+    $variable['contact_forms_title'] = array(
+    'title' => t('Default Title for individual contact pages ', array(), $options),
+    'description' => t('If a category doesn\'t have a page title specified this will be shown. To place the category name in the title use the wildcard "@category".', array(), $options),
+    'type' => 'string',
+    'default' => t('Contact @category', array(), $options),
+    'required' => TRUE,
+    'group' => 'contact_forms_i18n',
+    'localize' => TRUE,
+  );
+
+  $variable['contact_forms_information'] = array(
+    'title' => t('Default Additional Information for individual contact pages ', array(), $options),
+    'description' => t('If a category doesn\'t have additional information specified this will be shown. To place the category name in your message use the wildcard "@category" e.g. You can send @category a message using the contact form below.', array(), $options),
+    'type' => 'string',
+    'default' => t('You can send @category a message using the contact form below.', array(), $options),
+'group' => 'contact_forms_i18n',
+    'localize' => TRUE,
+  );
+
+  return $variable;
+}
+
+/**
+ *
+ */
+function contact_forms_int_i18n_object_info_alter(&$info) {
+
+    $info['contact_category']['string translation']['properties'] = array(
+        'category' => t('Category'),
+        'page_title' => t('Page Title'),
+        'page_info' => t('Additional Information'),
+        'reply' => t('Auto-reply'),
+
+      );
+}

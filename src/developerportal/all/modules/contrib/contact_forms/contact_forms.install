@@ -1,0 +1,67 @@
+<?php
+// $Id:
+
+/**
+ * Implementation of hook_install().
+ */
+function contact_forms_install() {
+  //Alter the contact table to add an info field and title for each category
+  if (!db_field_exists('contact', 'page_title')) {
+    db_add_field('contact', 'page_title', array('type' => 'text', 'size' => 'normal', 'not null' => FALSE));
+  }
+  if (!db_field_exists('contact', 'page_info')) {
+    db_add_field('contact', 'page_info', array('type' => 'text', 'size' => 'big', 'not null' => FALSE));
+}
+  watchdog ('Contact Forms', 'contact_forms module installed');
+  drupal_set_message(t("Contact Forms module has been enabled. Please go to the settings page at !link and choose the space replacement token",
+    array( '!link' => l('Administer > Structure > Contact form ',  'admin/structure/contact/settings' ) )
+  ));
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function contact_forms_uninstall() {
+
+  // remove variables
+  variable_del('contact_forms_information');
+  variable_del('contact_forms_title');
+  variable_del('contact_forms_redirect');
+
+  //remove category information field
+  db_drop_field('contact', 'page_title');
+  db_drop_field('contact', 'page_info');
+
+  // clear the cache tables
+  cache_clear_all(null, 'cache');
+  cache_clear_all(null, 'cache_filter');
+  cache_clear_all(null, 'cache_menu');
+  cache_clear_all(null, 'cache_page');
+
+  watchdog ('Contact Forms', 'Contact Forms module removed');
+}
+
+
+ /**
+ * Add 7.x columns for those upgrading from earlier Drupal version.
+ */
+function contact_forms_update_7000() {
+  //Alter the contact table to add an info field and title for each category
+  if (!db_field_exists('contact', 'page_title')) {
+    db_add_field('contact', 'page_title', array('type' => 'text', 'size' => 'normal', 'not null' => FALSE));
+  }
+  if (!db_field_exists('contact', 'page_info')) {
+    db_add_field('contact', 'page_info', array('type' => 'text', 'size' => 'big', 'not null' => FALSE));
+  }
+}
+
+/**
+* Implementation of hook_update_N()
+*/
+function contact_forms_update_7101() {
+  $ret = array();
+
+  drupal_set_message(t("Contact Forms module has been updated. Please go to the settings page at !link and choose the space replacement token",  array( '!link' => l('Administer > Site building > Contact form ',  'admin/build/contact/settings' ))));
+
+  return $ret;
+}
