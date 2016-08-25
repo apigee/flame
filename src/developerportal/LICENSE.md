@@ -1,7 +1,7 @@
 
 Copyright (c) 2016 Apigee
 
-GNU LICENSE 
+GNU LICENSE
 
 Contents of this Developer Portal folder is licensed under
 
@@ -635,11 +635,16 @@ copy of the Program in return for a fee.
 Below list details third Party libraries used in this folder and their corresponding  licenses
 
 ========-------==========------------============----------------
-contact_forms 	7.x-1.8	https://www.drupal.org/project/contact_forms
+accordion_blocks 	7.x-3.2	https://www.drupal.org/project/accordion_blocks
 
 License: GNU (http://www.gnu.org/licenses/gpl.html)
-========-------==========------------============----------------
 
+========-------==========------------============----------------
+feedback 	7.x-2.0	https://www.drupal.org/project/feedback
+
+License: GNU (http://www.gnu.org/licenses/gpl.html)
+
+========-------==========------------============----------------
 flexslider	7.x-2.0-rc1	https://www.drupal.org/project/flexslider
 
 License: GNU (http://www.gnu.org/licenses/gpl.html)
@@ -647,6 +652,12 @@ License: GNU (http://www.gnu.org/licenses/gpl.html)
 ========-------==========------------============----------------
 
 flexslider_views_slideshow	7.x-2.x-dev	https://www.drupal.org/project/flexslider_views_slideshow
+
+License: GNU (http://www.gnu.org/licenses/gpl.html)
+
+========-------==========------------============----------------
+
+menu_block	7.x-2.7	https://www.drupal.org/project/menu_block
 
 License: GNU (http://www.gnu.org/licenses/gpl.html)
 
