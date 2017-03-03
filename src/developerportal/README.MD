@@ -96,35 +96,13 @@ Access the developer portal website and login with admin credentials.
 
 ###4.2 Enable FHIR Swagger module:  
 
- To enable FHIR Swagger or any other module, we can use Drush commands. **Drush** stands for **Drupal-Shell** and it is a command line shell and unix scripting interface for Drupal to control, manipulate, and administer Drupal websites.  
+To enable FHIR Swagger or any other module, go to admin -> modules and enable them.
 
-To run these commands, we need to install **Drush** either on our Cloud environment or On-Premises environment.  
+- Select fhir_swagger module from the list of modules, enable it.
 
-For Drush installation details: please refer: [https://www.drupal.org/node/1791676](https://www.drupal.org/node/1791676) and [http://docs.drush.org/en/master/install/](http://docs.drush.org/en/master/install/)   
+- Save the configuration.
 
-**Note:** 
- 
-#####Cloud Instance: 
-For a Cloud instance you have to download the **Drush aliases** file **(i.e. pantheon.aliases.drushrc.php)** from your pantheon account and copy to the installed Drush Installer folder (e.g C:\ProgramData\Drush)   
-Refer following screen shot:
-<img src="../../readme-images/devportal/Fig02.jpg" width="700px" height="281px"/>   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fig 4. 
-
-From this file, you need to obtain the drush alias name which needs to be used in every drush command. **(e.g. drush @youraliasname <command> --strict=0)**.  
-
-You will get available Drush Alias names by running following command:
-**$ drush sa**
-
-Pick the alias for the desired portal from the above command’s output. For the drush commands mentioned in the following section, place the alias after drush in each command. Eg: **drush cc all** needs to be converted to **drush @_youralias_ cc all –strict=0**
-
-#####On-Prem customer: 
-For an on prem instance you do not require the alias name & --strict=0 in drush command. Simply use following drush commands.
-
-**Execute following Drush Commands to enable FHIR Swagger module :**
-
-    $ drush pm-enable fhir_swagger
-    $ drush cc all
-
+- Clear Cache [hover Home icon of admin bar ->click Flush all caches ]
 
 ###4.3 Deploy SmartDocs
 The FHIR APIs description are available in Swagger JSON formats. These APIs description defines requests that point to the FHIR resources deployed on the Apigee edge gateway instance.
@@ -248,26 +226,23 @@ Following all sections and steps above would enable a customized developer-porta
 
 ###4.5 Enable FHIR responsive theme and other FHIR required modules:  
 
+Fhir_responsive theme contains all fhir related customisation for the portal, and hence needs to be enabled and set as default.
 
-#####On-Prem customer: 
-**Execute following Drush Commands in the same order only :**
+- Goto {your_portal_site}/admin/appearance.
+- Choose fhir_responsive responsive theme, enable it and set it as default.
 
-    $ drush vset theme_default fhir_responsive
-    $ drush cc all
-    $ drush pm-enable fhir_responsive
-    $ drush cc all
-    $ drush pm-enable fhir_blocks
-    $ drush cc all
-    $ drush pm-enable fhir_custom
-    $ drush cc all
+To enable module, go to admin -> modules and enable them.
 
-Set APIS menu weight, goto -
+- Select fhir_responsive module from the list of modules, enable it.
+- Select fhir_blocks module from the list of modules, enable it. 
+- Select fhir_custom module from the list of modules, enable it.
+
+- Set APIS menu weight, goto -
     Structure->Menus->Main menu->Show row weights
     ->Set APIS  weight to -50->Save.
-    
-    $ drush pm-enable fhir_install
-    $ drush cc all
-    
+- Select fhir_install module from the list of modules, enable it.
+- Clear Cache [hover Home icon of admin bar ->click Flush all caches ]  
+
 Here we go, now refresh you portal site and you will see all changes of flame code on your portal.  
 See reference image below:  
 <img src="../../readme-images/devportal/Fig03.jpg" width="700px" height="350px"/>    
