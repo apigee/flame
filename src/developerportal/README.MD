@@ -236,11 +236,12 @@ To enable module, go to admin -> modules and enable them.
 - Select fhir_responsive module from the list of modules, enable it.
 - Select fhir_blocks module from the list of modules, enable it. 
 - Select fhir_custom module from the list of modules, enable it.
-
+- Save the configuration.
 - Set APIS menu weight, goto -
     Structure->Menus->Main menu->Show row weights
     ->Set APIS  weight to -50->Save.
 - Select fhir_install module from the list of modules, enable it.
+- Save the configuration.
 - Clear Cache [hover Home icon of admin bar ->click Flush all caches ]  
 
 Here we go, now refresh you portal site and you will see all changes of flame code on your portal.  
