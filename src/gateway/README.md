@@ -31,6 +31,50 @@ This solution is built on top of open source project Grass from Apigee. It mainl
 This component is intended for Untrusted Developers /B2C (Business to Consumer) Model.  
 Deploy the identity solution as per steps mentioned [here](identityandoauth/setup-identity).
 
+or
+
+To deploy the APIs and its dependencies on your own org please run the following
+script from the root folder of the cloned repo.
+
+### Installation 
+
+#### Pre-requisites
++ node.js 
++ npm
+
+#### Instructions
+
+Install gulp 
+```
+npm install --global gulp-cli
+```
+
+Pull node modules
+```
+npm install
+```
+
+Run the deploy command
+```
+gulp deploy --resource fhir_apis
+```
+
+This will interactively prompt you for following details, and will then create / deploy all relevants bundles and artifacts and will provision the ** FHIR Sandbox** on your own Org.
+
++ Edge Org name
++ Edge Username
++ Edge Password
++ Edge Env for deployment
++ Target server host URL
++ Target server port
++ Target server basepath
++ BaaS Org Name
++ BaaS App Name
++ BaaS Org Client Id
++ BaaS Org Client Secret 
+
+
+
 _A note on **Backend**_  
 Healthapix connects to [FHIR Test server](http://fhirtest.uhn.ca) from HAPI community. 
 
