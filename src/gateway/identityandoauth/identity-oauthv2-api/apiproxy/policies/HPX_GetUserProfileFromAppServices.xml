@@ -19,6 +19,6 @@
     <Response>appservicesuserprofile</Response>
     <HTTPTargetConnection>
         <Properties/>
-        <URL>[TO_BE_REPLACED]</URL>
+        <URL>{{ HPX_GetUserProfileFromAppServices }}</URL>
     </HTTPTargetConnection>
 </ServiceCallout>

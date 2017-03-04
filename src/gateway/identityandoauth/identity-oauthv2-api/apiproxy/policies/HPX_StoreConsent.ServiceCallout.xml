@@ -7,6 +7,6 @@
     <Response>storeConsentResponse</Response>
     <HTTPTargetConnection>
         <Properties/>
-        <URL>[TO_BE_REPLACED]</URL>
+        <URL>{{ HPX_StoreConsent_url }}</URL>
     </HTTPTargetConnection>
 </ServiceCallout>

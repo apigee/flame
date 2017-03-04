@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="HPX_Fault_NoResponse">
+    <DisplayName>Fault_NoResponse</DisplayName>
+    <Properties/>
+    <Set>
+            <Headers/>
+            <Payload contentType="application/json" variablePrefix="%" variableSuffix="#">
+			{
+				"resourceType":"OperationOutcome",
+				"text":{
+					"status":"generated",
+					"div":"<div><h1>Operation Outcome</h1><table border='1'><tr><td style='font-weight: bold;'>error</td><td>[]</td><td><pre>Empty Response</pre></td>\n\t\t\t</tr>\n\t\t</table>\n\t</div>"
+				},
+				"issue":[
+					{
+						"severity":"error",
+              			"code":"not-found",
+						"details":"Empty Response"
+					}
+				]
+			}
+            </Payload>
+            <StatusCode>404</StatusCode>
+            <ReasonPhrase>Not Found</ReasonPhrase>
+        </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</AssignMessage>

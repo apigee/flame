@@ -2,6 +2,6 @@
 	<DisplayName>Assign Issuer</DisplayName>
 	<AssignVariable>
 		<Name>issuer</Name>
-		<Value>[TO_BE_REPLACED]</Value>
+		<Value>{{ HPX_AssignIssuer }}</Value>
 	</AssignVariable>
 </AssignMessage>

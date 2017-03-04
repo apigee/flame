@@ -4,7 +4,7 @@
 	<AssignTo createNew="false" transport="http" type="request">request</AssignTo>
 	<Set>
 	 	<QueryParams>
-			<QueryParam name="logoutRedircetUri">[TO_BE_REPLACED]</QueryParam>
+			<QueryParam name="logoutRedircetUri">{{ logoutRedircetUri }}</QueryParam>
 		</QueryParams>
 	</Set>
 </AssignMessage>

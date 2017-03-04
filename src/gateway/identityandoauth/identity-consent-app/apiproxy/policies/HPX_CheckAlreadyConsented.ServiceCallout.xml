@@ -7,7 +7,7 @@
         <Set>
             <Headers>
                 <Header name="Accept">application/json</Header>
-                <Header name="Authorization">[TO_BE_REPLACED]</Header>
+                <Header name="Authorization">{{ baas_auth }}</Header>
             </Headers>
             <QueryParams>
                 <QueryParam name="client_id">{client_id}</QueryParam>
@@ -19,6 +19,6 @@
     <Response>previousConsentResponse</Response>
     <HTTPTargetConnection>
         <Properties/>
-        <URL>[TO_BE_REPLACED]</URL>
+        <URL>{{ HPX_CheckAlreadyConsented_url }}</URL>
     </HTTPTargetConnection>
 </ServiceCallout>

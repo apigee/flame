@@ -9,6 +9,6 @@
     <Response>identifyUserResponse</Response>
     <HTTPTargetConnection>
         <Properties/>
-        <URL>[TO_BE_REPLACED]</URL>
+        <URL>{{ HPX_ServiceCallout.IdentifyUser_url }}</URL>
     </HTTPTargetConnection>
 </ServiceCallout>

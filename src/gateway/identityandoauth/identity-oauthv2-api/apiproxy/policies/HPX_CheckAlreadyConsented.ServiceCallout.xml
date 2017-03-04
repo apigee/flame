@@ -18,6 +18,6 @@
     <Response>previousConsentResponse</Response>
     <HTTPTargetConnection>
         <Properties/>
-        <URL>[TO_BE_REPLACED]</URL>
+        <URL>{{ HPX_CheckAlreadyConsented_url }}</URL>
     </HTTPTargetConnection>
 </ServiceCallout>

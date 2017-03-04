@@ -8,7 +8,7 @@
 	<Set>
 		<StatusCode>302</StatusCode>
 		<Headers> 
-			<Header name="Location">[TO_BE_REPLACED]</Header> 
+			<Header name="Location">{{ consent_app_RedirectToConsent }}</Header>
 			<Header name="Access-Control-Allow-Origin">*</Header>
 			<Header name="Access-Control-Allow-Origin">*</Header>
 		</Headers> 

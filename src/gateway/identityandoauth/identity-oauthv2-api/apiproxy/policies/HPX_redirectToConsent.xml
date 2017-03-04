@@ -9,7 +9,7 @@
     <Set>
         <StatusCode>302</StatusCode>
         <Headers>
-            <Header name="Location">[TO_BE_REPLACED]</Header>
+            <Header name="Location">{{ oauth_RedirectToConsent }}</Header>
             <Header name="Access-Control-Allow-Origin">*</Header>
             <Header name="Access-Control-Allow-Origin">*</Header>
             <Header name="Set-cookie">sessionid= {sessionid}; Max-Age=18000; Version=1; path=/</Header>

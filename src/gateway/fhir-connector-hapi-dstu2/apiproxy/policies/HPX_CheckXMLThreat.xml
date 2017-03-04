@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XMLThreatProtection async="false" continueOnError="false" enabled="true" name="HPX_CheckXMLThreat">
+    <DisplayName>CheckXMLThreat</DisplayName>
+    <Properties/>
+    <NameLimits>
+        <Element>30</Element>
+        <Attribute>10</Attribute>
+        <NamespacePrefix>20</NamespacePrefix>
+    </NameLimits>
+    <Source>request</Source>
+    <StructureLimits>
+        <NodeDepth>10</NodeDepth>
+        <AttributeCountPerElement>3</AttributeCountPerElement>
+        <NamespaceCountPerElement>3</NamespaceCountPerElement>
+        <ChildCount includeComment="false" includeElement="true" includeProcessingInstruction="true" includeText="true">30</ChildCount>
+    </StructureLimits>
+    <ValueLimits>
+        <NamespaceURI>50</NamespaceURI>
+    </ValueLimits>
+</XMLThreatProtection>

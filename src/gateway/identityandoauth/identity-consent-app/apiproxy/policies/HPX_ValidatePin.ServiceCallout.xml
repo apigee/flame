@@ -5,7 +5,7 @@
 		<IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
 		<Set>
 			<Headers>
-				<Header name="apikey">[TO_BE_REPLACED]</Header>
+				<Header name="apikey">{{ baas_auth }}</Header>
 			</Headers>
 			<Verb>GET</Verb>
 		</Set>
@@ -13,6 +13,6 @@
     <Response>validate_sms_token_response</Response>
     <HTTPTargetConnection>
         <Properties/>
-        <URL>[TO_BE_REPLACED]</URL>
+        <URL>{{ HPX_ValidatePin_url }}</URL>
     </HTTPTargetConnection>
 </ServiceCallout>

@@ -6,6 +6,6 @@
     <Response>get_user_details_response</Response>
     <HTTPTargetConnection>
         <Properties/>
-        <URL>[TO_BE_REPLACED]</URL>
+        <URL>{{ HPX_GetUserDetails_url }}</URL>
     </HTTPTargetConnection>
 </ServiceCallout>

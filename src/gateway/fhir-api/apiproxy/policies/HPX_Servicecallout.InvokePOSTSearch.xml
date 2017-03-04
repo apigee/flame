@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout async="false" continueOnError="true" enabled="true" name="HPX_Servicecallout.InvokePOSTSearch">
+    <DisplayName>Servicecallout.InvokePOSTSearch</DisplayName>
+    <Properties/>
+    <Request clearPayload="false" variable="invokePostSearchRequest">
+        <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>     
+        <Set>     
+         <Headers>      
+          <Header name="Accept">{request.header.Accept}</Header>     
+         </Headers> 
+           <Payload contentType="application/x-www-form-urlencoded">{request.formstring}</Payload>
+         <Verb>{request.verb}</Verb>
+        </Set>
+    </Request>
+    <Response>invokeConnectorAPIResponse</Response> 
+    <HTTPTargetConnection>
+        <Properties/>
+      <URL>https://{connector_domain}/{connector_basepath}{proxy.pathsuffix}?{request.querystring}</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>

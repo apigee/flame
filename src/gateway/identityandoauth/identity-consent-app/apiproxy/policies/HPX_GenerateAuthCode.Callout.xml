@@ -9,6 +9,6 @@
     <Response>authcode.response</Response>
     <HTTPTargetConnection>
         <Properties/>
-        <URL>[TO_BE_REPLACED]</URL>
+        <URL>{{ HPX_GenerateAuthCode_url }}</URL>
     </HTTPTargetConnection>
 </ServiceCallout>

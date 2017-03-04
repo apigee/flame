@@ -6,7 +6,7 @@
     <Set>
         <Headers>
             <Header name="Accept">application/json</Header>
-            <Header name="Authorization">[TO_BE_REPLACED]</Header>
+            <Header name="Authorization">{{ baas_auth }}</Header>
             <Header name="Content-Type">application/json</Header>
         </Headers>
         <Payload variablePrefix="%" variableSuffix="#">

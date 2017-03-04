@@ -9,6 +9,6 @@
     <Response>send_sms_response</Response>
     <HTTPTargetConnection>
         <Properties/>
-        <URL>[TO_BE_REPLACED]</URL>
+        <URL>{{ HPX_SendSMS_url }}</URL>
     </HTTPTargetConnection>
 </ServiceCallout>

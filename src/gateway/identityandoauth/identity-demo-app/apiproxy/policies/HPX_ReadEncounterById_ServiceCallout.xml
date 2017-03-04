@@ -8,6 +8,6 @@
     <Response>read_patient_encounter_response</Response>
     <HTTPTargetConnection>
         <Properties/>
-        <URL>[TO_BE_REPLACED]</URL>
+        <URL>{{ HPX_ReadEncounterById_url }}</URL>
     </HTTPTargetConnection>
 </ServiceCallout>

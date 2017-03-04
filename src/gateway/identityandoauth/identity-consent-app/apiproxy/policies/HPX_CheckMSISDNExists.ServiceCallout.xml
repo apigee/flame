@@ -14,6 +14,6 @@
     <Response>userManagement.response</Response>
     <HTTPTargetConnection>
         <Properties/>
-        <URL>[TO_BE_REPLACED]</URL>
+        <URL>{{ CheckMSISDNExists_url }}</URL>
     </HTTPTargetConnection>
 </ServiceCallout>

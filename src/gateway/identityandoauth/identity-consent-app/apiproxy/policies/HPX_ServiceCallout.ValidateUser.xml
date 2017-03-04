@@ -9,6 +9,6 @@
     <Response>validateUserResponse</Response>
     <HTTPTargetConnection>
         <Properties/>
-        <URL>[TO_BE_REPLACED]</URL>
+        <URL>{{ HPX_ServiceCallout.ValidateUser_url }}</URL>
     </HTTPTargetConnection>
 </ServiceCallout>

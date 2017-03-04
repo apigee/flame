@@ -8,7 +8,7 @@
 	<Add>
 		<QueryParams>
 			<QueryParam name="redirect_uri">/openid/redirect/{sessionid}</QueryParam>
-			<QueryParam name="hostName">[TO_BE_REPLACED]</QueryParam>
+			<QueryParam name="hostName">{{ hostName }}</QueryParam>
 			<QueryParam name="host">{request.header.host}</QueryParam>
 			<QueryParam name="basePath">/openid</QueryParam>
 			<QueryParam name="appName">{appName}</QueryParam>

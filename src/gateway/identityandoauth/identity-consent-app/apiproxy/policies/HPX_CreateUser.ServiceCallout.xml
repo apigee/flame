@@ -7,6 +7,6 @@
     <Response>createUser.response</Response>
     <HTTPTargetConnection>
         <Properties/>
-        <URL>[TO_BE_REPLACED]</URL>
+        <URL>{{ HPX_CreateUser_url }}</URL>
     </HTTPTargetConnection>
 </ServiceCallout>
