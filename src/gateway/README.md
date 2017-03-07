@@ -23,7 +23,6 @@ Healthapix supports following 18 FHIR APIs
 16.	DocumentReference  
 17.	Schedule  
 18.	Coverage  
-Deploy the FHIR API as per steps mentioned [here](fhir/setup-apis).
 
 **OAuth and Identity Solution**  
 Healthapix also provides Identity solution for accessing FHIR APIs in a secured manner.  
