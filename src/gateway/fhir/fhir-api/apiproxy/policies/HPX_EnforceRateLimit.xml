@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<SpikeArrest async="false" continueOnError="false" enabled="true" name="HPX_EnforceRateLimit">
-    <DisplayName>EnforceRateLimit</DisplayName>
-    <Properties/>
-    <Identifier ref="apigee.client_id"/>
-  <Rate ref="apiproduct.RATE_LIMIT_OVERRIDE_LIMIT" ></Rate>
-</SpikeArrest>

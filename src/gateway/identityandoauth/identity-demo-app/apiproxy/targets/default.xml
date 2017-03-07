@@ -1,7 +1,0 @@
-<TargetEndpoint name="default">
-	<PreFlow>
-	</PreFlow>
-	<ScriptTarget>
-		<ResourceURL>node://app.js</ResourceURL>
-	</ScriptTarget>
-</TargetEndpoint>

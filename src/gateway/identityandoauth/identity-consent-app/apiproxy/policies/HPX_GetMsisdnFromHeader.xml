@@ -1,7 +1,0 @@
-<AssignMessage enabled="true" continueOnError="true" async="false" name="HPX_GetMsisdnFromHeader">
-	<DisplayName>GetMsisdnFromHeader</DisplayName>
-    <AssignVariable>
-        <Name>msisdn</Name>
-        <Ref>request.header.x-msisdn</Ref>
-    </AssignVariable>
-</AssignMessage>

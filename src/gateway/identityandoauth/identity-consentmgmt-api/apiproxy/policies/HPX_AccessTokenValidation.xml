@@ -1,5 +1,0 @@
-<OAuthV2 name="HPX_AccessTokenValidation" continueOnError="false" enabled="true">
-	<DisplayName>AccessTokenValidation</DisplayName>
-	<Operation>VerifyAccessToken</Operation>
-	<AccessToken>access_token</AccessToken>
-</OAuthV2>

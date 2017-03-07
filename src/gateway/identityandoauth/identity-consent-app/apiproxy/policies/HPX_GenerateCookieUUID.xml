@@ -1,6 +1,0 @@
-<Javascript timeLimit="0" enabled="true" continueOnError="true" async="false" name="HPX_GenerateCookieUUID">
-	<DisplayName>GenerateCookieUUID</DisplayName>
-    <FaultRules/>
-    <Properties/>
-    <ResourceURL>jsc://HPX_GenerateIdForCookie.js</ResourceURL>
-</Javascript>

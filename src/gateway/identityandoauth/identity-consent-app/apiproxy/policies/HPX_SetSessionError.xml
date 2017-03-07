@@ -1,8 +1,0 @@
-<AssignMessage name="HPX_SetSessionError">
-	<DisplayName>SetSessionError</DisplayName>
-	<IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
-	<AssignVariable>
-		<Name>flowError</Name>
-		<Value>SESSION_INVALID</Value>
-	</AssignVariable>
-</AssignMessage>

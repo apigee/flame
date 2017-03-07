@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<Javascript name="HPX_generate-token">
-    <DisplayName>Generate-Token</DisplayName>
-    <IncludeURL>jsc://HPX_token.js</IncludeURL>
-    <ResourceURL>jsc://HPX_generate-token.js</ResourceURL>
-</Javascript>

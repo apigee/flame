@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<GetOAuthV2Info async="false" continueOnError="false" enabled="true" name="HPX_GetAuthCodeAttributes">
-    <DisplayName>GetAuthCodeAttributes</DisplayName>
-    <AuthorizationCode ref="request.formparam.code"></AuthorizationCode>
-</GetOAuthV2Info>

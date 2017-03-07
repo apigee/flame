@@ -1,9 +1,0 @@
-<InvalidateCache name="HPX_InvalidateSession">
-	<DisplayName>InvalidateSession</DisplayName>
-    <CacheResource>consent-session-cache</CacheResource>
-    <Scope>Global</Scope>
-    <CacheKey>
-        <KeyFragment ref="sessionid" />
-    </CacheKey>
-    <PurgeChildEntries>true</PurgeChildEntries>
-</InvalidateCache>

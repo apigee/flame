@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<AssignMessage name="HPX_setGrantType" createNew="true">
-	<DisplayName>SetGrantType</DisplayName>
-    <AssignVariable>
-        <Name>var.grantType</Name>
-        <Value>client_credentials</Value>
-    </AssignVariable>
-</AssignMessage>
