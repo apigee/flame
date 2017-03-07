@@ -67,13 +67,14 @@ This will interactively prompt you for following details, and will then create /
 + Target server basepath **eg**: /baseDstu2
 + BaaS Org Name
 + BaaS App Name **(**new app with this name is created in BaaS if it doesn't already exist**)**
-+ BaaS Org Client Id **(**can be obtained from BaaS ui as shown in the fig 1**)**
-+ BaaS Org Client Secret **(**can be obtained from BaaS ui as shown in the fig 1**)**
++ BaaS Org Client Id **(**can be obtained from BaaS ui as shown in the Fig-1**)**
++ BaaS Org Client Secret **(**can be obtained from BaaS ui as shown in the Fig-1**)**
 
 
 
 _A note on **Backend**_  
 Healthapix connects to [FHIR Test server](http://fhirtest.uhn.ca) from HAPI community. 
 
+**Fig - 1**
+![BaaS org credentials](/readme-images/gateway/baas-cred.png "Where to find BaaS org credentials")
 
-[BaaS org credentials](https://raw.githubusercontent.com/kidiyoor/flame/master/readme-images/gateway/baas-cred.png "Where to find BaaS org credentials")
