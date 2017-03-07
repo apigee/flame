@@ -76,4 +76,4 @@ _A note on **Backend**_
 Healthapix connects to [FHIR Test server](http://fhirtest.uhn.ca) from HAPI community. 
 
 
-[BaaS org credentials](/readme-images/gateway/baas-cred.png?raw=true "Where to find BaaS org credentials")
+[BaaS org credentials](https://raw.githubusercontent.com/kidiyoor/flame/master/readme-images/gateway/baas-cred.png "Where to find BaaS org credentials")
