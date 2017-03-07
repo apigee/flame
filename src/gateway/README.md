@@ -62,13 +62,13 @@ This will interactively prompt you for following details, and will then create /
 + Edge Username
 + Edge Password
 + Edge Env for deployment
-+ Target server host URL
-+ Target server port
-+ Target server basepath
++ Target server host URL **eg**: fhirtest.uhn.ca
++ Target server port **eg**: 80
++ Target server basepath **eg**: /baseDstu2
 + BaaS Org Name
-+ BaaS App Name
-+ BaaS Org Client Id
-+ BaaS Org Client Secret 
++ BaaS App Name **(**new app with this name is created in BaaS if it doesn't already exist**)**
++ BaaS Org Client Id **(**can be obtained from BaaS ui as shown in the fig 1**)**
++ BaaS Org Client Secret **(**can be obtained from BaaS ui as shown in the fig 1**)**
 
 
 
