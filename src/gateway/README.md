@@ -23,17 +23,14 @@ Healthapix supports following 18 FHIR APIs
 16.	DocumentReference  
 17.	Schedule  
 18.	Coverage  
-Deploy the FHIR API as per steps mentioned [here](fhir/setup-apis).
 
 **OAuth and Identity Solution**  
 Healthapix also provides Identity solution for accessing FHIR APIs in a secured manner.  
 This solution is built on top of open source project Grass from Apigee. It mainly consists of OAuth, Identity/User management and Consent Management.  
 This component is intended for Untrusted Developers /B2C (Business to Consumer) Model.  
-Deploy the identity solution as per steps mentioned [here](identityandoauth/setup-identity).
 
-or
 
-To deploy the APIs and its dependencies on your own org please run the following
+To deploy all the APIs, OAuth and Identity Solution on your own org please run the following
 script from the root folder of the cloned repo.
 
 ### Installation 
