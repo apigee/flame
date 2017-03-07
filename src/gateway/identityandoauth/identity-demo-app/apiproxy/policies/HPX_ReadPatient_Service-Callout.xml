@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout async="false" continueOnError="false" enabled="true" name="HPX_ReadPatient_Service-Callout">
+    <DisplayName>ReadPatient_Service Callout</DisplayName>
+    <Properties/>
+    <Request clearPayload="true" variable="read_patient_request">
+        <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+    </Request>
+    <Response>read_patient_response</Response>
+    <HTTPTargetConnection>
+        <Properties/>
+        <URL>[TO_BE_REPLACED]</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>

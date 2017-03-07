@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PopulateCache async="false" continueOnError="false" enabled="true" name="HPX_AddDeveloperToCache">
+    <DisplayName>AddDeveloperToCache</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <CacheKey>
+        <KeyFragment ref="apigee.developer.email"/>
+    </CacheKey>
+    <Scope>Application</Scope>
+    <ExpirySettings>
+        <TimeoutInSec>3600</TimeoutInSec>
+    </ExpirySettings>
+    <Source>AccessEntity.HPX_GetDeveloperInfo</Source>
+</PopulateCache>
+

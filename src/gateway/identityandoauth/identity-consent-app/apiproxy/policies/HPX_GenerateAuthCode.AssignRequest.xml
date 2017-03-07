@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage enabled="true" continueOnError="true" async="false" name="HPX_GenerateAuthCode.AssignRequest">
+    <DisplayName>GenerateAuthCode.AssignRequest</DisplayName>
+    <FaultRules />
+    <Properties />
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="true" transport="http" type="request">authcode.request</AssignTo>
+    <Set>
+        <QueryParams>
+            <QueryParam name="response_type">code</QueryParam>
+            <QueryParam name="redirect_uri">{redirect_uri}</QueryParam>
+            <QueryParam name="scope">{scope}</QueryParam>
+            <QueryParam name="client_id">{client_id}</QueryParam>
+            <QueryParam name="userid">{userid}</QueryParam>
+            <QueryParam name="nonce">{nonce}</QueryParam>
+            <QueryParam name="patient_id">{patient_id}</QueryParam>
+        </QueryParams>
+        <Verb>GET</Verb>
+    </Set>
+</AssignMessage>

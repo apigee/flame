@@ -1,0 +1,19 @@
+<ExtractVariables name="HPX_ExtractIdentifyUserResponse">
+	<DisplayName>ExtractIdentifyUserResponse</DisplayName>
+	<Source>identifyUserResponse</Source>
+		<IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+	<JSONPayload>
+		<Variable name="userid">
+			<JSONPath>$.user_identifier_id</JSONPath>
+		</Variable>
+		<Variable name="create_name">
+			<JSONPath>$.first_name</JSONPath>
+		</Variable>
+		<Variable name="create_lastName">
+			<JSONPath>$.last_name</JSONPath>
+		</Variable>
+		<Variable name="create_email">
+			<JSONPath>$.email</JSONPath>
+		</Variable>
+	</JSONPayload>
+</ExtractVariables>

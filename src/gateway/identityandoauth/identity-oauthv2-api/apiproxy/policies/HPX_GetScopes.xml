@@ -1,0 +1,10 @@
+<ExtractVariables name="HPX_GetScopes">
+    <DisplayName>GetScopes</DisplayName>
+    <Source>apiProductJSON</Source>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <JSONPayload>
+        <Variable name="productScopes">
+            <JSONPath>$.ApiProduct.Scopes.Scope</JSONPath>
+        </Variable>
+    </JSONPayload>
+</ExtractVariables>

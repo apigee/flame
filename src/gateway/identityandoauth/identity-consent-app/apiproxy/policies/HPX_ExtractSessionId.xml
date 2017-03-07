@@ -1,0 +1,9 @@
+<ExtractVariables name="HPX_ExtractSessionId">
+	<DisplayName>ExtractSessionId</DisplayName>
+	<Source>request</Source>
+	<IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+	<QueryParam name="sessionid">
+		<Pattern>{sessionid}</Pattern>
+	</QueryParam>
+</ExtractVariables>
+ 

@@ -1,0 +1,15 @@
+<ExtractVariables name="HPX_ExtractUserIdFromResponse">
+    <DisplayName>ExtractUserIdFromResponse</DisplayName>
+    <Source>userManagement.response</Source>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <JSONPayload>
+        <Variable name="userid">
+            <JSONPath>$.username</JSONPath>
+        </Variable>
+        <Variable name="patient_id">
+            <JSONPath>$.patient_id</JSONPath>
+        </Variable>
+    </JSONPayload>
+</ExtractVariables>
+
+

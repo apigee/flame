@@ -1,0 +1,6 @@
+<Javascript timeLimit="0" enabled="true" continueOnError="false" async="false" name="HPX_CheckPinEntryTries_JS">
+	<DisplayName>CheckPinEntryTries_JS</DisplayName>
+	<FaultRules/>
+	<Properties/>
+	<ResourceURL>jsc://HPX_CheckPinEntryTries.js</ResourceURL>
+</Javascript>

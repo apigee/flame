@@ -1,0 +1,8 @@
+<AssignMessage name="HPX_SetFlowErrorForInvalidCode">
+	<DisplayName>SetFlowErrorForInvalidCode</DisplayName>
+	<IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+	<AssignVariable>
+		<Name>flowError</Name>
+		<Value>Internal_Server_Error</Value>
+	</AssignVariable>
+</AssignMessage>

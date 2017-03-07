@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="19" name="identity-sms-token-api">
+    <ConfigurationVersion majorVersion="4" minorVersion="0"/>
+    <CreatedAt>1460617602823</CreatedAt>
+    <CreatedBy>surbhi_nijhara@persistent.com</CreatedBy>
+    <Description> </Description>
+    <DisplayName>identity-sms-token</DisplayName>
+    <LastModifiedAt>1460617602823</LastModifiedAt>
+    <LastModifiedBy>surbhi_nijhara@persistent.com</LastModifiedBy>
+    <Policies>
+        <Policy>HPX_generate-token</Policy>
+        <Policy>HPX_get-identifier-token</Policy>
+        <Policy>HPX_get-identifier</Policy>
+        <Policy>HPX_get-token-cache</Policy>
+        <Policy>HPX_modify-token-cache</Policy>
+        <Policy>HPX_set-create-response</Policy>
+        <Policy>HPX_set-failure-token-response</Policy>
+        <Policy>HPX_set-sms-payload</Policy>
+        <Policy>HPX_set-success-token-response</Policy>
+        <Policy>HPX_set-token-cache</Policy>
+        <Policy>HPX_verify-api-key</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources>
+        <Resource>jsc://HPX_generate-token.js</Resource>
+        <Resource>jsc://HPX_token.js</Resource>
+    </Resources>
+    <TargetServers/>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+</APIProxy>

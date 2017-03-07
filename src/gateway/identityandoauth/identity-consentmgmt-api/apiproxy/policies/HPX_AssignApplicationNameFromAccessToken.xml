@@ -1,0 +1,8 @@
+<AssignMessage name="HPX_AssignApplicationNameFromAccessToken">
+	<DisplayName>AssignApplicationNameFromAccessToken</DisplayName>
+	<IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+	<AssignVariable>
+		<Name>application_name</Name>
+		<Ref>apigee.developer.app.name</Ref>
+	</AssignVariable>
+</AssignMessage>

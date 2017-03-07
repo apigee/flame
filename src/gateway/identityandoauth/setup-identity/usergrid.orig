@@ -1,0 +1,144 @@
+### usergrid.sh
+
+ADMIN_EMAIL=__ADMINEMAIL__
+APW='__APW__'
+
+## User is asked to enter valid app name for limited number of tries.
+valid_app_tries=3
+
+##This function checks if an element is contained in an array. Returns 0 if element exists else returns 1
+containsElement () {
+  local e
+  for e in "${@:2}"; do [[ "$e" == "$1" ]] && return 0; done
+  return 1
+}
+
+##Get apigee Management URI from user or set to default value.
+echo "Default Apigee BaaS Management URI is: https://api.usergrid.com"
+echo "To change Management URI press Y else press N [ENTER]:"
+read URIFLAG
+
+if [[ $URIFLAG == "y" || $URIFLAG == "Y" ]]; then
+	 echo "Enter Management URI, followed by [ENTER]:"
+	 read URI	
+fi
+
+if [ -z "${URI}" ]; then
+	URI="https://api.usergrid.com"	
+fi	
+
+#Get org name
+if [ -z "${ORG}" ]; then
+	echo "Enter Apigee app services org, followed by [ENTER]:"
+	read ORG
+fi
+
+unamestr=`uname`
+echo "$unamestr"
+if [[ "$unamestr" == 'Linux' || "$unamestr" == *"NT"* ]] ; then
+	APW=$(echo ${APW} | sed -e 's/\\/\\\\/g' -e 's/\"/\\\"/g')
+else
+	APW=$(echo ${APW} | sed -e 's/\\/\\\\/g' -e 's/\"/\\\"/g')
+fi
+
+##Fetching token to access usergrid apis
+				echo "Fetching app Services Token, to login ...${attempt}"
+				token=`curl -k -X POST ${URI}/management/token  -d '{"grant_type":"password", "username": "'${ADMIN_EMAIL}'", "password": "'${APW}'"}' | sed 's/.*access_token\"\:\"\(.*\)\"\,\"expires_in.*/\1/'`
+				echo "Token: " ${token}
+						
+#Fetching details of apps available in this org.
+app_data=`curl -k -X GET "${URI}/management/orgs/${ORG}/apps" -H "Authorization: Bearer ${token}"`
+app_list=()
+echo "App Data... ${app_data}"
+app_data=${app_data#*data*:}
+list_of_app=($(echo $app_data | tr '"' '\n' | grep ${ORG}/))
+
+echo "List of existing apps in ${ORG} org:"
+for app in ${list_of_app[@]}
+do
+	app=$(echo $app| cut -d'/' -f 2)
+	app_list+=(${app})
+	echo -e "\t ${app}"
+done 
+
+##Set a flag to check if user wants to create new app. 
+if [ -z "${APP_CREATE}" ]; then
+	 echo "Press Y, if you want to create a new app, else press N if you want to use an existing app, followed by [ENTER]:"
+	 read APP_CREATE
+fi
+
+## According to given choice of creating new app OR use existing app, following process is done.
+## If user wants to use an existing app, the app name should exist.
+## If user wants to create new app, the entered app name should not pre-exist.
+## In either case, suer shall be given a maximum of 'valid_app_tries' value times to enter the corect app name.
+if ! [[ $APP_CREATE == "y" || $APP_CREATE == "Y" ]];then ##If user wants to use an existing app
+		while [[ $valid_app_tries != 0 ]]
+			do
+			echo "Enter app name from List above that was earlier used for IDM app deployment:    ${MSG}"
+			read APP_NAME
+			
+			containsElement "${APP_NAME}" "${app_list[@]}"
+			if [ $? == 0 ]; then
+				echo "Using application ${APP_NAME} for IDM deployment."
+				break
+			
+			else
+				valid_app_tries=`expr $valid_app_tries - 1`
+				echo "App Not Found! Please enter a valid name from the list above"
+				MSG="[Attempts Remaining: ${valid_app_tries}]"
+			fi
+		done
+	else ## If user wants to create new app.
+		while [[ $valid_app_tries != 0 ]]
+			do
+			echo "Enter a new App name:    ${MSG}"
+			read APP_NAME		
+			containsElement "${APP_NAME}" "${app_list[@]}"
+			if [ $? == 1 ]; then ##If aentered app name is not found, creat the new app.		
+				echo "Creating App Services Application: ${APP_NAME}, with Token: ${token}"
+				app=`curl -k -X POST ${URI}/management/orgs/${ORG}/apps?access_token="${token}" -d '{"name":"'${APP_NAME}'"}'`
+				echo "Creating Credentials for this APP..."
+				creds_create=`curl -k -X POST ${URI}/management/orgs/${ORG}/apps/${APP_NAME}/credentials?access_token="${token}" | sed 's/}//'`
+				break
+				# The sso and consnet collections are not needed to created explicitly. They will be created during runtime.
+						# echo "Creating Collections"
+						# CONSENT=`curl -k -X POST ${URI}/${ORG}/${APP_NAME}/consent?access_token="${token}"`
+						# echo "Status: Created Consent Collection: ${CONSENT}"
+
+						# SSO=`curl -k -X POST ${URI}/${ORG}/${APP_NAME}/sso?access_token="${token}"`
+						# echo "Status: Created SSO Collection:${SSO}"
+						# break			
+			else ##If entered app name is found, ask user for new name
+				valid_app_tries=`expr $valid_app_tries - 1`
+				echo "App already exists. Please enter a new app name."
+				MSG="[Attempts Remaining: ${valid_app_tries}]"
+			fi
+		done
+	fi
+#Generate credentials for the app	
+ creds=`curl -k -X GET ${URI}/management/orgs/${ORG}/apps/${APP_NAME}/credentials?access_token="${token}" | sed 's/}//'`
+ echo "Got app Services Credentials for the app: ${APP_NAME}"
+ c_id=${creds#*client_id*:}
+ c_id=`echo ${c_id%,*} | tr -d ' '`
+ sec=${creds#*client_secret*:}
+ sec=`echo ${sec%*} | tr -d ' '`
+ echo "Client ID: ${c_id}"
+ echo "Client Secret: ${sec}"
+
+#Replace credentials in config files
+ if [[ "$unamestr" == 'Linux' || "$unamestr" == *"NT"* ]] ; then
+	 sed -i "s/__UGORG__/$ORG/g" ./config.sh
+	 sed -i "s/__UGKEY__/$c_id/g" ./config.sh
+	 sed -i "s/__UGSECRET__/$sec/g" ./config.sh
+	 sed -i "s/__UGAPP__/$APP_NAME/g" ./config.sh
+	 bash ./config.sh
+else
+	 sed -i "" "s/__UGORG__/$ORG/g" ./config.sh
+	 sed -i "" "s/__UGKEY__/$c_id/g" ./config.sh
+	 sed -i "" "s/__UGSECRET__/$sec/g" ./config.sh
+	 sed -i "" "s/__UGAPP__/$APP_NAME/g" ./config.sh	
+	 sh ./config.sh
+fi
+
+# ### End - Create Application ###
+

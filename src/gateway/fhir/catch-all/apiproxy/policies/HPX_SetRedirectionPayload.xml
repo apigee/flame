@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="HPX_SetRedirectionPayload">
+    <DisplayName>SetRedirectionPayload</DisplayName>
+    <Set>
+        <Headers>
+            <Header name="Location">{client.scheme}://{organization.name}-{environment.name}.apigee.net{request.uri}</Header>
+        </Headers>
+        <Payload contentType="application/json" variablePrefix="%" variableSuffix="#">
+            <![CDATA[
+            {
+				"resourceType":"OperationOutcome",
+				"text":{
+					"status":"generated",
+					"div":"<div><h1>Operation Outcome</h1><table border='0'><tr><td style='font-weight: bold;'>information</td><td>[]</td><td><pre>Redirect</pre></td>\n\t\t\t</tr>\n\t\t</table>\n\t</div>"
+				},
+				"issue":[
+					{
+						"severity":"information",
+              		  	"code":"informational",
+						"details":"Support for /v2 basepath is stopped, use /fhir/v1 instead. New url is: %client.scheme#://%organization.name#-%environment.name#.apigee.net%request.uri#"
+					}
+				]
+			}
+]]>
+        </Payload>
+        <StatusCode>307</StatusCode>
+        <ReasonPhrase>Redirect</ReasonPhrase>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="response"/>
+</AssignMessage>

@@ -1,0 +1,9 @@
+<ExtractVariables name="HPX_ExtractSessionIdFromURL">
+	<DisplayName>ExtractSessionIdFromURL</DisplayName>
+	<Source>request</Source>
+	<IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+	<URIPath>
+        <Pattern ignoreCase="true">/redirect/{sessionid}</Pattern>
+    </URIPath>
+</ExtractVariables>
+ 

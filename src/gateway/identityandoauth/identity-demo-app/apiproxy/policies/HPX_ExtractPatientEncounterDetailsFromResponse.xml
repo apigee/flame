@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ExtractVariables name="HPX_ExtractPatientEncounterDetailsFromResponse" enabled="true">
+	<DisplayName>ExtractPatientEncounterDetailsFromResponse</DisplayName>
+    <Source>read_patient_encounter_response.content</Source>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <JSONPayload>
+        <Variable name="id_array">
+            <JSONPath>$..entry..resource['id']</JSONPath>
+        </Variable>
+        <Variable name="status_array">
+            <JSONPath>$..entry..resource['status']</JSONPath>
+        </Variable>
+        <Variable name="class_array">
+            <JSONPath>$..entry..resource['class']</JSONPath>
+        </Variable>
+        <Variable name="last_updated_array">
+            <JSONPath>$..entry..resource.meta['lastUpdated']</JSONPath>
+        </Variable>
+        <Variable name="version_array">
+            <JSONPath>$..entry..resource.meta['versionId']</JSONPath>
+        </Variable>
+    </JSONPayload>
+</ExtractVariables>

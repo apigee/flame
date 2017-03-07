@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<ProxyEndpoint name="default">
+    <Description>Default Proxy to create flows on an API</Description>
+    <FaultRules>
+        <FaultRule name="InvalidApiKey">
+            <Condition>(fault.name = "FailedToResolveAPIKey") or (fault.name = "InvalidApiKeyForGivenResource") or (fault.name = "InvalidApiKey")</Condition>
+            <Step>
+                <FaultRules/>
+                <Name>HPX_RaiseFault.ApplicationKey</Name>
+            </Step>
+        </FaultRule>
+        <FaultRule name="InvalidRequest" />
+    </FaultRules>
+    <Flows>
+        <Flow name="Authorization">
+            <Description>This flow is for Authorize call. This flow redirects the user to a consent application. after developer's api key validation. Stores state information.</Description>
+            <Request>
+                <Step>
+                    <Condition>(error_variable != null)</Condition>
+                    <Name>HPX_RaiseFault.InvalidAuthorizationRequest</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Condition>(request.formparam.scope = "patient/*.read") or (request.queryparam.scope = "patient/*.read")</Condition>
+                    <Name>HPX_AllowPatientReadScopes</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Condition>(request.formparam.scope = "patient/*.write") or (request.queryparam.scope = "patient/*.write")</Condition>
+                    <Name>HPX_AllowPatientWriteScopes</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Condition>(request.formparam.scope = "user/*.*") or (request.queryparam.scope = "user/*.*")</Condition>
+                    <Name>HPX_AllowUserAllScopes</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Condition>(request.formparam.scope = "user/*.read") or (request.queryparam.scope = "user/*.read")</Condition>
+                    <Name>HPX_AllowUserReadScopes</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Condition>(request.formparam.scope = "user/*.write") or (request.queryparam.scope = "user/*.write")</Condition>
+                    <Name>HPX_AllowUserWriteScopes</Name>
+                </Step>
+                <Step>
+                    <Name>HPX_ValidateRequest</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Name>HPX_validateApiKey</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Name>HPX_GetApiProduct</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Name>HPX_ConvertToJSON</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Name>HPX_GetScopes</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Name>HPX_ValidateScopeValues_JS</Name>
+                </Step>
+                <Step>
+                    <Condition>nonce != null and nonce != ""</Condition>
+                    <Name>HPX_CheckNonceReplayAttack</Name>
+                </Step>
+                <Step>
+                    <Condition>nonce_cache_value != null</Condition>
+                    <Name>HPX_AssignReplayAttackError</Name>
+                </Step>
+                <Step>
+                    <Condition>error_variable != null</Condition>
+                    <Name>HPX_RaiseFault.InvalidAuthorizationRequest</Name>
+                </Step>
+                <Step>
+                    <Condition>nonce != null and nonce != ""</Condition>
+                    <Name>HPX_SaveNonceInCache</Name>
+                </Step>
+                <Step>
+                    <Name>HPX_GenerateUUID</Name>
+                </Step>
+                <Step>
+                    <Name>HPX_SetSessionPayload</Name>
+                </Step>
+                <Step>
+                    <Name>HPX_Session.SetInCache</Name>
+                </Step>
+            </Request>
+            <Response>
+                <!-- Authorization Successful Response -->
+                <Step>
+                    <FaultRules/>
+                    <Name>HPX_redirectToConsent</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/authorize") and ((request.verb = "POST") or (request.verb = "GET"))</Condition>
+        </Flow>
+        <Flow name="OauthCodeRedirect">
+            <Description>This flow generates authcode after user is authenticated</Description>
+            <Request/>
+            <Response>
+                <Step>
+                    <FaultRules/>
+                    <Name>HPX_generateAuthCode</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/code") and (request.verb = "GET")</Condition>
+        </Flow>
+        <Flow name="GenerateAccessToken">
+            <Description>This flow is for Access token generation</Description>
+            <Request>
+                <Step>
+                    <Name>HPX_CheckAlreadyConsented.ServiceCallout</Name>
+                </Step>
+                <Step>
+                    <Name>HPX_GetConsentStatus</Name>
+                    <Condition>(previousConsentResponse.status.code = "200")</Condition>
+                </Step>
+                <Step>
+                    <Condition>(request.queryparam.grant_type = "authorization_code") or (request.formparam.grant_type = "authorization_code")</Condition>
+                    <Name>HPX_GetAuthCodeAttributes</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Condition>((request.queryparam.grant_type = "client_credentials") or (request.formparam.grant_type = "client_credentials"))and ((request.formparam.scope = "patient/*.read") or (request.queryparam.scope = "patient/*.read"))</Condition>
+                    <Name>HPX_AllowPatientReadScopes</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Condition>((request.queryparam.grant_type = "client_credentials") or (request.formparam.grant_type = "client_credentials"))and ((request.formparam.scope = "patient/*.write") or (request.queryparam.scope = "patient/*.write"))</Condition>
+                    <Name>HPX_AllowPatientWriteScopes</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Condition>((request.queryparam.grant_type = "client_credentials") or (request.formparam.grant_type = "client_credentials")) and ((request.formparam.scope = "user/*.*") or (request.queryparam.scope = "user/*.*"))</Condition>
+                    <Name>HPX_AllowUserAllScopes</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Condition>((request.queryparam.grant_type = "client_credentials") or (request.formparam.grant_type = "client_credentials")) and ((request.formparam.scope = "user/*.read") or (request.queryparam.scope = "user/*.read"))</Condition>
+                    <Name>HPX_AllowUserReadScopes</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Condition>((request.queryparam.grant_type = "client_credentials") or (request.formparam.grant_type = "client_credentials")) and ((request.formparam.scope = "user/*.write") or (request.queryparam.scope = "user/*.write"))</Condition>
+                    <Name>HPX_AllowUserWriteScopes</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Condition>(request.formparam.grant_type = "authorization_code")</Condition>
+                    <Name>HPX_generateAccessToken</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Condition>request.queryparam.grant_type = "client_credentials"</Condition>
+                    <Name>HPX_GenerateAccessTokenClientCredentials</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <FaultRules/>
+                    <Condition>request.queryparam.grant_type = "client_credentials"</Condition>
+                    <Name>HPX_AccessTokenResponseCC</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Condition>(request.formparam.grant_type = "authorization_code") and (response.status.code = "200")</Condition>
+                    <Name>HPX_AssignIssuer</Name>
+                </Step>
+                <Step>
+                    <FaultRules/>
+                    <Condition>(request.formparam.grant_type = "authorization_code") and (response.status.code = "200")</Condition>
+                    <Name>HPX_ExtractAccessTokenResponse</Name>
+                </Step>
+                <Step>
+                    <Condition>(request.formparam.grant_type = "authorization_code") and (response.status.code = "200")</Condition>
+                    <Name>HPX_JwtTokenSigning</Name>
+                </Step>
+                <Step>
+                    <Condition>(request.formparam.grant_type = "authorization_code") and (response.status.code = "200")</Condition>
+                    <Name>HPX_CreateScopeArray_JS</Name>
+                </Step>
+                <Step>
+                    <Condition>(request.formparam.grant_type = "authorization_code") and (response.status.code = "200")</Condition>
+                    <Name>HPX_AssignStoreConsentRequest</Name>
+                </Step>
+                <Step>
+                    <Condition>(request.formparam.grant_type = "authorization_code") and (response.status.code = "200") and ((previousConsentResponse.status.code != "200") or ((previousConsentResponse.status.code = "200") and (consentStatus = "revoked")))</Condition>
+                    <Name>HPX_StoreConsent.ServiceCallout</Name>
+                </Step>
+                <Step>
+                    <Condition>(request.formparam.grant_type = "authorization_code") and (response.status.code = "200")</Condition>
+                    <Name>HPX_GenerateAccessToken.Response</Name>
+                </Step>
+                <Step>
+                    <Condition>response.status.code != "200"</Condition>
+                    <Name>HPX_RaiseFault.InvalidRequest</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/accesstoken") and (request.verb = "POST")</Condition>
+        </Flow>
+        <Flow name="GenerateRefreshToken">
+            <Description>This flow is for Access token generation</Description>
+            <Request>
+                <Step>
+                    <FaultRules/>
+                    <Name>HPX_generateRefreshToken</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Condition>response.status.code != "200"</Condition>
+                    <Name>HPX_RaiseFault.InvalidRequest</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/refreshtoken") and (request.verb = "POST")</Condition>
+        </Flow>
+        <Flow name="User Details">
+            <Condition>(proxy.pathsuffix MatchesPath "/getdetails") and (request.verb= "GET")</Condition>
+            <Request>
+                <Step>
+                    <FaultRules/>
+                    <Name>HPX_AccesstokenValidation</Name>
+                </Step>
+                <Step>
+                    <Name>HPX_GetUserProfileFromAppServices</Name>
+                </Step>
+                <Step>
+                    <Condition>appservicesuserprofile.status.code = "200"</Condition>
+                    <Name>HPX_ExtractUserProfileResponse</Name>
+                </Step>
+                <Step>
+                    <Condition>appservicesuserprofile.status.code = "200"</Condition>
+                    <Name>HPX_CustomizeUserProfile_JS</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Condition>appservicesuserprofile.status.code = "200"</Condition>
+                    <Name>HPX_AssignIdentityMessageResponse</Name>
+                </Step>
+            </Response>
+        </Flow>
+        <Flow name="Default-Operation">
+            <Description>Bad requests</Description>
+            <Request>
+                <Step>
+                    <FaultRules/>
+                    <Name>HPX_handleBadRequest</Name>
+                </Step>
+            </Request>
+            <Response/>
+        </Flow>
+    </Flows>
+    <PreFlow name="PreFlow">
+        <Request>
+            <Step>
+                <Condition>(request.verb="OPTIONS")</Condition>
+                <Name>HPX_CORSPreflight</Name>
+            </Step>
+        </Request>
+        <Response/>
+    </PreFlow>
+    <PostFlow name="PostFlow">
+        <Response>
+            <Step>
+                <Condition>(request.verb!="OPTIONS")</Condition>
+                <Name>HPX_CORS</Name>
+            </Step>
+        </Response>
+        <Request/>
+    </PostFlow>
+    <HTTPProxyConnection>
+        <BasePath>/oauth/v2</BasePath>
+        <VirtualHost>secure</VirtualHost>
+    </HTTPProxyConnection>
+    <RouteRule name="default" />
+</ProxyEndpoint>

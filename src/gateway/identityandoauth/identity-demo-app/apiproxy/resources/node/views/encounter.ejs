@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Encounter</title>
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<style>
+
+body {   
+   font-family:sans-serif;
+   margin-top:0;
+   color: rgb(168, 168, 168);    
+   font-size:12pt;
+}
+
+a:link,a:visited,a:hover,a:active  {
+    color: blue;
+    font-size:10pt;   
+    font-weight:normal;
+}
+
+#first{
+  width:100;background-color:RGB(0,100,100);
+  height:40px;
+  border-top-left-radius:9px;
+  border-top-right-radius:9px;
+}
+
+#second{
+  width:100;background-color:RGB(0,100,100);
+  height:50px;  
+  align-contents:cetner;
+}
+
+#client_area {
+    background-color:RGB(210,236,246);
+    height:800px;
+    width:800px;
+    margin: auto;    
+    border:3px;    
+    border-radius: 9px;
+    box-shadow: 10px 10px 5px #888888;
+}
+
+#page_heading {      
+    height:32px;
+    width:789px;
+    background-color:RGB(100,100,100);  
+    font-size:20px;
+    padding:2px; 
+    border-width:100%; 
+    color:white;
+    padding-top:4px;   
+    padding-left:9px;
+    padding-top:10px;
+}
+
+#info_heading {      
+    width:788px;
+    height:20px;
+    color:white;
+    font-size:12px;
+    padding:2px; 
+    border-bottom: solid 1px RGB(190,255,255);   
+    border-width:100%;     
+    background-color:RGB(150,150,150);
+    padding-left:9px; 
+	font-weight:bold;
+}
+
+.table{
+  color: rgb(100, 100, 100);
+  width:55%;
+  font-size:10px; 
+  background-color:RGB(230,230,230) 
+}
+
+.field{
+  text-align:right;
+  font-size:10pt;
+  font-family : Arial;  
+}
+
+.value{
+  font-weight:bold;
+  font-size:9pt;
+  font-family : Arial;
+}
+
+.patient_name{
+  font-size:14pt;
+  color:RGB(254,67,0);;
+  padding-left:9px;
+  font-weight:bold;	
+}
+
+#app_name{
+  width:50%
+  height:100%;
+  font-size:18pt;
+  font-weight:bold;	
+  padding-left:10px;
+  top:20px;
+  position:absolute;  
+  float:left;
+  position:relative;
+  color:white;
+}
+
+#account{
+  width:47%;
+  height:100%;  
+  font-weight:bold;	
+  padding-right:10px;
+  top:20px;
+  position:absolute;  
+  float:left;
+  position:relative; 
+  text-align:right;
+  font-size:10pt;
+  padding-top:5px;  
+}
+
+table{
+  color:rgb(100,100,100);
+  font-size:10pt;
+  width:90%;
+}
+th{
+  font-weight:bold;	
+}
+
+#menu{
+  height:18px;
+  padding:3px;
+  background-color:rgb(200,200,200);
+}
+</style>
+</head>
+<body> 
+<div id="client_area" >
+    <div id="first"></div>
+    <div id="second">
+      <div id="app_name">My Health Data</div>
+    </div>
+    <div style="width:100;background-color:RGB(0,100,100);height:20px;"></div>
+   <div id="page_heading">Clinical Data</div> 
+    
+    <div id="info_heading">Encounter Details
+		<div style= "float:right; id="menu">
+			<a style="float:right;color:white; padding-right:10px;" href="javascript:history.back()">Back</a>
+		</div>
+	</div>
+	<div id="encounter_details" style="padding-left:10px;padding-top:10px"></div>
+    
+    <h3 id="patient_display" style="display:none;"><%= patient_display %></h3>
+    <h3 id="identifier" style="display:none;"><%= identifier %></h3>  
+	<h3 id="reason" style="display:none;"><%= reason %></h3>
+	<h3 id="indication" style="display:none;"><%= indication %></h3>
+    <h3 id="length" style="display:none;"><%= length %></h3>
+	<h3 id="status" style="display:none;"><%= status %></h3>	
+	<h3 id="class" style="display:none;"><%= res_class %></h3>	
+	<h3 id="diagnosis" style="display:none;"><%= diagnosis %></h3>	
+	<h3 id="priority" style="display:none;"><%= priority %></h3>
+</div>    
+<script type="text/javascript">	
+    //create table    
+	var tablearea = document.getElementById('encounter_details'),
+    table = document.createElement("table");
+    
+	add_record(table, "patient_display", "Patient Name : ", true);
+    add_record(table, "diagnosis", "Diagnosis : ", true);	
+    add_record(table, "identifier", "Identifier : ", false);	
+	add_record(table, "reason", "Reason : ", false);
+	add_record(table, "indication", "Indication : ", false);
+	add_record(table, "length", "Length : ", true);
+	add_record(table, "status", "Status : ", false);
+	add_record(table, "class", "Class : ", false);
+	add_record(table, "priority", "Priority : ", false);
+	 
+	//show table on page 
+	tablearea.appendChild(table);	
+	
+	function add_record(table, element_id, field_name, is_json){	    
+		var tr = document.createElement('tr'); 
+		tr.setAttribute("height", "25px"); 
+		//filed name
+		field = document.createElement('td');	
+		field.setAttribute("class", "field"); 
+		tr.appendChild(field);
+		tr.cells[0].appendChild( document.createTextNode(field_name));
+		
+		//filed value
+		field = document.createElement('td');	
+		field.setAttribute("class", "value"); 
+		tr.appendChild( field );
+        
+         		
+		var value = is_json ? JSON.parse(document.getElementById(element_id).innerText) : document.getElementById(element_id).innerText;
+		if  (is_json)
+		 tr.cells[1].appendChild( document.createTextNode(value.join(" ")));
+		else
+		 tr.cells[1].appendChild( document.createTextNode(value)); 
+		 
+	
+		
+		table.appendChild(tr);
+	}
+</script>
+</body>
+</html>

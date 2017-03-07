@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ExtractVariables name="HPX_ExtractPatientDetailsFromResponse" enabled="true">
+	<DisplayName>ExtractPatientDetailsFromResponse</DisplayName>
+    <Source>read_patient_response.content</Source>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <JSONPayload>
+        <Variable name="id">
+            <JSONPath>$.entry[0].resource.id</JSONPath>
+        </Variable>
+        <Variable name="family_name">
+            <JSONPath>$..name[0].family[0]</JSONPath>
+        </Variable>
+        <Variable name="given_name">
+            <JSONPath>$..name[0].given[0]</JSONPath>
+        </Variable>
+        <Variable name="name_suffix">
+            <JSONPath>$..name[0].suffix[0]</JSONPath>
+        </Variable>
+        <Variable name="gender">
+            <JSONPath>$..gender[0]</JSONPath>
+        </Variable>
+        <Variable name="birth_date">
+            <JSONPath>$..birthDate[0]</JSONPath>
+        </Variable>
+        <Variable name="version">
+            <JSONPath>$.entry[0].resource.meta.versionId</JSONPath>
+        </Variable>
+        <Variable name="last_updated">
+            <JSONPath>$.entry[0].resource.meta.lastUpdated</JSONPath>
+        </Variable>
+        <Variable name="relation">
+            <JSONPath>$..link[0].relation</JSONPath>
+        </Variable>
+        <Variable name="email">
+            <JSONPath>$..telecom[0].value</JSONPath>
+        </Variable>
+    </JSONPayload>
+</ExtractVariables>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ExtractVariables async="false" continueOnError="false" enabled="true" name="HPX_ExtractDeveloperInfoFromDeveloperCache">
+    <DisplayName>ExtractDeveloperInfoFromDeveloperCache</DisplayName>
+    <FaultRules/>
+    <Properties/>
+  <Source>developerCache</Source>
+   <VariablePrefix>devAttributes</VariablePrefix>
+  <XMLPayload stopPayloadProcessing="false">
+        <Namespaces/>
+        <Variable name="provider" type="string">
+          <XPath>/Developer/Attributes/Attribute[Name='provider']/Value</XPath>
+        </Variable>
+    </XMLPayload>
+</ExtractVariables>
+

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage name="HPX_AssignReadEncounterRequest" enabled="true" continueOnError="false" async="false">
+    <DisplayName>AssignReadEncounterRequest</DisplayName>
+    <Properties/>
+    <Set>
+        <Headers>
+            <Header name="Accept">application/json</Header>
+            <Header name="Authorization">Bearer {access_token}</Header>
+        </Headers>
+        <QueryParams>
+            <QueryParam name="_id">{_id}</QueryParam>
+        </QueryParams>
+        <Verb>GET</Verb>
+        <Path/>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo type="request" transport="http" createNew="true">read_patient_encounter_request</AssignTo>
+</AssignMessage>

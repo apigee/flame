@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="19" name="identity-consentmgmt-api">
+    <ConfigurationVersion majorVersion="4" minorVersion="0"/>
+    <CreatedAt>1460617577043</CreatedAt>
+    <CreatedBy>surbhi_nijhara@persistent.com</CreatedBy>
+    <Description> </Description>
+    <DisplayName>identity-consent-management</DisplayName>
+    <LastModifiedAt>1460617577043</LastModifiedAt>
+    <LastModifiedBy>surbhi_nijhara@persistent.com</LastModifiedBy>
+    <Policies>
+        <Policy>HPX_AccessTokenValidation</Policy>
+        <Policy>HPX_AssignApplicationNameFromAccessToken</Policy>
+        <Policy>HPX_AssignApplicationNameFromVerifyClientId</Policy>
+        <Policy>HPX_AssignCreateConsentFlowResponse</Policy>
+        <Policy>HPX_AssignRequestPayloadToFlowVar</Policy>
+        <Policy>HPX_ConstructErrorResponse</Policy>
+        <Policy>HPX_CreateResposneContent_JS</Policy>
+        <Policy>HPX_DeleteExistingSimilarConsent</Policy>
+        <Policy>HPX_ExtractCreateSSOTokenReqVariables</Policy>
+        <Policy>HPX_ExtractPOSTRequestJSONVariables</Policy>
+        <Policy>HPX_ExtractPUTRequestJSONVariables</Policy>
+        <Policy>HPX_ExtractTargetResponseParameters</Policy>
+        <Policy>HPX_GetSSOTokenFromRequest_JS</Policy>
+        <Policy>HPX_ModifyCreateSSOTokenRequestToAddParams</Policy>
+        <Policy>HPX_ModifyPUTRequestToAddParams</Policy>
+        <Policy>HPX_ModifyRequestToAddParams</Policy>
+        <Policy>HPX_Option.AssignResponse</Policy>
+        <Policy>HPX_RaiseFault.ApplicationKey</Policy>
+        <Policy>HPX_RaiseFault.InvalidAccessToken</Policy>
+        <Policy>HPX_RaiseFault_BadRequest</Policy>
+        <Policy>HPX_RaiseFault_InvalidQueryParam</Policy>
+        <Policy>HPX_RaiseFault_Invalid_SSO_Operation</Policy>
+        <Policy>HPX_RaiseFault_Unauthorized</Policy>
+        <Policy>HPX_SetTokenLifeInRequest</Policy>
+        <Policy>HPX_ValidateCreateSSOTokenReqVariables_JS</Policy>
+        <Policy>HPX_ValidatePUTRequestJSONParams_JS</Policy>
+        <Policy>HPX_ValidateRequestJSONParams_JS</Policy>
+        <Policy>HPX_VerifyClientId</Policy>
+        <Policy>HPX_authenticationFailed</Policy>
+        <Policy>HPX_authorizationFailed</Policy>
+        <Policy>HPX_challengeResponse</Policy>
+        <Policy>HPX_setGrantType</Policy>
+        <Policy>HPX_validateBasicAuth</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources>
+        <Resource>node://app.js</Resource>
+        <Resource>node://node_modules.zip</Resource>
+        <Resource>node://package.json</Resource>
+        <Resource>node://routes.zip</Resource>
+        <Resource>node://routes/index.js</Resource>
+        <Resource>jsc://HPX_createResposneContent.js</Resource>
+        <Resource>jsc://HPX_getSSOTokenFromRequest.js</Resource>
+        <Resource>jsc://HPX_validateCreateSSOTokenReqVariables.js</Resource>
+        <Resource>jsc://HPX_validatePUTRequestJSONParams.js</Resource>
+        <Resource>jsc://HPX_validateRequestJSONParams.js</Resource>
+    </Resources>
+    <TargetServers/>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+</APIProxy>

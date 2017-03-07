@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ExtractVariables async="false" continueOnError="false" enabled="true" name="HPX_ExtractAccesTokenFromQueryParams">
+    <Source>request.queryparam</Source>
+    <DisplayName>ExtractAccesTokenFromQueryParams</DisplayName>
+    <Properties/>
+    <QueryParam name="access_token">
+        <Pattern ignoreCase="true">{access_token}</Pattern>
+    </QueryParam>
+    <QueryParam name="_id">
+        <Pattern ignoreCase="true">{_id}</Pattern>
+    </QueryParam>
+    <Source>request</Source>
+</ExtractVariables>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="HPX_AllowPatientWriteScopes">
+    <DisplayName>AllowPatientWriteScopes</DisplayName>
+    <Properties/>
+    <Set>
+        <Headers/>
+        <QueryParams/>
+        <FormParams/>
+        <!-- <Verb>GET</Verb> -->
+        <Path/>
+    </Set>
+    <AssignVariable>
+        <Name>request.formparam.scope</Name>
+        <Value>patient/Allergyintolerance.write patient/Careplan.write patient/Condition.write patient/Diagnosticorder.write patient/Diagnosticreport.write patient/Documentreference.write patient/Encounter.write patient/Immunization.write patient/Medicationadministration.write patient/Medicationdispense.write patient/Medicationorder.write patient/Medicationstatement.write patient/Observation.write patient/Patient.write patient/Practitioner.write patient/Procedure.write</Value>
+        <Ref/>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>request.queryparam.scope</Name>
+        <Value>patient/Allergyintolerance.write patient/Careplan.write patient/Condition.write patient/Diagnosticorder.write patient/Diagnosticreport.write patient/Documentreference.write patient/Encounter.write patient/Immunization.write patient/Medicationadministration.write patient/Medicationdispense.write patient/Medicationorder.write patient/Medicationstatement.write patient/Observation.write patient/Patient.write patient/Practitioner.write patient/Procedure.write</Value>
+        <Ref/>
+    </AssignVariable>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="request"/>
+</AssignMessage>

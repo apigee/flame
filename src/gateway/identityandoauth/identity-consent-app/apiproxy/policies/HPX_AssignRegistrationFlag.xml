@@ -1,0 +1,8 @@
+<AssignMessage name="HPX_AssignRegistrationFlag">
+	<DisplayName>AssignRegistrationFlag</DisplayName>
+	<IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>	
+	<AssignVariable>
+		<Name>registrationFlag</Name>
+		<Value>true</Value>
+	</AssignVariable>
+</AssignMessage>

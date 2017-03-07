@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="11" name="identity-authentication-spi">
+    <ConfigurationVersion majorVersion="4" minorVersion="0"/>
+    <CreatedAt>1460617741527</CreatedAt>
+    <CreatedBy>surbhi_nijhara@persistent.com</CreatedBy>
+    <Description> </Description>
+    <DisplayName>identity-consent-management</DisplayName>
+    <LastModifiedAt>1460617741527</LastModifiedAt>
+    <LastModifiedBy>surbhi_nijhara@persistent.com</LastModifiedBy>
+    <Policies>
+        <Policy>HPX_AssignIdentifierResponse</Policy>
+        <Policy>HPX_Option.AssignResponse</Policy>
+        <Policy>HPX_RaiseFault.BadRequest</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources/>
+    <TargetServers/>
+    <TargetEndpoints/>
+</APIProxy>
