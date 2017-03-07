@@ -31,7 +31,7 @@ This solution is built on top of open source project Grass from Apigee. It mainl
 This component is intended for Untrusted Developers /B2C (Business to Consumer) Model.  
 
 
-To deploy all the APIs and its dependencies on your own org please run the following
+To deploy all the APIs, OAuth and Identity Solution on your own org please run the following
 script from the root folder of the cloned repo.
 
 ### Installation 
