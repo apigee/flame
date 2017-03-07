@@ -17,6 +17,7 @@ resources:
       prompt: Target server host URL
     - name: target_server_port
       prompt: Target server port
+      default: 80
     - name: target_server_basepath
       prompt: Target server basepath
     - name: usergrid_org
