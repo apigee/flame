@@ -53,9 +53,9 @@ resources:
       items:
       - name: connector_domain
         filePaths: ['src/gateway/fhir-api/target/apiproxy/policies/HPX_SetConnector.xml']
-        value: '{{ host }}'
+        value: '{{ org }}-{{ env }}.apigee.net'
       - name: connector_basepath
-        filePaths: ['src/gateway/oauth/target/apiproxy/policies/Assign.RedirectConsentApp.xml']
+        filePaths: ['src/gateway/fhir-api/target/apiproxy/policies/HPX_SetConnector.xml']
         value: 'hapi-dstu2'
       - name: targetBaseURI
         filePaths: ['src/gateway/fhir-connector-hapi-dstu2/target/apiproxy/policies/HPX_SetTargetBasepath.xml']
@@ -83,15 +83,15 @@ resources:
       - name: testFHIRproduct
         payload: '{"approvalType":"auto","attributes": [{"name": "RATE_LIMIT_OVERRIDE_LIMIT","value": "100ps"}],"displayName":"testFHIRproduct","name":"testFHIRproduct","environments":["{{ env }}"],"proxies": ["fhir-api"],"apiResources":["/","/**"],"quota": "10000", "quotaInterval": "1", "quotaTimeUnit": "minute","scopes" : ["patient/Allergyintolerance.read","patient/Allergyintolerance.write","patient/Careplan.read","patient/Careplan.write","patient/Condition.read","patient/Condition.write","patient/Diagnosticorder.read","patient/Diagnosticorder.write","patient/Diagnosticreport.read","patient/Diagnosticreport.write","patient/Documentreference.read","patient/Documentreference.write","patient/Encounter.read","patient/Encounter.write","patient/Immunization.read","patient/Immunization.write","patient/Medicationadministration.read","patient/Medicationadministration.write","patient/Medicationdispense.read","patient/Medicationdispense.write","patient/Medicationorder.read","patient/Medicationorder.write","patient/Medicationstatement.read","patient/Medicationstatement.write","patient/Observation.read","patient/Observation.write","patient/Patient.read","patient/Patient.write","patient/Practitioner.read","patient/Practitioner.write","patient/Procedure.read","patient/Procedure.write","user/Allergyintolerance.read","user/Allergyintolerance.write","user/Careplan.read","user/Careplan.write","user/Condition.read","user/Condition.write","user/Diagnosticorder.read","user/Diagnosticorder.write","user/Diagnosticreport.read","user/Diagnosticreport.write","user/Documentreference.read","user/Documentreference.write","user/Encounter.read","user/Encounter.write","user/Immunization.read","user/Immunization.write","user/Medicationadministration.read","user/Medicationadministration.write","user/Medicationdispense.read","user/Medicationdispense.write","user/Medicationorder.read","user/Medicationorder.write","user/Medicationstatement.read","user/Medicationstatement.write","user/Observation.read","user/Observation.write","user/Patient.read","user/Patient.write","user/Practitioner.read","user/Practitioner.write","user/Procedure.read","user/Procedure.write","patient/Schedule.read","patient/Schedule.write","user/Schedule.read","user/Schedule.write","patient/Coverage.read","patient/Coverage.write","user/Coverage.read","user/Coverage.write"]}'
       - name: identityproduct
-        payload: '{"approvalType":"auto","attributes": [{"name": "RATE_LIMIT_OVERRIDE_LIMIT","value": "100ps"}],"displayName":"Identity App Product","name":"identityproduct","environments":["'{{ env }}'"], "quota": "100", "quotaInterval": "1", "quotaTimeUnit": "minute","scopes" :["patient/Allergyintolerance.read","patient/Allergyintolerance.write","patient/Careplan.read","patient/Careplan.write","patient/Condition.read","patient/Condition.write","patient/Diagnosticorder.read","patient/Diagnosticorder.write","patient/Diagnosticreport.read","patient/Diagnosticreport.write","patient/Documentreference.read","patient/Documentreference.write","patient/Encounter.read","patient/Encounter.write","patient/Immunization.read","patient/Immunization.write","patient/Medicationadministration.read","patient/Medicationadministration.write","patient/Medicationdispense.read","patient/Medicationdispense.write","patient/Medicationorder.read","patient/Medicationorder.write","patient/Medicationstatement.read","patient/Medicationstatement.write","patient/Observation.read","patient/Observation.write","patient/Patient.read","patient/Patient.write","patient/Practitioner.read","patient/Practitioner.write","patient/Procedure.read","patient/Procedure.write","patient/Schedule.read","patient/Schedule.write","patient/Coverage.read","patient/Coverage.write"]}'
+        payload: '{"approvalType":"auto","attributes": [{"name": "RATE_LIMIT_OVERRIDE_LIMIT","value": "100ps"}],"displayName":"Identity App Product","name":"identityproduct","environments":["{{ env }}"], "quota": "100", "quotaInterval": "1", "quotaTimeUnit": "minute","scopes" :["patient/Allergyintolerance.read","patient/Allergyintolerance.write","patient/Careplan.read","patient/Careplan.write","patient/Condition.read","patient/Condition.write","patient/Diagnosticorder.read","patient/Diagnosticorder.write","patient/Diagnosticreport.read","patient/Diagnosticreport.write","patient/Documentreference.read","patient/Documentreference.write","patient/Encounter.read","patient/Encounter.write","patient/Immunization.read","patient/Immunization.write","patient/Medicationadministration.read","patient/Medicationadministration.write","patient/Medicationdispense.read","patient/Medicationdispense.write","patient/Medicationorder.read","patient/Medicationorder.write","patient/Medicationstatement.read","patient/Medicationstatement.write","patient/Observation.read","patient/Observation.write","patient/Patient.read","patient/Patient.write","patient/Practitioner.read","patient/Practitioner.write","patient/Procedure.read","patient/Procedure.write","patient/Schedule.read","patient/Schedule.write","patient/Coverage.read","patient/Coverage.write"]}'
 
     - name: developerApps
       type: app
       items:
       - name: testFHIRApp
-        payload: '{"name":"AISP_App","callback":"https://{{ host }}","email":"testuser@apigee.com","apiProducts":"testFHIRproduct"}'
+        payload: '{"name":"testFHIRApp","callback":"https://{{ org }}-{{ env }}.apigee.net","email":"testuser@apigee.com","apiProducts":"testFHIRproduct"}'
       - name: IdentityApp
-        payload: '{"name":"IdentityApp", "callback":"https://{{ host }}/identity_app/callback"},"email":"user@identity.com","apiProducts":"identityproduct"}'
+        payload: '{"name":"IdentityApp", "callback":"https://{{ org }}-{{ env }}.apigee.net/identity_app/callback","email":"user@identity.com","apiProducts":"identityproduct"}'
         assignResponse:
         - from: credentials.0.consumerKey
           to: apiKey_identity
@@ -137,76 +137,98 @@ resources:
       items:
       - name: consent_app_RedirectToConsent
         filePaths: ['src/gateway/identity-consent-app/target/apiproxy/policies/HPX_redirectToConsent.xml']
-        value: 'https://{{ host }}/openid/index?sessionid={sessionid}'
+        value: 'https://{{ org }}-{{ env }}.apigee.net/openid/index?sessionid={sessionid}'
       - name: AssignSendSMSAPIRequest_apikey
         filePaths: ['src/gateway/identity-consent-app/target/apiproxy/policies/HPX_AssignSendSMSAPIRequest.xml']
         value: '{{ usergrid_client_id }}'
       - name: logoutRedircetUri
         filePaths: ['src/gateway/identity-consent-app/target/apiproxy/policies/HPX_AssignlogoutRedircetUri.xml']
-        value: 'https://{{ host }}/openid/index'
+        value: 'https://{{ org }}-{{ env }}.apigee.net/openid/index'
       - name: hostName
         filePaths: ['src/gateway/identity-consent-app/target/apiproxy/policies/HPX_AddVariablesToTargetRequest.xml']
-        value: 'https://{{ host }}'
+        value: 'https://{{ org }}-{{ env }}.apigee.net'
       - name: baas_auth
         filePaths: ['src/gateway/identity-consent-app/target/apiproxy/policies/HPX_CheckAlreadyConsented.ServiceCallout.xml','src/gateway/identity-consent-app/target/apiproxy/policies/HPX_GetUserApps.ServiceCallout.xml','src/gateway/identity-consent-app/target/apiproxy/policies/HPX_RevokeUserConsent.ServiceCallout.xml','src/gateway/identity-consent-app/target/apiproxy/policies/HPX_ValidatePin.ServiceCallout.xml']
         value: 'ClientCredential {{ baas_auth }}'
       - name: HPX_CheckAlreadyConsented_url
         filePaths: ['src/gateway/identity-consent-app/target/apiproxy/policies/HPX_CheckAlreadyConsented.ServiceCallout.xml']
-        value: 'https://{{ host }}/identity/consents/validate'
+        value: 'https://{{ org }}-{{ env }}.apigee.net/identity/consents/validate'
       - name: CheckMSISDNExists_url
         filePaths: ['src/gateway/identity-consent-app/target/apiproxy/policies/HPX_CheckMSISDNExists.ServiceCallout.xml']
-        value: 'https://{{ host }}/identity-users/v1/users/{msisdn}'
+        value: 'https://{{ org }}-{{ env }}.apigee.net/identity-users/v1/users/{msisdn}'
       - name: HPX_CheckUserExists_url
         filePaths: ['src/gateway/identity-consent-app/target/apiproxy/policies/HPX_CheckUserExists.ServiceCallout.xml']
-        value: 'https://{{ host }}/identity-users/v1/users/{username}'
+        value: 'https://{{ org }}-{{ env }}.apigee.net/identity-users/v1/users/{username}'
       - name: HPX_CreateUser_url
         filePaths: ['src/gateway/identity-consent-app/target/apiproxy/policies/HPX_CreateUser.ServiceCallout.xml']
-        value: 'https://{{ host }}/identity-users/v1/users'
+        value: 'https://{{ org }}-{{ env }}.apigee.net/identity-users/v1/users'
       - name: HPX_GenerateAuthCode_url
         filePaths: ['src/gateway/identity-consent-app/target/apiproxy/policies/HPX_GenerateAuthCode.Callout.xml']
-        value: 'https://{{ host }}/oauth/v2/code'
+        value: 'https://{{ org }}-{{ env }}.apigee.net/oauth/v2/code'
       - name: HPX_GetUserApps_url
         filePaths: ['src/gateway/identity-consent-app/target/apiproxy/policies/HPX_GetUserApps.ServiceCallout.xml']
-        value: 'https://{{ host }}/identity/consents'
+        value: 'https://{{ org }}-{{ env }}.apigee.net/identity/consents'
       - name: HPX_GetUserProfileFromUserManagement_url
         filePaths: ['src/gateway/identity-consent-app/target/apiproxy/policies/HPX_GetUserProfileFromUserManagement.xml']
-        value: 'https://{{ host }}/identity-users/v1/users/{userid}'
+        value: 'https://{{ org }}-{{ env }}.apigee.net/identity-users/v1/users/{userid}'
       - name: HPX_ResetPassword_url
         filePaths: ['src/gateway/identity-consent-app/target/apiproxy/policies/HPX_ResetPassword.ServiceCallout.xml']
-        value: 'https://{{ host }}/identity-users/v1/users/{reset_username}/password'
+        value: 'https://{{ org }}-{{ env }}.apigee.net/identity-users/v1/users/{reset_username}/password'
       - name: HPX_RevokeUserConsent_url
         filePaths: ['src/gateway/identity-consent-app/target/apiproxy/policies/HPX_RevokeUserConsent.ServiceCallout.xml']
-        value: 'https://{{ host }}/identity/consents/{request.queryparam.consentid}'
+        value: 'https://{{ org }}-{{ env }}.apigee.net/identity/consents/{request.queryparam.consentid}'
       - name: HPX_SendSMS_url
         filePaths: ['src/gateway/identity-consent-app/target/apiproxy/policies/HPX_SendSMS.ServiceCallout.xml']
-        value: 'https://{{ host }}/v1/token/sms/{msisdn}'
-      - name: HPX_ServiceCallout.IdentifyUser_url
+        value: 'https://{{ org }}-{{ env }}.apigee.net/v1/token/sms/{msisdn}'
+      - name: HPX_ServiceCallout_IdentifyUser_url
         filePaths: ['src/gateway/identity-consent-app/target/apiproxy/policies/HPX_ServiceCallout.IdentifyUser.xml']
-        value: 'https://{{ host }}/authenticate/identify'
-      - name: HPX_ServiceCallout.ValidateUser_url
+        value: 'https://{{ org }}-{{ env }}.apigee.net/authenticate/identify'
+      - name: HPX_ServiceCallout_ValidateUser_url
         filePaths: ['src/gateway/identity-consent-app/target/apiproxy/policies/HPX_ServiceCallout.ValidateUser.xml']
-        value: 'https://{{ host }}/identity-users/v1/users/authenticate'
+        value: 'https://{{ org }}-{{ env }}.apigee.net/identity-users/v1/users/authenticate'
       - name: HPX_SetPassword_url
         filePaths: ['src/gateway/identity-consent-app/target/apiproxy/policies/HPX_SetPassword.ServiceCallout.xml']
-        value: 'https://{{ host }}/identity-users/v1/users/{username}/password'
+        value: 'https://{{ org }}-{{ env }}.apigee.net/identity-users/v1/users/{username}/password'
       - name: HPX_UpdateUserProfile_url
         filePaths: ['src/gateway/identity-consent-app/target/apiproxy/policies/HPX_UpdateUserProfile.ServiceCallout.xml']
-        value: 'https://{{ host }}/identity-users/v1/users/{request.formparam.email}'
+        value: 'https://{{ org }}-{{ env }}.apigee.net/identity-users/v1/users/{request.formparam.email}'
       - name: HPX_ValidatePin_url
         filePaths: ['src/gateway/identity-consent-app/target/apiproxy/policies/HPX_ValidatePin.ServiceCallout.xml']
-        value: 'https://{{ host }}/v1/token/sms/{msisdn}/{request.formparam.pin}'
+        value: 'https://{{ org }}-{{ env }}.apigee.net/v1/token/sms/{msisdn}/{request.formparam.pin}'
 
     - name: replace_variables_identity_consent_mgnt_api
       type: configSubstitutions
       items:
+      - name: baas_app
+        filePaths: ['src/gateway/identity-consentmgmt-api/target/apiproxy/resources/node/package.json']
+        value: '{{ usergrid_app }}'
+      - name: baas_org
+        filePaths: ['src/gateway/identity-consentmgmt-api/target/apiproxy/resources/node/package.json']
+        value: '{{ usergrid_org }}'
       - name: HPX_DeleteExistingSimilarConsent_url
         filePaths: ['src/gateway/identity-consentmgmt-api/target/apiproxy/policies/HPX_DeleteExistingSimilarConsent.xml']
-        value: 'https://api.usergrid.com/__APPORG__/__APPAPP__/consents'
+        value: 'https://api.usergrid.com/{{ usergrid_org }}/{{ usergrid_app }}/consents'
       - name: baas_client_id
-        filePaths: ['src/gateway/identity-consentmgmt-api/target/apiproxy/policies/HPX_DeleteExistingSimilarConsent.xml']
+        filePaths: ['src/gateway/identity-consentmgmt-api/target/apiproxy/policies/HPX_DeleteExistingSimilarConsent.xml','src/gateway/identity-consentmgmt-api/target/apiproxy/resources/node/package.json']
         value: '{{ usergrid_client_id }}'
       - name: baas_secret
-        filePaths: ['src/gateway/identity-consentmgmt-api/target/apiproxy/policies/HPX_DeleteExistingSimilarConsent.xml']
+        filePaths: ['src/gateway/identity-consentmgmt-api/target/apiproxy/policies/HPX_DeleteExistingSimilarConsent.xml','src/gateway/identity-consentmgmt-api/target/apiproxy/resources/node/package.json']
+        value: '{{ usergrid_secret }}'
+
+    - name: replace_variables_identity_usermgnt_api
+      type: configSubstitutions
+      items:
+      - name: baas_app
+        filePaths: ['src/gateway/identity-usermgmt-api/target/apiproxy/resources/node/package.json']
+        value: '{{ usergrid_app }}'
+      - name: baas_org
+        filePaths: ['src/gateway/identity-usermgmt-api/target/apiproxy/resources/node/package.json']
+        value: '{{ usergrid_org }}'
+      - name: baas_client_id
+        filePaths: ['src/gateway/identity-usermgmt-api/target/apiproxy/resources/node/package.json']
+        value: '{{ usergrid_client_id }}'
+      - name: baas_secret
+        filePaths: ['src/gateway/identity-usermgmt-api/target/apiproxy/resources/node/package.json']
         value: '{{ usergrid_secret }}'
 
     - name: replace_variables_identity_oauthv2-api
@@ -214,22 +236,22 @@ resources:
       items:
       - name: oauth_RedirectToConsent
         filePaths: ['src/gateway/identity-oauthv2-api/target/apiproxy/policies/HPX_redirectToConsent.xml']
-        value: 'https://{{ host }}/openid/onnet?sessionid={sessionid}'
+        value: 'https://{{ org }}-{{ env }}.apigee.net/openid/onnet?sessionid={sessionid}'
       - name: HPX_GetUserProfileFromAppServices_url
         filePaths: ['src/gateway/identity-oauthv2-api/target/apiproxy/policies/HPX_GetUserProfileFromAppServices.xml']
-        value: 'https://{{ host }}/identity-users/v1/users/{accesstoken.userid}'
+        value: 'https://{{ org }}-{{ env }}.apigee.net/identity-users/v1/users/{accesstoken.userid}'
       - name: baas_auth
         filePaths: ['src/gateway/identity-oauthv2-api/target/apiproxy/policies/HPX_AssignStoreConsentRequest.xml']
         value: 'ClientCredential {{ baas_auth }}'
       - name: HPX_StoreConsent_url
         filePaths: ['src/gateway/identity-oauthv2-api/target/apiproxy/policies/HPX_StoreConsent.ServiceCallout.xml']
-        value: 'https://{{ host }}/identity/consents'
+        value: 'https://{{ org }}-{{ env }}.apigee.net/identity/consents'
       - name: HPX_AssignIssuer
         filePaths: ['src/gateway/identity-oauthv2-api/target/apiproxy/policies/HPX_AssignIssuer.xml']
-        value: 'https://{{ host }}/'
+        value: 'https://{{ org }}-{{ env }}.apigee.net/'
       - name: HPX_CheckAlreadyConsented_url
         filePaths: ['src/gateway/identity-oauthv2-api/target/apiproxy/policies/HPX_CheckAlreadyConsented.ServiceCallout.xml']
-        value: 'https://{{ host }}/identity/consents/validate'
+        value: 'https://{{ org }}-{{ env }}.apigee.net/identity/consents/validate'
 
     - name: replace_variables_demo_app
       type: configSubstitutions
@@ -239,25 +261,25 @@ resources:
         value: '{{ usergrid_client_id }}'
       - name: demo_app_redirect_uri
         filePaths: ['src/gateway/identity-demo-app/target/apiproxy/policies/HPX_AddAuthorizationReqVarInReq.xml']
-        value: 'https://{{ host }}/identity_app/callback'
+        value: 'https://{{ org }}-{{ env }}.apigee.net/identity_app/callback'
       - name: demo_app_authorization_req_url
         filePaths: ['src/gateway/identity-demo-app/target/apiproxy/policies/HPX_AddAuthorizationReqVarInReq.xml']
-        value: '{{ https://{{ host }}/oauth/v2/authorize }}'
+        value: '{{ https://{{ org }}-{{ env }}.apigee.net/oauth/v2/authorize }}'
       - name: HPX_GetAccessToken_url
         filePaths: ['src/gateway/identity-demo-app/target/apiproxy/policies/HPX_GetAccessToken_ServiceCallout.xml']
-        value: 'https://{{ host }}/oauth/v2/accesstoken'
+        value: 'https://{{ org }}-{{ env }}.apigee.net/oauth/v2/accesstoken'
       - name: HPX_GetUserDetails_url
         filePaths: ['src/gateway/identity-demo-app/target/apiproxy/policies/HPX_GetUserDetails_ServiceCallout.xml']
-        value: 'https://{{ host }}/oauth/v2/getdetails'
+        value: 'https://{{ org }}-{{ env }}.apigee.net/oauth/v2/getdetails'
       - name: HPX_ReadPatient_url
         filePaths: ['src/gateway/identity-demo-app/target/apiproxy/policies/HPX_ReadPatient_Service-Callout.xml']
-        value: 'https://{{ host }}/fhir/v1/Patient'
+        value: 'https://{{ org }}-{{ env }}.apigee.net/fhir/v1/Patient'
       - name: HPX_ReadEncounterById_url
         filePaths: ['src/gateway/identity-demo-app/target/apiproxy/policies/HPX_ReadEncounterById_ServiceCallout.xml']
-        value: 'https://{{ host }}/fhir/v1/Encounter'
+        value: 'https://{{ org }}-{{ env }}.apigee.net/fhir/v1/Encounter'
       - name: HPX_ReadPatientEncounterDetails_url
         filePaths: ['src/gateway/identity-demo-app/target/apiproxy/policies/HPX_ReadPatientEncounterDetails_ServiceCallout.xml']
-        value: 'https://{{ host }}/fhir/v1/Encounter'
+        value: 'https://{{ org }}-{{ env }}.apigee.net/fhir/v1/Encounter'
 
     - name: identity_proxies
       type: proxy

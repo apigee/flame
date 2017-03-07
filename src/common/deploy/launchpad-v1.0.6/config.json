@@ -1,0 +1,197 @@
+{
+  "resources": [{
+    "type": "solutions.api",
+    "name": "openbank_apis",
+    "properties": {
+      "inputs": [{
+        "prompt": "Edge Org name",
+        "name": "organization"
+      }, {
+        "prompt": "Edge Org Environment",
+        "name": "environment"
+      }, {
+        "prompt": "Edge Auth token",
+        "name": "token"
+      }, {
+        "prompt": "App services org name",
+        "name": "usergrid_org"
+      }, {
+        "prompt": "App services app name",
+        "name": "usergrid_app"
+      }, {
+        "prompt": "App services App Client Id",
+        "name": "usergrid_client_id"
+      }, {
+        "prompt": "App services App Client Secret",
+        "name": "usergrid_secret"
+      }],
+      "edgeOrg": "orgName:'{{organization}}' env:'{{environment}}' token:'{{token}}'",
+      "dataSources": [{
+        "orgName": "{{usergrid_org}}",
+        "appClientId": "{{usergrid_client_id}}",
+        "appSecret": "{{usergrid_secret}}",
+        "name": "default",
+        "appName": "{{usergrid_app}}"
+      }],
+      "script": "gulpfile.js",
+      "basePath": "./src/gateway/",
+      "dependencies": [{
+        "version": null,
+        "type": "node",
+        "name": "common-consent-controller"
+      }],
+      "subResources": [{
+        "items": [{
+          "name": "consent-session-cache",
+          "payload": "{ name: 'consent-session-cache'}"
+        }, {
+          "name": "application-session-cache",
+          "payload": "{ name: 'application-session-cache'}"
+        }, {
+          "name": "nonce-cache",
+          "payload": "{ name: 'sms-token-cache'}"
+        }],
+        "type": "cache",
+        "name": "cacheResources"
+      }, {
+        "items": [{
+          "name": "authentication_connector_target_url",
+          "value": "{{ugbase}}/customers/{customerNumber}",
+          "filePaths": [
+            "authentication-connector/apiproxy/targets/default.xml"
+          ]
+        }, {
+          "name": "accounts_connector_appBasePath",
+          "value": "{{ugbase}}",
+          "filePaths": null
+        }, {
+          "name": "location_connector_appBasePath",
+          "value": "{{ugbase}}",
+          "filePaths": null
+        }, {
+          "name": "oauth_consent_app_redirect",
+          "value": "{{proxybase}}/internal/consent?sessionid={messageid}",
+          "filePaths": null
+        }, {
+          "name": "transfers_consent_app_redirect",
+          "value": "{{proxybase}}/internal/transfer-consent?sessionid={messageid}",
+          "filePaths": null
+        }, {
+          "name": "transfers_connector_targeturl",
+          "value": "{{ugbase}}/transactions",
+          "filePaths": null
+        }, {
+          "name": "userinfo_getuser_url",
+          "value": "{{ugbase}}/customers/{accesstoken.customer_number}",
+          "filePaths": null
+        }],
+        "type": "configSubstitutions",
+        "name": "replaceorgvalues"
+      }, {
+        "items": [{
+          "name": "accounts"
+        }, {
+          "name": "accounts-connector"
+        }, {
+          "name": "authentication-connector"
+        }, {
+          "name": "locations"
+        }, {
+          "name": "locations-connector"
+        }, {
+          "name": "oauth"
+        }, {
+          "name": "session"
+        }, {
+          "name": "sms-token"
+        }, {
+          "name": "transfers"
+        }, {
+          "name": "transfers-connector"
+        }, {
+          "name": "userinfo"
+        }],
+        "type": "proxies",
+        "name": "bank_apis"
+      }, {
+        "items": [{
+          "payload": "{\"email\":\"openbank@apigee.net\", \"firstName\":\"OpenBank\",\"lastName\":\"Developer\",\"userName\":\"openbank\"}",
+          "email": "openbank@apigee.net"
+        }],
+        "type": "developers",
+        "name": "developers"
+      }, {
+        "items": [{
+          "payload": "{\"approvalType\":\"auto\", \"displayName\":\"Open Data APIs\",\"name\":\"open_data_apis\",\"environments\":[\"test\",\"prod\"],\"scopes\":[\"openid\", \"atms\", \"branches\"], \"proxies\":[\"oauth\", \"locations\"]}",
+          "name": "open_data_apis"
+        }, {
+          "payload": "{\"approvalType\":\"auto\", \"displayName\":\"Payment Transfer APIs\",\"name\":\"payment_transfer_apis\",\"environments\":[\"test\",\"prod\"],\"scopes\":[\"openid\", \"accounts\", \"transfer\", \"payment\"], \"proxies\":[\"oauth\", \"transfers\", \"accounts\"]}",
+          "name": "payment_transfer_apis"
+        }, {
+          "payload": "{\"approvalType\":\"auto\", \"displayName\":\"Account Access APIs\",\"name\":\"account_access_apis\",\"environments\":[\"test\",\"prod\"],\"scopes\":[\"openid\", \"accounts\", \"accounts-info\", \"accounts-balance\", \"accounts-transactions\"], \"proxies\":[\"oauth\", \"accounts\"]}",
+          "name": "account_access_apis"
+        }, {
+          "payload": "{\"approvalType\":\"auto\", \"attributes\":[{\"name\":\"access\",\"value\":\"private\"}], \"displayName\":\"Internal Consent APIs\",\"name\":\"internal_consent_apis\",\"environments\":[\"test\",\"prod\"],\"scopes\":[], \"proxies\":[\"session\", \"sms-token\", \"authentication-connector\", \"oauth\"]}",
+          "name": "internal_consent_apis"
+        }],
+        "type": "products",
+        "name": "apiProducts"
+      }, {
+        "items": [{
+          "payload": "{name:'AISP_App',callback:'http://apigee.com/about',email:'openbank@apigee.net',apiProducts:'account_access_apis'}",
+          "name": "AISP_App"
+        }, {
+          "name": "PISP_App",
+          "payload": "{name:'PISP_App',callback:'http://apigee.com/about',email:'openbank@apigee.net',apiProducts:'payment_transfer_apis'}"
+        }, {
+          "name": "Opendata_App",
+          "payload": "{name:'Opendata_App',callback:'http://apigee.com/about',email:'openbank@apigee.net',apiProducts:'open_data_apis'}"
+        }, {
+          "assignResponse": [{
+            "name": "consent_app_key",
+            "value": "apiKey"
+          }],
+          "name": "internal_consent_app",
+          "payload": "{name:'internal_consent_app',callback:'http://apigee.com/about',email:'openbank@apigee.net',apiProducts:'internal_consent_apis'}"
+        }],
+        "type": "apps",
+        "name": "developerApps"
+      }, {
+        "items": [{
+          "name": "consent_app_key",
+          "value": "{{consent_app_key}}",
+          "filePaths": [
+            "consent-app/apiproxy/resources/node/config.orig"
+          ]
+        }, {
+          "name": "proxy_host",
+          "value": "{{proxyhost}}",
+          "filePaths": [
+            "consent-app/apiproxy/resources/node/config.orig"
+          ]
+        }],
+        "type": "configSubstitutions",
+        "name": "replace_consent_app_key"
+      }, {
+        "items": [{
+          "name": "consent-app"
+        }, {
+          "name": "consent-app-transfers"
+        }],
+        "type": "proxies",
+        "name": "consent_apis"
+      }],
+      "configurations": [{
+        "ugbase": "https://api.usergrid.com/{{usergrid_org}}/{{usergrid_app}}",
+        "env": "test",
+        "proxybase": "https://{{organization}}-{{environment}}.apigee.net",
+        "proxyhost": "{{organization}}-{{environment}}.apigee.net"
+      }, {
+        "ugbase": "https://api.usergrid.com/{{usergrid_org}}/{{usergrid_app}}",
+        "env": "prod",
+        "proxybase": "https://{{organization}}-{{environment}}.apigee.net",
+        "proxyhost": "{{organization}}-{{environment}}.apigee.net"
+      }]
+    }
+  }]
+}
