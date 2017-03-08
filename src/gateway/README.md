@@ -56,7 +56,7 @@ Run the deploy command
 gulp deploy --resource fhir_apis
 ```
 
-This will interactively prompt you for following details, and will then create / deploy all relevants bundles and artifacts and will provision the ** FHIR Sandbox** on your own Org.
+This will interactively prompt you for following details, and will then create / deploy all relevants bundles and artifacts and will provision the **FHIR Sandbox** on your own Org.
 
 + Edge Org name
 + Edge Username
