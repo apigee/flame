@@ -36,8 +36,8 @@ script from the root folder of the cloned repo.
 ### Installation 
 
 #### Pre-requisites
-+ node.js 
-+ npm
++ [node.js](https://nodejs.org/en/download/) 
++ [npm](https://docs.npmjs.com/getting-started/installing-node)
 
 #### Instructions
 
