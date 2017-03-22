@@ -31,30 +31,30 @@ The deployment of custom changes would result into a similar site as Apigee [Hea
 3. Getting Started
 -------------------
 
-###3.1 Get code with customized changes
+### 3.1 Get code with customized changes
 Clone **flame** repo.   
 Go to **/flame/src/developerportal** – This contains custom portal source code.  
 
-###3.2 Customize default developer portal
+### 3.2 Customize default developer portal
 Initially, before flame code migration to the default portal, default developer portal website will look like as below:
 <img src="../../readme-images/devportal/Fig01.jpg" width="700px" height="350px"/>  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fig 1.
   
-####3.2.1 Get default developer portal source 
+#### 3.2.1 Get default developer portal source 
 
 The default portal code to be modified is in **sites** folder.
 
-#####In-Cloud instance:
+##### In-Cloud instance:
 
 * Get the default site’s code from git via pantheon service.  
 **Note:** Here, you can get clone of site’s code by using “git clone <git repository url> <repository path>” command followed by pantheon service credentials.  
 * The code will be downloaded on your local system at <repository path>. 
 
 
-#####On-prem instance:
+##### On-prem instance:
 You will find the default developer code at **/var/www/html/sites.**
 
-####3.2.2 Backup of default developer portal  
+#### 3.2.2 Backup of default developer portal  
 
 A backup of default portal’s code is recommended before importing custom changes.   
 
@@ -64,7 +64,7 @@ Login Pantheon -> goto your portal site -> Backups -> and create a new backup.
 For **On-prem** instance, 
 Take a backup of **/var/www/html/sites directory**.
 
-####3.2.3 Replace **all** folder of default code with **all** folder from **flame** repo.  
+#### 3.2.3 Replace **all** folder of default code with **all** folder from **flame** repo.  
 
 The **all** folder from default portal code now has to be replaced with the **all** folder from the flame source code.  
 Replace(Overwrite)   **/sites/all directory**  with  **/flame/src/developerportal/all**  directory.     
@@ -94,7 +94,7 @@ Access the developer portal website and login with admin credentials.
 <img src="../../readme-images/devportal/Fig05.jpg" width="700px" height="350px"/>       
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fig 3.   
 
-###4.2 Enable FHIR Swagger module:  
+### 4.2 Enable FHIR Swagger module:  
 
 To enable FHIR Swagger or any other module, go to admin -> modules and enable them.
 
@@ -104,14 +104,14 @@ To enable FHIR Swagger or any other module, go to admin -> modules and enable th
 
 - Clear Cache [hover Home icon of admin bar ->click Flush all caches ]
 
-###4.3 Deploy SmartDocs
+### 4.3 Deploy SmartDocs
 The FHIR APIs description are available in Swagger JSON formats. These APIs description defines requests that point to the FHIR resources deployed on the Apigee edge gateway instance.
 
 Swagger files are available at: **~\flame\src\developerportal\all\modules\custom\fhir_swagger\swaggers**
 
 You will need to modify the **host** field in all the swagger JSON files to point to the Apigee Edge gateway URL where the FHIR APIs are deployed.
 
-####4.3.1 Create a developer app.
+#### 4.3.1 Create a developer app.
 
   - 	Goto MY ACCOUNT -> My Apps.  
   - 	Select My Apps.  
@@ -120,7 +120,7 @@ You will need to modify the **host** field in all the swagger JSON files to poin
   - 	Do not add Callback URL.  
   - 	Select testFHIRproduct from the list of products  
 
-####4.3.2 Create models and import all FHIR API’s swagger files.  
+#### 4.3.2 Create models and import all FHIR API’s swagger files.  
 **NOTE:** Creating all models and import swagger feature is only to be used for first time deployment. For subsequent imports, [manual steps](http://docs.apigee.com/developer-services/content/using-smartdocs-document-apis#creatingamodel) would be needed.  
 
   - 	Goto address bar > enter dev-{org-name}.devportal.apigee.com**/swagger/import**  
@@ -133,7 +133,7 @@ You will need to modify the **host** field in all the swagger JSON files to poin
   - 	Select Content->SmartDocs.  
   - 	You’ll find list of all FHIR APIs models which are unpublished.  
 
-####4.3.3 Render and publish all API’s methods
+#### 4.3.3 Render and publish all API’s methods
 
   -   	Goto address bar > enter dev-{org-name}.devportal.apigee.com**/swagger/publish**  
   - 	Rendering and publishing of models will start and the progress of the same will be seen on UI.   
@@ -147,12 +147,12 @@ You will need to modify the **host** field in all the swagger JSON files to poin
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fig 7.
 
-####4.3.4 Configure OAuth 2.0 authentication
+#### 4.3.4 Configure OAuth 2.0 authentication
 
 This section is applicable to all FHIR resources only i.e. should not be applied to OAuth and Basepath API documentation.
 OAuth 2.0 authentication can be used to secure the access to the API. Following steps need to be done to accomplish this.  
 
-#####4.3.4.1 Update Security Scheme
+##### 4.3.4.1 Update Security Scheme
  - 	Select Content > SmartDocs.  
  - 	For the API model which needs to be configured, select API Revisions from Operations drop-down.  
  - 	For an API revision, select Security Settings from Operations drop-down.  
@@ -170,7 +170,7 @@ OAuth 2.0 authentication can be used to secure the access to the API. Following 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fig 10.
  - 	Select Submit.  
 
-#####4.3.4.2 Configure Template Authentication Scheme
+##### 4.3.4.2 Configure Template Authentication Scheme
  - 	Select Content > SmartDocs.  
  - 	For the same model, select Settings from Operations drop-down.   
  - 	In Template authentication schemes, set Client Id & Client Secret to the previously created App’s Consumer key and Secret respectively. The app creation is explained in Section 4.3.1.   
@@ -179,7 +179,7 @@ OAuth 2.0 authentication can be used to secure the access to the API. Following 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fig 11.
 
-###4.4 Creating Quicktab instance 
+### 4.4 Creating Quicktab instance 
  - 	Go to modules -> Enable Quicktab Module  
  - 	Go to Structure  -> Quicktabs -> Add Quicktabs Instance  
  - 	Fill the details as highlighted in RED 
@@ -224,7 +224,7 @@ This completes configuration of Smartdocs.
 
 Following all sections and steps above would enable a customized developer-portal similar to [https://healthapix.apigee.com/](https://healthapix.apigee.com/)
 
-###4.5 Enable FHIR responsive theme and other FHIR required modules:  
+### 4.5 Enable FHIR responsive theme and other FHIR required modules:  
 
 Fhir_responsive theme contains all fhir related customisation for the portal, and hence needs to be enabled and set as default.
 
