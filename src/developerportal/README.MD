@@ -1,4 +1,4 @@
-1. Introduction
+# 1. Introduction
 ---------------
 The intent of this document is to guide step by step how to deploy and configure healthapix custom features on a default (out of the box) Apigee developer Portal.
 
@@ -14,7 +14,7 @@ On successful deployment of customized site, you will be able to access followin
 
 The deployment of custom changes would result into a similar site as Apigee [HealthAPIx](https://healthapix.apigee.com).
 
-2. Pre-Requisites
+# 2. Pre-Requisites
 -----------------
 
  -   You have created an Apigee developer portal either in the cloud or on-prem.
@@ -28,7 +28,7 @@ The deployment of custom changes would result into a similar site as Apigee [Hea
 -Refer [http://docs.apigee.com/developer-services/content/working-pantheon](http://docs.apigee.com/developer-services/content/working-pantheon).    
 -You will need to connect with Apigee support team to request them to associate your Apigee dev portal with your created pantheon account.  
 
-3. Getting Started
+# 3. Getting Started
 -------------------
 
 ### 3.1 Get code with customized changes
@@ -75,11 +75,11 @@ For **In-Cloud instance**, you will need to push the custom changes back to git.
 We further need to do few manual configurations.  
 Access the developer portal website and login with admin credentials.  
 
-4. Further Configurations
+# 4. Further Configurations
 -------------------------
  
 
-###4.1 Applying HBR template:
+### 4.1 Applying HBR template:
   
 •   Go to Configuration -> SmartDocs -> Advanced settings -> Click on **Choose File** button to select the **.hbr** file from cloned/downloaded flame source code i.e. **/flame/src/developerportal/smartdocTemplate.hbr**    
 <img src="../../readme-images/devportal/Fig04.jpg" width="700px" height="350px"/>    
@@ -249,7 +249,7 @@ See reference image below:
 <img src="../../readme-images/devportal/Fig03.jpg" width="700px" height="350px"/>    
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fig 18.
 
-5.	Configure GTM
+# 5.	Configure GTM
 --------------------
 
 Site owner will share a GTM container id [GTM-XXXXXX] created using a google application i.e Google analytics tag manager [URL https://tagmanager.google.com](https://tagmanager.google.com), which has to be configured on the apigee portal to analyze site statistics.  
