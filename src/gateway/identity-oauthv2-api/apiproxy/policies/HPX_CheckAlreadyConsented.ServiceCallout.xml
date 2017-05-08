@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout async="false" continueOnError="true" enabled="true" name="HPX_CheckAlreadyConsented.ServiceCallout">
+    <DisplayName>CheckAlreadyConsented.ServiceCallout</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <Request clearPayload="true">
+        <Set>
+            <Headers>
+                <Header name="Accept">application/json</Header>
+            </Headers>
+            <QueryParams>
+                <QueryParam name="client_id">{request.formparam.client_id}</QueryParam>
+                <QueryParam name="user_id">{userid}</QueryParam>
+            </QueryParams>
+            <Verb>GET</Verb>
+        </Set>
+    </Request>
+    <Response>previousConsentResponse</Response>
+    <HTTPTargetConnection>
+        <Properties/>
+        <URL>{{ HPX_CheckAlreadyConsented_url }}</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>

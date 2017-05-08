@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<AssignMessage enabled="true" continueOnError="true" async="false" name="HPX_AddAuthorizationReqVarInReq">
+    <DisplayName>AddAuthorizationReqVarInReq</DisplayName>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="request">request</AssignTo>
+    <Set>
+        <QueryParams>
+            <QueryParam name="client_id">{{ baas_client_id }}</QueryParam>
+            <QueryParam name="redirect_uri">{{ demo_app_redirect_uri }}</QueryParam>
+            <QueryParam name="authorization_req_url">{{ demo_app_authorization_req_url }}</QueryParam>
+        </QueryParams>
+    </Set>
+</AssignMessage>

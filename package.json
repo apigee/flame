@@ -1,0 +1,26 @@
+{
+  "name": "flame",
+  "version": "1.0.0",
+  "description": "Healthapix",
+  "main": "gulpfile.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apigee/flame.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/apigee/flame/issues"
+  },
+  "homepage": "https://github.com/apigee/flame#readme",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "launchpad": "file:./src/common/deploy/launchpad-v1.0.6"
+  }
+}

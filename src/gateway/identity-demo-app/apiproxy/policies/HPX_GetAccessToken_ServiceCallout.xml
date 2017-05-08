@@ -1,0 +1,11 @@
+<ServiceCallout enabled="true" continueOnError="true" async="false" name="HPX_GetAccessToken_ServiceCallout">
+    <DisplayName>GetAccessToken_ServiceCallout</DisplayName>
+    <Request variable="generate_access_token_request" clearPayload="false">
+        <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+    </Request>
+    <Response>generate_access_token_response</Response>
+    <HTTPTargetConnection>
+        <Properties/>
+        <URL>{{ HPX_GetAccessToken_url }}</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>

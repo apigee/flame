@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout enabled="true" continueOnError="true" async="false" name="HPX_ServiceCallout.ValidateUser">
+	<DisplayName>ServiceCallout.ValidateUser</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <Request variable="validateUserRequest" clearPayload="false">
+         <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+    </Request>
+    <Response>validateUserResponse</Response>
+    <HTTPTargetConnection>
+        <Properties/>
+        <URL>{{ HPX_ServiceCallout_ValidateUser_url }}</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>

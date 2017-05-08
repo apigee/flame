@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout async="false" continueOnError="true" enabled="true" name="HPX_ReadEncounterById_ServiceCallout">
+    <DisplayName>ReadEncounterById_ServiceCallout</DisplayName>
+    <Properties/>
+    <Request clearPayload="true" variable="read_patient_encounter_request">
+        <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+    </Request>
+    <Response>read_patient_encounter_response</Response>
+    <HTTPTargetConnection>
+        <Properties/>
+        <URL>{{ HPX_ReadEncounterById_url }}</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>

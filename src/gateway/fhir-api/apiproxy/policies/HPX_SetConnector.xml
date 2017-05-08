@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="HPX_SetConnector">
+    <DisplayName>SetConnector</DisplayName>
+    <Properties/>
+    <AssignVariable>
+        <Name>connector_domain</Name>
+        <Value>{{ connector_domain }}</Value>
+		<!-- For example connector_domain will be "{org}-{env}.apigee.net". -->
+    </AssignVariable>
+	<AssignVariable>
+        <Name>connector_basepath</Name>
+        <Value>{{ connector_basepath }}</Value>
+		<!-- For example hapiconnector's connector_basepath will be "hapi-dstu2". -->
+    </AssignVariable>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="request"/>
+</AssignMessage>

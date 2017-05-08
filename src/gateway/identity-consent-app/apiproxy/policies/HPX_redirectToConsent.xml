@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><AssignMessage name="HPX_redirectToConsent">
+	<DisplayName>RedirectToConsent</DisplayName>
+	<AssignTo createNew="true" type="response">response</AssignTo>
+	<IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>	
+	<Remove>
+		<Payload/>
+	</Remove>
+	<Set>
+		<StatusCode>302</StatusCode>
+		<Headers> 
+			<Header name="Location">{{ consent_app_RedirectToConsent }}</Header>
+			<Header name="Access-Control-Allow-Origin">*</Header>
+			<Header name="Access-Control-Allow-Origin">*</Header>
+		</Headers> 
+	</Set>
+</AssignMessage>

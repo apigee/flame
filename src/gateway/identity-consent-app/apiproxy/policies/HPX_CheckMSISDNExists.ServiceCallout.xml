@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout enabled="true" continueOnError="true" async="false" name="HPX_CheckMSISDNExists.ServiceCallout" >
+    <DisplayName>CheckMSISDNExists.ServiceCallout</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <Request clearPayload="true">
+        <Set>
+            <Headers>
+                <Header name="Accept">application/json</Header>
+            </Headers>            
+            <Verb>GET</Verb>
+        </Set>
+    </Request>
+    <Response>userManagement.response</Response>
+    <HTTPTargetConnection>
+        <Properties/>
+        <URL>{{ CheckMSISDNExists_url }}</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>

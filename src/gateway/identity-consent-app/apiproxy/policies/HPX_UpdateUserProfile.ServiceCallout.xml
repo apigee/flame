@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout enabled="true" continueOnError="true" async="false" name="HPX_UpdateUserProfile.ServiceCallout">
+	<DisplayName>UpdateUserProfile.ServiceCallout</DisplayName>
+    <Request variable="updateUserRequest" clearPayload="false">
+         <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+    </Request>
+    <Response>updateUserResponse</Response>
+    <HTTPTargetConnection>
+        <Properties/>
+        <URL>{{ HPX_UpdateUserProfile_url }}</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>

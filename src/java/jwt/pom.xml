@@ -1,0 +1,108 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>JwtTokenSign</groupId>
+    <artifactId>jwtTokenSigning</artifactId>
+    <version>1</version>
+    <name>jwt</name>
+    <description>Json Web Token</description>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <excludes>
+                        <exclude>README</exclude>
+                    </excludes>
+                    <outputDirectory>include</outputDirectory>
+                    <finalName>jwtTokenSigning</finalName>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.1.1</version>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <executable>zip</executable>
+                    <arguments>
+                        <argument>-r</argument>
+                        <argument>target/jsontoken.zip</argument>
+                        <argument>include</argument>
+                        <argument>-x</argument>
+                        <argument>include/.DS_Store</argument>
+                    </arguments>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <id>copy-jar-files</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/../../../identity-oauthv2-api/apiproxy/resources/java</outputDirectory>
+                            <overwrite>true</overwrite>
+                            <resources>
+                                <resource>
+                                    <directory>target</directory>
+                                    <includes>
+                                        <include>jsontoken.zip</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.8</version>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.jsontoken</groupId>
+            <artifactId>jsontoken</artifactId>
+            <version>1.0</version>
+        </dependency>
+<dependency>
+            <groupId>com.apigee.flow</groupId>
+            <artifactId>expressions</artifactId>
+            <version>1.0.0</version>
+<scope>system</scope>
+<systemPath>${project.basedir}/../lib/expressions-1.0.0.jar</systemPath>
+
+        
+</dependency>
+<dependency>
+            <groupId>com.apigee.flow</groupId>
+            <artifactId>messageflow</artifactId>
+            <version>1.0.0</version>
+<scope>system</scope>
+<systemPath>${project.basedir}/../lib/message-flow-1.0.0.jar</systemPath>
+
+        
+</dependency>
+
+    </dependencies>
+</project>

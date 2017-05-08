@@ -1,0 +1,16 @@
+{
+   "name": "identity-consent-mgmt",
+   "version": "0.0.1",
+   "private": true,
+   "client_id": "{{ baas_client_id }}",
+   "client_secret": "{{ baas_secret }}",
+   "orgName": "{{ baas_org }}",
+   "appName": "{{ baas_app }}",
+
+   "dependencies": {
+     "express": "2.5.8",
+     "stylus": ">= 0.0.1",
+     "jade": ">= 0.0.1"
+  }
+  }
+

@@ -1,0 +1,11 @@
+<ServiceCallout enabled="false" continueOnError="true" async="false" name="HPX_GetUserDetails_ServiceCallout">
+    <DisplayName>GetUserDetails_ServiceCallout</DisplayName>
+    <Request variable="get_user_details_request" clearPayload="false">
+        <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+    </Request>
+    <Response>get_user_details_response</Response>
+    <HTTPTargetConnection>
+        <Properties/>
+        <URL>{{ HPX_GetUserDetails_url }}</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>

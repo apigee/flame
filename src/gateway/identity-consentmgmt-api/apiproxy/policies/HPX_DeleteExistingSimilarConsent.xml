@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout enabled="true" continueOnError="true" async="false" name="HPX_DeleteExistingSimilarConsent">
+    <DisplayName>DeleteExistingSimilarConsent</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <Request clearPayload="true">
+        <Set>
+            <QueryParams>
+                <QueryParam name="ql">client_id = '{client_id}' and end_user_id= '{end_user_id}'</QueryParam>
+                <QueryParam name="client_id">{{ baas_client_id }}</QueryParam>
+                <QueryParam name="client_secret">{{ baas_secret }}</QueryParam>
+            </QueryParams>
+            <Verb>DELETE</Verb>
+        </Set>
+    </Request>
+    <Response>removeConsentResponse</Response>
+    <HTTPTargetConnection>
+        <Properties/>
+        <URL>{{ HPX_DeleteExistingSimilarConsent_url }}</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>

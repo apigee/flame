@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout enabled="true" continueOnError="true" async="false" name="HPX_RevokeUserConsent.ServiceCallout" >
+    <DisplayName>RevokeUserConsent.ServiceCallout</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <Request clearPayload="true">
+        <Set>
+            <Headers>
+                <Header name="Authorization">{{ baas_auth }}</Header>
+                <Header name="Content-type">application/json</Header>
+            </Headers>            
+            <Verb>PUT</Verb>
+            <Payload variableSuffix="#" variablePrefix="%">
+                {"status": "revoked"}
+            </Payload>
+        </Set>
+    </Request>
+    <Response>userApps</Response>
+    <HTTPTargetConnection>
+        <Properties/>
+        <URL>{{ HPX_RevokeUserConsent_url }}</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>

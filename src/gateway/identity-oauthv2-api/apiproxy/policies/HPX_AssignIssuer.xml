@@ -1,0 +1,7 @@
+<AssignMessage enabled="true" continueOnError="false" async="false" name="HPX_AssignIssuer">
+	<DisplayName>Assign Issuer</DisplayName>
+	<AssignVariable>
+		<Name>issuer</Name>
+		<Value>{{ HPX_AssignIssuer }}</Value>
+	</AssignVariable>
+</AssignMessage>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout enabled="true" continueOnError="true" async="false" name="HPX_GetUserApps.ServiceCallout" >
+    <DisplayName>GetUserApps.ServiceCallout</DisplayName>
+    <Request clearPayload="true">
+        <Set>
+            <Headers>
+                <Header name="Authorization">{{ baas_auth }}</Header>
+            </Headers>
+            <QueryParams>
+                <QueryParam name="user_id">{userid}</QueryParam>
+            </QueryParams>
+            <Verb>GET</Verb>
+        </Set>
+    </Request>
+    <Response>userApps</Response>
+    <HTTPTargetConnection>
+        <Properties/>
+        <URL>{{ HPX_GetUserApps_url }}</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>

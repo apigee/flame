@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage async="false" continueOnError="false" enabled="true" name="HPX_SetTargetBasepath">
+    <DisplayName>SetTargetBasepath</DisplayName>
+    <Properties/>
+    <AssignVariable>
+        <Name>targetBaseURI</Name>
+        <Value>{{ targetBaseURI }}</Value>
+		<!-- For example hapi fhir endpoint targetBaseURI will be "baseDstu2". -->
+    </AssignVariable>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="request"/>
+</AssignMessage>
