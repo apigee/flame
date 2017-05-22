@@ -11,7 +11,7 @@ The Apigee HealthAPIx solution provides App developers and digital teams with ac
 
 **FHIR Gateway**
 * Pre-configured API proxies for FHIR Resources. The API proxies are your gateway to various backend EMR systems.
-  Follow more information on this here.
+  Follow more information on this [here](src/gateway).
 * Pre-integrated OAuth security framework and other key security functions.
   Follow more information on this [here](src/gateway).
 
