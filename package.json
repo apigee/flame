@@ -21,6 +21,6 @@
   "homepage": "https://github.com/apigee/flame#readme",
   "dependencies": {
     "gulp": "^3.9.1",
-    "launchpad": "file:./src/common/deploy/launchpad-v1.0.6"
+    "edge-launchpad": "^2.0.2"
   }
 }
