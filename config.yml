@@ -20,21 +20,19 @@ resources:
       default: 80
     - name: target_server_basepath
       prompt: Target server basepath
-    - name: usergrid_org
-      prompt: BaaS Org name
-    - name: usergrid_app
-      prompt: BaaS App name
-    - name: usergrid_client_id
-      prompt: BaaS Org Client Id
-    - name: usergrid_secret
-      prompt: BaaS Org Client Secret
+    - name: serviceaccount_project
+      prompt: Datastore project Id
+    - name: serviceaccount_private_key
+      prompt: Service account private key
+    - name: serviceaccount_token_uri
+      prompt: Service account token uri
+    - name: serviceaccount_client_email
+      prompt: Service account email
     configurations:
     - env: test
-      baas_host: https://apibaas-trial.apigee.net
       edge_host: https://api.enterprise.apigee.com
       host: '{{ org }}-{{ env }}.apigee.net'
     - env : prod
-      baas_host: https://apibaas-trial.apigee.net
       edge_host: https://api.enterprise.apigee.com
       host: '{{ org }}-{{ env }}.apigee.net'
 
@@ -111,27 +109,52 @@ resources:
       - name: nonce-cache
         payload: '{ "name": "nonce-cache"}'
 
-    - name: create_baas_app
-      type: baasApp
+    - name: message_kvm
+      type: kvm
       items:
-      - appName: '{{ usergrid_app }}'
+      - name: GoogleServiceAccountKVM
+        payload: '{ "name" : "GoogleServiceAccountKVM", "entry" : [ { "name" : "privateKey", "value" : "{{ serviceaccount_private_key }}" } ] , "encrypted": "true"}'
 
-    - name: get_baas_app_cred
-      type: getBaasAppCredential
+    - name: replaceDatastoreProject
+      type: configSubstitutions
       items:
-      - appName: '{{ usergrid_app }}'
+      - name: datastoreProject
+        filePaths: ['src/gateway/datastore-connector/target/apiproxy/targets/default.xml','src/gateway/datastore-connector/target/apiproxy/policies/Service-Callout-Get-Entity.xml']
+        value: '{{ serviceaccount_project }}'
+      - name: client_email
+        filePaths: ['src/gateway/datastore-connector/target/apiproxy/policies/Generate-JWT-Datastore.xml']
+        value: '{{ serviceaccount_client_email }}'
+      - name: token_uri
+        filePaths: ['src/gateway/datastore-connector/target/apiproxy/policies/Generate-JWT-Datastore.xml','src/gateway/datastore-connector/target/apiproxy/policies/Service-Callout-Get-Access-Token.xml']
+        value: '{{ serviceaccount_token_uri }}'
+
+    - name: datastore-connector api
+      type: proxy
+      items:
+      - name: datastore-connector
+        apiName: datastore-connector
+
+    - name: dsApiProducts
+      type: product
+      items:
+      - payload: '{"approvalType":"auto", "attributes":[{"name":"access","value":"private"}], "displayName":"Internal Datastore Product","name":"datastore_product","environments":["test","prod"],"scopes":[]}'
+        name: datastore_api
+
+    - name: dsDeveloperApps
+      type: app
+      items:
+      - name: internal_DS
+        payload: '{"name":"internal_datastore_app","callback":"http://localhost/","email":"user@identity.com","apiProducts":"datastore_product"}'
         assignResponse:
-        - from: credentials.client_id
-          to: baas_client_id
-        - from: credentials.client_secret
-          to: baas_secret
+        - from: credentials.0.consumerKey
+          to: apiKey_DS
 
     - name: generate_auth
       type: util
       items:
       - action: base64.encode
-        value: '{{ baas_client_id }}:{{ baas_secret }}'
-        assignTo: baas_auth
+        value: '{{ apiKey_identity }}:{{ apiSecret_identity }}'
+        assignTo: base64_auth
 
     - name: replace_variables_consent_app
       type: configSubstitutions
@@ -141,16 +164,16 @@ resources:
         value: 'https://{{ org }}-{{ env }}.apigee.net/openid/index?sessionid={sessionid}'
       - name: AssignSendSMSAPIRequest_apikey
         filePaths: ['src/gateway/identity-consent-app/target/apiproxy/policies/HPX_AssignSendSMSAPIRequest.xml']
-        value: '{{ usergrid_client_id }}'
+        value: '{{ apiKey_identity }}'
       - name: logoutRedircetUri
         filePaths: ['src/gateway/identity-consent-app/target/apiproxy/policies/HPX_AssignlogoutRedircetUri.xml']
         value: 'https://{{ org }}-{{ env }}.apigee.net/openid/index'
       - name: hostName
         filePaths: ['src/gateway/identity-consent-app/target/apiproxy/policies/HPX_AddVariablesToTargetRequest.xml']
         value: 'https://{{ org }}-{{ env }}.apigee.net'
-      - name: baas_auth
+      - name: base64_auth
         filePaths: ['src/gateway/identity-consent-app/target/apiproxy/policies/HPX_CheckAlreadyConsented.ServiceCallout.xml','src/gateway/identity-consent-app/target/apiproxy/policies/HPX_GetUserApps.ServiceCallout.xml','src/gateway/identity-consent-app/target/apiproxy/policies/HPX_RevokeUserConsent.ServiceCallout.xml','src/gateway/identity-consent-app/target/apiproxy/policies/HPX_ValidatePin.ServiceCallout.xml']
-        value: 'ClientCredential {{ baas_auth }}'
+        value: 'Basic {{ base64_auth }}'
       - name: HPX_CheckAlreadyConsented_url
         filePaths: ['src/gateway/identity-consent-app/target/apiproxy/policies/HPX_CheckAlreadyConsented.ServiceCallout.xml']
         value: 'https://{{ org }}-{{ env }}.apigee.net/identity/consents/validate'
@@ -200,37 +223,31 @@ resources:
     - name: replace_variables_identity_consent_mgnt_api
       type: configSubstitutions
       items:
-      - name: baas_app
+      - name: hostName
         filePaths: ['src/gateway/identity-consentmgmt-api/target/apiproxy/resources/node/package.json']
-        value: '{{ usergrid_app }}'
-      - name: baas_org
-        filePaths: ['src/gateway/identity-consentmgmt-api/target/apiproxy/resources/node/package.json']
-        value: '{{ usergrid_org }}'
+        value: 'https://{{ org }}-{{ env }}.apigee.net'
       - name: HPX_DeleteExistingSimilarConsent_url
         filePaths: ['src/gateway/identity-consentmgmt-api/target/apiproxy/policies/HPX_DeleteExistingSimilarConsent.xml']
-        value: 'https://api.usergrid.com/{{ usergrid_org }}/{{ usergrid_app }}/consents'
-      - name: baas_client_id
+        value: 'https://{{ org }}-{{ env }}.apigee.net/apis/internal/datastore/consents'
+      - name: apiKey_DS
         filePaths: ['src/gateway/identity-consentmgmt-api/target/apiproxy/policies/HPX_DeleteExistingSimilarConsent.xml','src/gateway/identity-consentmgmt-api/target/apiproxy/resources/node/package.json']
-        value: '{{ usergrid_client_id }}'
-      - name: baas_secret
-        filePaths: ['src/gateway/identity-consentmgmt-api/target/apiproxy/policies/HPX_DeleteExistingSimilarConsent.xml','src/gateway/identity-consentmgmt-api/target/apiproxy/resources/node/package.json']
-        value: '{{ usergrid_secret }}'
+        value: '{{ apiKey_DS }}'
+      - name: basepath_DS
+        filePaths: ['src/gateway/identity-consentmgmt-api/target/apiproxy/resources/node/package.json']
+        value: '/apis/internal/datastore'
 
     - name: replace_variables_identity_usermgnt_api
       type: configSubstitutions
       items:
-      - name: baas_app
+      - name: hostName
         filePaths: ['src/gateway/identity-usermgmt-api/target/apiproxy/resources/node/package.json']
-        value: '{{ usergrid_app }}'
-      - name: baas_org
+        value: '{{ org }}-{{ env }}.apigee.net'
+      - name: apiKey_DS
         filePaths: ['src/gateway/identity-usermgmt-api/target/apiproxy/resources/node/package.json']
-        value: '{{ usergrid_org }}'
-      - name: baas_client_id
+        value: '{{ apiKey_DS }}'
+      - name: basepath_DS
         filePaths: ['src/gateway/identity-usermgmt-api/target/apiproxy/resources/node/package.json']
-        value: '{{ usergrid_client_id }}'
-      - name: baas_secret
-        filePaths: ['src/gateway/identity-usermgmt-api/target/apiproxy/resources/node/package.json']
-        value: '{{ usergrid_secret }}'
+        value: '/apis/internal/datastore'
 
     - name: replace_variables_identity_oauthv2-api
       type: configSubstitutions
@@ -241,9 +258,9 @@ resources:
       - name: HPX_GetUserProfileFromAppServices_url
         filePaths: ['src/gateway/identity-oauthv2-api/target/apiproxy/policies/HPX_GetUserProfileFromAppServices.xml']
         value: 'https://{{ org }}-{{ env }}.apigee.net/identity-users/v1/users/{accesstoken.userid}'
-      - name: baas_auth
+      - name: base64_auth
         filePaths: ['src/gateway/identity-oauthv2-api/target/apiproxy/policies/HPX_AssignStoreConsentRequest.xml']
-        value: 'ClientCredential {{ baas_auth }}'
+        value: 'Basic {{ base64_auth }}'
       - name: HPX_StoreConsent_url
         filePaths: ['src/gateway/identity-oauthv2-api/target/apiproxy/policies/HPX_StoreConsent.ServiceCallout.xml']
         value: 'https://{{ org }}-{{ env }}.apigee.net/identity/consents'
@@ -257,15 +274,18 @@ resources:
     - name: replace_variables_demo_app
       type: configSubstitutions
       items:
-      - name: baas_client_id
-        filePaths: ['src/gateway/identity-demo-app/target/apiproxy/policies/HPX_AddAuthorizationReqVarInReq.xml']
-        value: '{{ usergrid_client_id }}'
+      - name: app_client_id
+        filePaths: ['src/gateway/identity-demo-app/target/apiproxy/policies/HPX_AddAuthorizationReqVarInReq.xml','src/gateway/identity-demo-app/target/apiproxy/policies/HPX_AssignGetAccessTokenRequest.xml']
+        value: '{{ apiKey_identity }}'
+      - name: app_client_secret
+        filePaths: ['src/gateway/identity-demo-app/target/apiproxy/policies/HPX_AssignGetAccessTokenRequest.xml']
+        value: '{{ apiSecret_identity }}'
       - name: demo_app_redirect_uri
-        filePaths: ['src/gateway/identity-demo-app/target/apiproxy/policies/HPX_AddAuthorizationReqVarInReq.xml']
+        filePaths: ['src/gateway/identity-demo-app/target/apiproxy/policies/HPX_AddAuthorizationReqVarInReq.xml','src/gateway/identity-demo-app/target/apiproxy/policies/HPX_AssignGetAccessTokenRequest.xml']
         value: 'https://{{ org }}-{{ env }}.apigee.net/identity_app/callback'
       - name: demo_app_authorization_req_url
         filePaths: ['src/gateway/identity-demo-app/target/apiproxy/policies/HPX_AddAuthorizationReqVarInReq.xml']
-        value: '{{ https://{{ org }}-{{ env }}.apigee.net/oauth/v2/authorize }}'
+        value: 'https://{{ org }}-{{ env }}.apigee.net/oauth/v2/authorize'
       - name: HPX_GetAccessToken_url
         filePaths: ['src/gateway/identity-demo-app/target/apiproxy/policies/HPX_GetAccessToken_ServiceCallout.xml']
         value: 'https://{{ org }}-{{ env }}.apigee.net/oauth/v2/accesstoken'
@@ -281,6 +301,9 @@ resources:
       - name: HPX_ReadPatientEncounterDetails_url
         filePaths: ['src/gateway/identity-demo-app/target/apiproxy/policies/HPX_ReadPatientEncounterDetails_ServiceCallout.xml']
         value: 'https://{{ org }}-{{ env }}.apigee.net/fhir/v1/Encounter'
+      - name: edgeHost
+        filePaths: ['src/gateway/identity-demo-app/target/apiproxy/policies/HPX_AddPatientDetailsToRequest.xml', 'src/gateway/identity-demo-app/target/apiproxy/policies/HPX_AddPatientEncounterDetailsToRequestt.xml']
+        value: 'https://{{ org }}-{{ env }}.apigee.net'
 
     - name: identity_proxies
       type: proxy
