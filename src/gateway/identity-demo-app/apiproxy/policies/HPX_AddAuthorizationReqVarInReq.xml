@@ -5,7 +5,7 @@
     <AssignTo createNew="false" transport="http" type="request">request</AssignTo>
     <Set>
         <QueryParams>
-            <QueryParam name="client_id">{{ baas_client_id }}</QueryParam>
+            <QueryParam name="client_id">{{ app_client_id }}</QueryParam>
             <QueryParam name="redirect_uri">{{ demo_app_redirect_uri }}</QueryParam>
             <QueryParam name="authorization_req_url">{{ demo_app_authorization_req_url }}</QueryParam>
         </QueryParams>
