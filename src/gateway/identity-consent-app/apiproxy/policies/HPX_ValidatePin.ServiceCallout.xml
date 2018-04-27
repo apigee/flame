@@ -5,7 +5,7 @@
 		<IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
 		<Set>
 			<Headers>
-				<Header name="apikey">{{ baas_auth }}</Header>
+				<Header name="apikey">{{ base64_auth }}</Header>
 			</Headers>
 			<Verb>GET</Verb>
 		</Set>
