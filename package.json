@@ -7,6 +7,7 @@
     "test": "tests"
   },
   "scripts": {
+    "start":"npm install && gulp start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,7 +21,11 @@
   },
   "homepage": "https://github.com/apigee/flame#readme",
   "dependencies": {
+    "edge-launchpad": "^2.0.2",
+    "fs-extra": "^5.0.0",
     "gulp": "^3.9.1",
-    "edge-launchpad": "^2.0.2"
+    "gulp-sequence": "^1.0.0",
+    "mustache": "^2.3.0",
+    "prompt": "^1.0.0"
   }
 }
