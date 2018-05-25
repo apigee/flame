@@ -46,17 +46,22 @@ Install gulp
 npm install --global gulp-cli
 ```
 
-Pull node modules
+Pull node modules and execute gulp task
 ```
-npm install
-```
-
-Run the deploy command
-```
-gulp deploy --resource fhir_apis
+npm start
 ```
 
-This will interactively prompt you for following details, and will then create / deploy all relevants bundles and artifacts and will provision the **FHIR Sandbox** on your own Org.
++ Do you have cloud datastore instance? Enter true/false **(** This will ask you if you have your own Datastore instance, or want to use the Apigee's public south-bound endpoint for Goole Cloud Datastore **)**
+
+--start if true -- _If you choose to use your own Datastore instance, the script will additionally prompt you all this_
++ Enter the cloud datastore project id
++ Enter the service account private key
++ Enter the token uri of the service account
++ Enter the client email of the service account
+
+-- end if --
+
+Once above inputs are provided, this will interactively prompt you for following details, and will then create / deploy all relevants bundles and artifacts and will provision the **FHIR Sandbox** on your own Org.
 
 + Edge Org name
 + Edge Username
@@ -65,16 +70,12 @@ This will interactively prompt you for following details, and will then create /
 + Target server host URL **eg**: fhirtest.uhn.ca
 + Target server port **eg**: 80
 + Target server basepath **eg**: /baseDstu2
-+ BaaS Org Name
-+ BaaS App Name **(**new app with this name is created in BaaS if it doesn't already exist**)**
-+ BaaS Org Client Id **(**can be obtained from BaaS ui as shown in the Fig-1**)**
-+ BaaS Org Client Secret **(**can be obtained from BaaS ui as shown in the Fig-1**)**
-
 
 
 _A note on **Backend**_  
 Healthapix connects to [FHIR Test server](http://fhirtest.uhn.ca) from HAPI community. 
 
-**Fig - 1**
-![BaaS org credentials](/readme-images/gateway/baas-cred.png "Where to find BaaS org credentials")
-
+_A note on **Datastore instance**_  
+The OpenBank Solution is using Google Cloud Datastore as backend. To setup the OpenBank solution, there are two options available:
++ Using one's own Google Cloud Datastore instance
++ If you do not have Goole Cloud Platform access then OpenBank solution can still be deployed and run with public south-bound endpoint for Datastore hosted by Apigee 
