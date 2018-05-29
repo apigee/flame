@@ -9,9 +9,9 @@
 		<FormParams>
 			<FormParam name="grant_type">authorization_code</FormParam>
 			<FormParam name="code">{request.queryparam.code}</FormParam>
-			<FormParam name="client_id">[TO_BE_REPLACED]</FormParam>
-			<FormParam name="client_secret">[TO_BE_REPLACED]</FormParam>
-			<FormParam name="redirect_uri">[TO_BE_REPLACED]</FormParam>
+			<FormParam name="client_id">{{ app_client_id }}</FormParam>
+			<FormParam name="client_secret">{{ app_client_secret }}</FormParam>
+			<FormParam name="redirect_uri">{{ demo_app_redirect_uri }}</FormParam>
 		</FormParams>
 		<Headers>
 			<Header name="Accept">application/json</Header>

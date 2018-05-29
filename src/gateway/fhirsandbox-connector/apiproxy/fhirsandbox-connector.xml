@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="1" name="fhirsandbox-connector">
+    <Basepaths></Basepaths>
+    <Basepaths>/connector/fhirsandbox</Basepaths>
+    <ConfigurationVersion majorVersion="4" minorVersion="0"/>
+    <CreatedAt>1525080779927</CreatedAt>
+    <CreatedBy>rmahalank@apigee.com</CreatedBy>
+    <Description></Description>
+    <DisplayName>FhirSandboxDatastoreAPIConnector</DisplayName>
+    <LastModifiedAt>1525080983491</LastModifiedAt>
+    <LastModifiedBy>rmahalank@apigee.com</LastModifiedBy>
+    <ManifestVersion>SHA-512:b15310096618027e652a2a206fe6296f41e572dfbed99b1e79bbfee6058961c3cb34731efbf386682157fdbb254dda43edb39daf0e6a51dc67392d506a1e80d7</ManifestVersion>
+    <Policies>
+        <Policy>Assign-Org-Header</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources>
+        <Resource>jsc://assignOrgHeader.js</Resource>
+    </Resources>
+    <Spec></Spec>
+    <TargetServers/>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+</APIProxy>

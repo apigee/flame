@@ -56,10 +56,8 @@ var dataregex = new RegExp('PUT|POST', 'i')
  *   - `host` obviously hostname of the datastore
  *   - `port` where the datastore listens
  *   - `protocol` http | https
- *   - `org` orgname for usergrid
- *   - `app` appname for usergrid
- *   - `client_id` clientid to authenticate
- *   - `client_secret` secret to authenticate
+ *   - `basepath` basepath for datastore
+ *   - `apiKey` apiKey to authenticate
  *
  * @param {Object} options
  * @api public
@@ -68,14 +66,11 @@ var dataregex = new RegExp('PUT|POST', 'i')
 function User(opts) {
   'use strict';
   opts = opts || {};
-  this.host = opts.host || 'api.usergrid.com';
+  this.host = opts.host;
   this.port = opts.port || 443;
   this.protocol = opts.protocol || 'https';
-  this.org = opts.org;
-  this.app = opts.app;
-  this.basepath = utilf.format('/%s/%s/users', this.org, this.app);
-  this.client_id = opts.client_id;
-  this.client_secret = opts.client_secret;
+  this.basepath = opts.basepath || '';
+  this.apiKey = opts.apiKey;
 }
 
 
@@ -96,8 +91,7 @@ function User(opts) {
 User.prototype.getopts = function(kv) {
   'use strict';
   var query = {
-    client_id: this.client_id,
-    client_secret: this.client_secret
+    apiKey: this.apiKey
   }, headers = {
       'accept': json_type
     };
@@ -111,7 +105,7 @@ User.prototype.getopts = function(kv) {
       kv.value = kv.value.replace(/\+/g, '');
     }
     query.ql = utilf.format(
-      "select * where %s = '%s'", kv.key, kv.value
+      "where %s = '%s'", kv.key, kv.value
     );
   }
 
@@ -362,10 +356,12 @@ User.prototype.update = function(id, body, fn) {
 User.prototype.token = function(body, fn) {
   'use strict';
   var opts = this.getopts({
-    method: 'POST',
-    body: JSON.stringify(body)
-  }); opts.path = opts.path.replace('/users', '/token');
+    //method: 'POST',
+    //body: JSON.stringify(body)
+  });
+  //opts.path = opts.path.replace('/users', '/token');
 
+  opts.path = opts.path.replace('/users', '/users/' + body.username);
   return this.client(opts, fn);
 };
 
@@ -381,10 +377,12 @@ User.prototype.token = function(body, fn) {
 
 User.prototype.password = function(id, body, fn) {
   'use strict';
+  var bdy = {"password": body.newpassword};
   var opts = this.getopts({
-    method: 'POST',
-    body: JSON.stringify(body)
-  }); opts.path = opts.path.replace('/users', '/users/' + id + '/password');
+    method: 'PUT',
+    body: JSON.stringify(bdy)
+  });
+  opts.path = opts.path.replace('/users', '/users/' + id);
 
   return this.client(opts, fn);
 };

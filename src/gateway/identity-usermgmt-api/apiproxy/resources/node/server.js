@@ -21,10 +21,9 @@ var pkginfo = require('./package')
  */
 
 var User = new entity({
-  org: pkginfo.org,
-  app: pkginfo.app,
-  client_id: pkginfo.client_id,
-  client_secret: pkginfo.client_secret
+  host: pkginfo.host,
+  basepath: pkginfo.hostBasePath,
+  apiKey: pkginfo.apiKey
 });
 
 

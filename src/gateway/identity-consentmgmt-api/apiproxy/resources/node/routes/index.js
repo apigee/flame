@@ -1,17 +1,14 @@
 /*
  GET home page.
  */
-
-var Usergrid = require("usergrid");
+var Usergrid = require("./usergrid");
 var pkginfo = require('../package')
 
 
 var client = new Usergrid.client({
-  orgName :  pkginfo.orgName,
-  appName :  pkginfo.appName,
-  authType : Usergrid.AUTH_CLIENT_ID,
-  clientId : pkginfo.client_id,
-  clientSecret : pkginfo.client_secret
+  URI :  pkginfo.host,
+  basepath :  pkginfo.basepath,
+  apiKey : pkginfo.apiKey
 });
 
 
@@ -514,7 +511,7 @@ exports.getConsent = function(req, res) {
   }
 
   var entities = [];
-  var queryString = "";
+  var queryString = "where ";
   var queryParam = null;
 
   // Create query as per request parameter
@@ -798,7 +795,7 @@ exports.validateConsent = function(req, res) {
 
   var queryString = "";
 
-  queryString = "end_user_id = '" + req.query.user_id + "' and client_id = '"
+  queryString = "where end_user_id = '" + req.query.user_id + "' and client_id = '"
       + req.query.client_id + "'";
 
   var options = {

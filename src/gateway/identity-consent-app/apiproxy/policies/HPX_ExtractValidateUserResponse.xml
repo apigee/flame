@@ -4,10 +4,10 @@
     <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
     <JSONPayload>
         <Variable name="userid">
-            <JSONPath>$.user.username</JSONPath>
+            <JSONPath>$.username</JSONPath>
         </Variable>
         <Variable name="patient_id">
-            <JSONPath>$.user.patient_id</JSONPath>
+            <JSONPath>$.patient_id</JSONPath>
         </Variable>
     </JSONPayload>
 </ExtractVariables>

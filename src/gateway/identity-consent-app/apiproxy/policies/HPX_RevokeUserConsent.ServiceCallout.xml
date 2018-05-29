@@ -6,7 +6,7 @@
     <Request clearPayload="true">
         <Set>
             <Headers>
-                <Header name="Authorization">{{ baas_auth }}</Header>
+                <Header name="Authorization">{{ base64_auth }}</Header>
                 <Header name="Content-type">application/json</Header>
             </Headers>            
             <Verb>PUT</Verb>

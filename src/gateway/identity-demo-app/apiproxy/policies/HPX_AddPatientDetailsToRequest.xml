@@ -7,10 +7,10 @@
     <AssignTo type="request" transport="http" createNew="false">request</AssignTo>
     <Set>
         <QueryParams>
-		    <QueryParam name="get_all_encounters_uri">[TO_BE_REPLACE]</QueryParam>
-			<QueryParam name="logout_uri">[TO_BE_REPLACE]</QueryParam>
-			<QueryParam name="logoutRedircetUri">[TO_BE_REPLACE]</QueryParam>
-			<QueryParam name="accessToken">{access_token}</QueryParam>
+            <QueryParam name="get_all_encounters_uri">{{ edgeHost }}/identity_app/getEncounters</QueryParam>
+            <QueryParam name="logout_uri">{{ edgeHost }}/openid/logout</QueryParam>
+            <QueryParam name="logoutRedircetUri">{{ edgeHost }}/identity_app/index</QueryParam>
+            <QueryParam name="accessToken">{access_token}</QueryParam>
             <QueryParam name="id">{id}</QueryParam>
             <QueryParam name="family_name">{family_name}</QueryParam>
             <QueryParam name="given_name">{given_name}</QueryParam>
